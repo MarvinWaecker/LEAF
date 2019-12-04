@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:leaf/services/authentication.dart';
-import 'package:leaf/pages/root_page.dart';
+import 'package:leaf/screens/feed_screen.dart';
+import 'package:leaf/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:leaf/screens/signup_screen.dart';
 
-void main() {
-  runApp(new MyApp());
-}
+void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
+  Widget _getScreenId() {
+    return StreamBuilder<FirebaseUser>(
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.hasData) {
+          return FeedScreen();
+        } else {
+          return LoginScreen();
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        title: 'LEAF',
-        debugShowCheckedModeBanner: false,
-        theme: new ThemeData(
-          primarySwatch: Colors.green,
-        ),
-        home: new RootPage(auth: new Auth()));
+    return MaterialApp(
+      title: 'LEAF',
+      debugShowCheckedModeBanner: false,
+      home: _getScreenId(),
+      routes: {
+        LoginScreen.id: (context) => LoginScreen(),
+        SignupScreen.id: (context) => SignupScreen(),
+        FeedScreen.id: (context) => FeedScreen(),
+      },
+    );
   }
 }
