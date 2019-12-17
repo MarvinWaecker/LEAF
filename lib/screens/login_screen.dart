@@ -17,13 +17,25 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       // Logging in the user with Firebase
-      AuthService.login(_email, _password);
+      AuthService.login(_email.trim(), _password);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text(
+          'LEAF',
+          style: TextStyle(
+            color: Colors.greenAccent,
+            fontSize: 35.0,
+            fontFamily: 'Raleway',
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,

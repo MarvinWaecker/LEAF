@@ -1,15 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/feed_screen.dart';
 import 'package:leaf/screens/login_screen.dart';
+import 'package:provider/provider.dart';
 
 class AuthService {
   static final _auth = FirebaseAuth.instance;
   static final _firestore = Firestore.instance;
 
-  static void signUpUser(
-      BuildContext context, String name, String email, String password) async {
+  static void signUpUser(BuildContext context, String name, String email,
+      String password) async {
     try {
       AuthResult authResult = await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -22,19 +24,24 @@ class AuthService {
           'email': email,
           'profileImageUrl': '',
         });
-        Navigator.pushReplacementNamed(context, FeedScreen.id);
+        Provider.of<UserData>(context).currentUserId = signedInUser.uid;
       }
+      Navigator.pop(context);
     } catch (e) {
       print(e);
     }
   }
 
-  static void logout(BuildContext context) {
+  static void logout() {
     _auth.signOut();
-    Navigator.pushReplacementNamed(context, LoginScreen.id);
   }
 
   static void login(String email, String password) async {
-    _auth.signInWithEmailAndPassword(email: email, password: password);
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      print(e);
+    }
+
   }
 }

@@ -22,6 +22,18 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: Text(
+            'LEAF',
+            style: TextStyle(
+              color: Colors.greenAccent,
+              fontSize: 35.0,
+              fontFamily: 'Raleway',
+            ),
+          ),
+        ),
         body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
