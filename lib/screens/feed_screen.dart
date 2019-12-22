@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/screens/home_screen.dart';
+import 'package:leaf/screens/search_screen.dart';
 import 'package:leaf/services/auth_service.dart';
 
 class FeedScreen extends StatefulWidget {
@@ -36,9 +37,10 @@ class _FeedScreenState extends State<FeedScreen> {
                 children: <Widget>[
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: ((MediaQuery.of(context).size.height) / 2) - 70,
+                    height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
-                      onPressed: () => print('Suche'),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => SearchScreen())),
                       color: Color.fromARGB(200, 232, 182, 65),
                       padding: EdgeInsets.all(10.0),
                       child: Text(
@@ -52,7 +54,7 @@ class _FeedScreenState extends State<FeedScreen> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: ((MediaQuery.of(context).size.height) / 2) - 70,
+                    height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
                       onPressed: () => print('Biete'),
                       color: Color.fromARGB(200, 12, 206, 107),

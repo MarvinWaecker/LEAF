@@ -36,6 +36,7 @@ dependencies:
   provider: ^3.1.0+1
   image_cropper: ^1.1.1
   datetime_picker_formfield: ^0.4.3
+  flutter_svg: ^0.15.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,12 @@ flutter:
      - family: Raleway
        fonts:
           - asset: assets/fonts/Raleway-Regular.ttf
+
+     - family: LeafIcons
+       fonts:
+          - asset: assets/fonts/LeafIcons.ttf
+
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #    - family: Trajan Pro

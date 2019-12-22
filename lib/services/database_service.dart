@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_data.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/utilities/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 
@@ -16,7 +19,7 @@ class DatabaseService {
     });
   }
 
-  static void createRide(Ride ride) {
+  static void createRide(Ride ride, BuildContext context) {
     var uuid = Uuid();
     _firestore
         .collection('/rides')
@@ -24,6 +27,7 @@ class DatabaseService {
         .setData({
       'origin': ride.origin,
       'destination': ride.destination,
+      'creatorId': Provider.of<UserData>(context).currentUserId,
     });
   }
 

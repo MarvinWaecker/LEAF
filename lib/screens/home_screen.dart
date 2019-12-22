@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/icons/leaf_icons_icons.dart';
 import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/activity_screen.dart';
 import 'package:leaf/screens/create_ride_screen.dart';
@@ -7,6 +8,7 @@ import 'package:leaf/screens/feed_screen.dart';
 import 'package:leaf/screens/profile_screen.dart';
 import 'package:leaf/screens/search_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -67,13 +69,12 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 32.0,
             )),
             BottomNavigationBarItem(
-                icon: Icon(
-              Icons.photo_camera,
-              size: 32.0,
+                icon: Icon(LeafIcons.biete,
+              size: 17.0,
             )),
             BottomNavigationBarItem(
                 icon: Icon(
-              Icons.notifications,
+              Icons.directions_car,
               size: 32.0,
             )),
             BottomNavigationBarItem(
