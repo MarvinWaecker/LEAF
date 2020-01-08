@@ -12,7 +12,7 @@ class CreateRideScreen extends StatefulWidget {
 
 class _CreateRideScreenState extends State<CreateRideScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
+  //bool _isLoading = false;
   String _origin = '';
   String _destination = '';
   //Future<DateTime> _date;

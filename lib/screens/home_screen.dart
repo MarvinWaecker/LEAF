@@ -4,14 +4,13 @@ import 'package:leaf/icons/leaf_icons_icons.dart';
 import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/activity_screen.dart';
 import 'package:leaf/screens/create_ride_screen.dart';
-import 'package:leaf/screens/feed_screen.dart';
+import 'package:leaf/screens/main_screen.dart';
 import 'package:leaf/screens/profile_screen.dart';
 import 'package:leaf/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -26,13 +25,38 @@ class _HomeScreenState extends State<HomeScreen> {
     _pageController = PageController();
   }
 
+  void toSearchScreen() {
+    setState(() {
+      _currentTab = 1;
+    });
+    _pageController.animateToPage(
+      1,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeIn,
+    );
+  }
+
+  void toCreateRideScreen() {
+    setState(() {
+      _currentTab = 2;
+    });
+    _pageController.animateToPage(
+      2,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeIn,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          FeedScreen(),
+          MainScreen(
+            toSearchScreen: toSearchScreen,
+            toCreateRideScreen: toCreateRideScreen,
+          ),
           SearchScreen(),
           CreateRideScreen(),
           ActivityScreen(),
@@ -69,7 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 32.0,
             )),
             BottomNavigationBarItem(
-                icon: Icon(LeafIcons.biete,
+                icon: Icon(
+              LeafIcons.biete,
               size: 17.0,
             )),
             BottomNavigationBarItem(

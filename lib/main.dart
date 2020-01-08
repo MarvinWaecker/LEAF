@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/screens/activity_screen.dart';
-import 'package:leaf/screens/feed_screen.dart';
+import 'package:leaf/screens/main_screen.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignupScreen.id: (context) => SignupScreen(),
-          FeedScreen.id: (context) => FeedScreen(),
+          MainScreen.id: (context) => MainScreen(),
           ActivityScreen.id: (context) => ActivityScreen(),
         },
       ),
