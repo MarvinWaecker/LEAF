@@ -1,15 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
-import 'package:leaf/models/user_data.dart';
-import 'package:leaf/models/user_model.dart';
-import 'package:leaf/screens/activity_screen.dart';
 import 'package:leaf/services/database_service.dart';
 import 'package:leaf/services/datepicker_service.dart';
 import 'package:leaf/services/timepicker_service.dart';
-import 'package:provider/provider.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 
 class CreateRideScreen extends StatefulWidget {
@@ -19,7 +12,7 @@ class CreateRideScreen extends StatefulWidget {
 
 class _CreateRideScreenState extends State<CreateRideScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
+  //bool _isLoading = false;
   String _origin = '';
   String _destination = '';
   //Future<DateTime> _date;
@@ -38,7 +31,7 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
     );
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      DatabaseService.createRide(ride);
+      DatabaseService.createRide(ride, context);
     }
   }
 

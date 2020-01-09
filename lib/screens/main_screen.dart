@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:leaf/screens/home_screen.dart';
-import 'package:leaf/services/auth_service.dart';
 
-class FeedScreen extends StatefulWidget {
+class MainScreen extends StatefulWidget {
+  final Function toSearchScreen;
+  final Function toCreateRideScreen;
+
+  MainScreen({
+    this.toSearchScreen,
+    this.toCreateRideScreen,
+  });
+
   @override
-  _FeedScreenState createState() => _FeedScreenState();
-  static final String id = 'feed_screen';
+  _MainScreenState createState() => _MainScreenState();
+  static final String id = 'main_screen';
 }
 
-class _FeedScreenState extends State<FeedScreen> {
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +42,9 @@ class _FeedScreenState extends State<FeedScreen> {
                 children: <Widget>[
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: ((MediaQuery.of(context).size.height) / 2) - 70,
+                    height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
-                      onPressed: () => print('Suche'),
+                      onPressed: widget.toSearchScreen,
                       color: Color.fromARGB(200, 232, 182, 65),
                       padding: EdgeInsets.all(10.0),
                       child: Text(
@@ -52,9 +58,9 @@ class _FeedScreenState extends State<FeedScreen> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: ((MediaQuery.of(context).size.height) / 2) - 70,
+                    height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
-                      onPressed: () => print('Biete'),
+                      onPressed: widget.toCreateRideScreen,
                       color: Color.fromARGB(200, 12, 206, 107),
                       padding: EdgeInsets.all(10.0),
                       child: Text(
