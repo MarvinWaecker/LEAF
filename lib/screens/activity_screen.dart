@@ -24,7 +24,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
         ),
       ),
       body: Center(child: Text(
-          'Activity'
+          'Hurenshohni'
       )),
     );
   }
