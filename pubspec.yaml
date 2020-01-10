@@ -79,13 +79,49 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-     - family: Raleway
+     - family: RalewayRegular
        fonts:
           - asset: assets/fonts/Raleway-Regular.ttf
-
      - family: LeafIcons
        fonts:
           - asset: assets/fonts/LeafIcons.ttf
+     - family: RalewayThin
+       fonts:
+          - asset: assets/fonts/Raleway-Thin.ttf
+
+     - family: UbuntuRegular
+       fonts:
+         - asset: assets/fonts/Ubuntu-Regular.ttf
+           style: normal
+
+     - family: UbuntuBold
+       fonts:
+         - asset: assets/fonts/Ubuntu-Bold.ttf
+
+     - family: UbuntuItalic
+       fonts:
+         - asset: assets/fonts/Ubuntu-Italic.ttf
+           style: italic
+
+     - family: UbuntuBoldItalic
+       fonts:
+         - asset: assets/fonts/Ubuntu-BoldItalic.ttf
+
+     - family: UbuntuMedium
+       fonts:
+         - asset: assets/fonts/Ubuntu-Medium.ttf
+
+     - family: UbuntuMediumItalic
+       fonts:
+         - asset: assets/fonts/Ubuntu-MediumItalic.ttf
+
+     - family: UbuntuLight
+       fonts:
+         - asset: assets/fonts/Ubuntu-Light.ttf
+
+     - family: UbuntuLightItalic
+       fonts:
+         - asset: assets/fonts/Ubuntu-LightItalic.ttf
 
 
   #       - asset: fonts/Schyler-Italic.ttf

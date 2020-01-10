@@ -10,12 +10,12 @@ import 'package:leaf/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
+class mainBarScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainBarScreenState createState() => _MainBarScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainBarScreenState extends State<mainBarScreen> {
   int _currentTab = 0;
   PageController _pageController;
 
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         controller: _pageController,
         children: <Widget>[
-          MainScreen(
+          HomeScreen(
             toSearchScreen: toSearchScreen,
             toCreateRideScreen: toCreateRideScreen,
           ),
