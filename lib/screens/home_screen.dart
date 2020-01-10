@@ -1,113 +1,83 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:leaf/icons/leaf_icons_icons.dart';
-import 'package:leaf/models/user_data.dart';
-import 'package:leaf/screens/activity_screen.dart';
-import 'package:leaf/screens/create_ride_screen.dart';
-import 'package:leaf/screens/main_screen.dart';
-import 'package:leaf/screens/profile_screen.dart';
-import 'package:leaf/screens/search_screen.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
+class MainScreen extends StatefulWidget {
+  final Function toSearchScreen;
+  final Function toCreateRideScreen;
+
+  MainScreen({
+    this.toSearchScreen,
+    this.toCreateRideScreen,
+  });
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainScreenState createState() => _MainScreenState();
+  static final String id = 'main_screen';
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentTab = 0;
-  PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController();
-  }
-
-  void toSearchScreen() {
-    setState(() {
-      _currentTab = 1;
-    });
-    _pageController.animateToPage(
-      1,
-      duration: Duration(milliseconds: 200),
-      curve: Curves.easeIn,
-    );
-  }
-
-  void toCreateRideScreen() {
-    setState(() {
-      _currentTab = 2;
-    });
-    _pageController.animateToPage(
-      2,
-      duration: Duration(milliseconds: 200),
-      curve: Curves.easeIn,
-    );
-  }
-
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        children: <Widget>[
-          MainScreen(
-            toSearchScreen: toSearchScreen,
-            toCreateRideScreen: toCreateRideScreen,
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text(
+          'LEAF',
+          style: TextStyle(
+            color: Colors.greenAccent,
+            fontSize: 35.0,
+            fontFamily: 'Raleway',
           ),
-          SearchScreen(),
-          CreateRideScreen(),
-          ActivityScreen(),
-          ProfileScreen(userId: Provider.of<UserData>(context).currentUserId),
-        ],
-        onPageChanged: (int index) {
-          setState(() {
-            _currentTab = index;
-          });
-        },
+        ),
       ),
-      bottomNavigationBar: CupertinoTabBar(
-          currentIndex: _currentTab,
-          onTap: (int index) {
-            setState(() {
-              _currentTab = index;
-            });
-            _pageController.animateToPage(
-              index,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeIn,
-            );
-          },
-          activeColor: Colors.green,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.home,
-              size: 32.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.search,
-              size: 32.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              LeafIcons.biete,
-              size: 17.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.directions_car,
-              size: 32.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.account_circle,
-              size: 32.0,
-            ))
-          ]),
+      //backgroundColor: Colors.blue,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Form(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: ((MediaQuery.of(context).size.height) / 2) - 78,
+                    child: FlatButton(
+                      onPressed: widget.toSearchScreen,
+                      color: Color.fromARGB(200, 232, 182, 65),
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Suche',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 12, 206, 107),
+                          fontSize: 80.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: ((MediaQuery.of(context).size.height) / 2) - 78,
+                    child: FlatButton(
+                      onPressed: widget.toCreateRideScreen,
+                      color: Color.fromARGB(200, 12, 206, 107),
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Biete',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 232, 182, 65),
+                          fontSize: 80.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
