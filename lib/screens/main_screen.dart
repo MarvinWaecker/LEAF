@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/screens/create_ride_screen.dart';
+import 'package:leaf/screens/search_location_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final Function toSearchScreen;
@@ -44,7 +46,10 @@ class _MainScreenState extends State<MainScreen> {
                     width: MediaQuery.of(context).size.width,
                     height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
-                      onPressed: widget.toSearchScreen,
+                      onPressed: () {
+                        widget.toSearchScreen;
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => SearchLocationScreen()));
+                      },
                       color: Color.fromARGB(200, 232, 182, 65),
                       padding: EdgeInsets.all(10.0),
                       child: Text(
@@ -60,7 +65,10 @@ class _MainScreenState extends State<MainScreen> {
                     width: MediaQuery.of(context).size.width,
                     height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
-                      onPressed: widget.toCreateRideScreen,
+                      onPressed: () {
+                        widget.toCreateRideScreen;
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => CreateRideScreen()));
+                      },
                       color: Color.fromARGB(200, 12, 206, 107),
                       padding: EdgeInsets.all(10.0),
                       child: Text(

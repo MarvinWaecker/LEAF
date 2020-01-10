@@ -13,19 +13,21 @@ class CreateRideScreen extends StatefulWidget {
 class _CreateRideScreenState extends State<CreateRideScreen> {
   final _formKey = GlobalKey<FormState>();
   //bool _isLoading = false;
-  String _origin = '';
-  String _destination = '';
-  //Future<DateTime> _date;
+  String origin = '';
+  String destination = '';
+  //Future<DateTime> _date; 
   //Future<DateTime> _time;
 
   final format = DateFormat("yyy-MM-dd");
+
+
 
   _submit() async {
     Ride ride = Ride(
       //  id: Provider.of<UserData>(context).currentUserId =
       //      UserData().currentUserId,
-      origin: _origin,
-      destination: _destination,
+      origin: origin,
+      destination: destination,
       //  date: _date,
       //  time: _time,
     );
@@ -68,7 +70,7 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
                         validator: (input) => input.trim().isEmpty
                             ? 'Please enter a valid starting point'
                             : null,
-                        onSaved: (input) => _origin = input,
+                        onSaved: (input) => origin = input,
                       ),
                     ),
                     Padding(
@@ -79,7 +81,7 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
                         validator: (input) => input.trim().isEmpty
                             ? 'Please enter a valid destination'
                             : null,
-                        onSaved: (input) => _destination = input,
+                        onSaved: (input) => destination = input,
                       ),
                     ),
                     SizedBox(height: 20.0),
@@ -87,8 +89,8 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
                       width: 250.0,
                       child: FlatButton(
                         onPressed: () async {
-                          final selectedDate = await DatepickerService.selectDate(context);
-                          print(selectedDate);
+                          //final selectedDate = await DatepickerService.selectDate(context);
+                          //print(selectedDate);
                         },
                         color: Colors.green,
                         padding: EdgeInsets.all(10.0),

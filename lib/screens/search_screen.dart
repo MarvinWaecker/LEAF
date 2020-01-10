@@ -26,11 +26,13 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       title: Text(user.name),
       onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => ProfileScreen(
-                    userId: user.id,
-                  ))),
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProfileScreen(
+            userId: user.id,
+          ),
+        ),
+      ),
     );
   }
 
