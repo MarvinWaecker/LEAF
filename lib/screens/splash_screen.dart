@@ -1,107 +1,140 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'package:leaf/main.dart' as main;
+import 'package:leaf/screens/mainBar_screen.dart';
 import 'package:leaf/screens/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:leaf/models/user_data.dart';
 
 
-class MyNavigator {
-  static void goToHome(BuildContext context) {
-    Navigator.pushNamed(context, "/home");
-  }
-  static void goToIntro(BuildContext context) {
-    Navigator.pushNamed(context, "/intro");
-  }
-}
 
 
 class SplashScreen extends StatefulWidget {
-  String text;
-  SplashScreen({Key key, @required this.text}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState(text: text);
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String text;
-  _SplashScreenState({Key key, @required this.text});
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new LoginScreen())),
+    Timer(Duration(seconds: 3), () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => _getScreenId())),
     );
   }
-
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(color: Colors.redAccent),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 50.0,
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: Colors.greenAccent,
-                          size: 50.0,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.0),
-                      ),
-                      Text(
-                        'Moin',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0),
-                      )
-                    ],
+      backgroundColor: Color(0xff111e2e),
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'LEAF',
+                  style: TextStyle(
+                    fontFamily: 'RalewayThin',
+                    fontSize: 113,
+                    color: Color(0xffE6EFE9),
                   ),
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Padding(
-                      padding: EdgeInsets.only(top: 20.0),
-                    ),
-                    Text(
-                      'Moin',
-                      softWrap: true,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18.0,
-                          color: Colors.white),
-                    )
-                  ],
+            Container(
+              alignment: Alignment.center,
+              child: Transform.translate(
+                offset: Offset (0,0),
+                child: Text(
+                  'your static life.',
+                  style: TextStyle(
+                    fontFamily: 'RalewayThin',
+                    fontSize: 40,
+                    color: Color(0xffE6EFE9),
+                  ),
                 ),
-              )
-            ],
-          )
-        ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 55.0),
+              child: MyStatefulWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  MyStatefulWidget({Key key}) : super(key: key);
+
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+
+// Animiertes Logo
+class _MyStatefulWidgetState extends State<MyStatefulWidget>
+    with SingleTickerProviderStateMixin {
+
+  AnimationController _controller;
+  Animation<Offset> _offsetAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+
+    _offsetAnimation = Tween<Offset>(
+      begin: Offset(-1.6, 0.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.decelerate,
+    ));
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Image.asset(
+          'assets/images/LEAF_Logo_mehr_Abstand.png',
+        ),
+      ),
+    );
+  }
+}
+
+Widget _getScreenId() {
+  return StreamBuilder<FirebaseUser>(
+    stream: FirebaseAuth.instance.onAuthStateChanged,
+    builder: (BuildContext context, snapshot) {
+      if (snapshot.hasData) {
+        Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
+        return mainBarScreen();
+        // HomeScreen
+      } else {
+        return LoginScreen();
+        // LoginScreen
+      }
+    },
+  );
 }

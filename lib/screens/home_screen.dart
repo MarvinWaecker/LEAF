@@ -1,36 +1,23 @@
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final Function toSearchScreen;
   final Function toCreateRideScreen;
 
-  MainScreen({
+  HomeScreen({
     this.toSearchScreen,
     this.toCreateRideScreen,
   });
 
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
   static final String id = 'main_screen';
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          'LEAF',
-          style: TextStyle(
-            color: Colors.greenAccent,
-            fontSize: 35.0,
-            fontFamily: 'Raleway',
-          ),
-        ),
-      ),
-      //backgroundColor: Colors.blue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

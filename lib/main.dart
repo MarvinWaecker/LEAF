@@ -17,19 +17,7 @@ void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
 
-  Widget _getScreenId() {
-    return StreamBuilder<FirebaseUser>(
-      stream: FirebaseAuth.instance.onAuthStateChanged,
-      builder: (BuildContext context, snapshot) {
-        if (snapshot.hasData) {
-          Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
-          return SplashScreen(text: 'moin');
-        } else {
-          return SplashScreen(text: 'moin');
-        }
-      },
-    );
-  }
+
 
 
   @override
@@ -58,11 +46,11 @@ class MyApp extends StatelessWidget {
           cursorColor: Color(0xffE6EFE9),
           //primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(color: Colors.black,),
         ),
-        home: _getScreenId(),
+        home: SplashScreen(),
         routes: {
           LoginScreen.id: (context) => LoginScreen(),
           SignupScreen.id: (context) => SignupScreen(),
-          MainScreen.id: (context) => MainScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
           ActivityScreen.id: (context) => ActivityScreen(),
         },
       ),
