@@ -8,6 +8,7 @@ import 'package:leaf/screens/search_location_screen.dart';
 import 'package:leaf/screens/search_time_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
+/*
 class SearchScreen extends StatefulWidget {
 
 
@@ -67,7 +68,6 @@ TextEditingController _searchController = TextEditingController();
         controller: _searchPageController,
         children: <Widget>[
           SearchLocationScreen(
-            toSearchTimeScreen: toSearchTimeScreen,
           ),
           SearchTimeScreen(),
         ],
@@ -82,7 +82,7 @@ TextEditingController _searchController = TextEditingController();
   /*
   _buildUserTile(User user) {
     return ListTile(
-      leading: CircleAvatar(
+      leading: (
         radius: 20.0,
         backgroundImage: user.profileImageUrl.isEmpty
             ? AssetImage('assets/images/logo.png')
@@ -102,19 +102,19 @@ TextEditingController _searchController = TextEditingController();
 
   _buildRideCard(Ride ride) {
     return ExpansionTile(
-      /*
+
       leading: CircleAvatar(
         radius: 20.0,
         backgroundImage: user.profileImageUrl.isEmpty
             ? AssetImage('assets/images/logo.png')
             : CachedNetworkImageProvider(user.profileImageUrl),
       ),
-       */
+
 
       title: Text(ride.origin),
       children: <Widget>[
       ],
-      /*
+
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
@@ -123,7 +123,7 @@ TextEditingController _searchController = TextEditingController();
           ),
         ),
       ),
-       */
+
 
     );
   }
@@ -135,13 +135,13 @@ TextEditingController _searchController = TextEditingController();
       _rides = null;
     });
   }
-   */
 
 
 
 
 
-      /*
+
+
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: TextField(
@@ -200,3 +200,7 @@ TextEditingController _searchController = TextEditingController();
     );
   }
 }
+
+
+
+ */

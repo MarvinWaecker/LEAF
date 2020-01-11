@@ -195,6 +195,8 @@ PODS:
   - firebase_core (0.0.1):
     - Firebase/Core
     - Flutter
+  - firebase_core_web (0.1.0):
+    - Flutter
   - firebase_storage (0.0.1):
     - Firebase/Storage
     - Flutter
@@ -325,6 +327,7 @@ DEPENDENCIES:
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_core_web (from `.symlinks/plugins/firebase_core_web/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
@@ -369,6 +372,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_core_web:
+    :path: ".symlinks/plugins/firebase_core_web/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
@@ -387,12 +392,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  cloud_firestore: 10fd4a09ebffc33efd64708106e2e7de701fe9ae
+  cloud_firestore: c5d1e4d114eecb1dfb535f008435685bcf6063f1
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
-  firebase_analytics: 2f3ab38886ff9d915b076d5aae2f964dc5ce7549
+  firebase_analytics: d83001d25b9a58ca5eda8db0ef566c02d7af5258
   firebase_auth: 6aa030648265449af60ba3f8792035aa70c7324e
-  firebase_core: 15d27cd74b2e40f8c29540707c0486bb561a92e8
-  firebase_storage: 83588f977fcc2c6f5becac76377d4cc9bb5f15d1
+  firebase_core: 9bd2e66a276153e219a87ff39dfecb6b671f524a
+  firebase_core_web: d501d8b946b60c8af265428ce483b0fff5ad52d1
+  firebase_storage: cee2383f53c26690269ab667b4dbfe25452c6caa
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAuth: 831577b184ecaba38bc886768c1c22a450cc44e3
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc

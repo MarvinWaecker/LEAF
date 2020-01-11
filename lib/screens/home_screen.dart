@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
-  static final String id = 'main_screen';
+  static final String id = 'home_screen';
 }
 
 class _HomeScreenState extends State<HomeScreen> {
