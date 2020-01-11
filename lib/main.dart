@@ -14,21 +14,17 @@ import 'package:flutter/services.dart';
 void main() => runApp(new MyApp());
 
 
-
 class MyApp extends StatelessWidget {
-
-
-
-
   @override
   Widget build(BuildContext context) {
 
 
-    // Status Bar und Navigation Bar - Farbe anpassen
+    /// Status Bar und Navigation Bar - Farbe anpassen
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Color(0xff111e2e),
       systemNavigationBarColor: Color(0xff111e2e),
     ));
+
 
 
     return ChangeNotifierProvider(
@@ -52,6 +48,11 @@ class MyApp extends StatelessWidget {
           SignupScreen.id: (context) => SignupScreen(),
           HomeScreen.id: (context) => HomeScreen(),
           ActivityScreen.id: (context) => ActivityScreen(),
+          // Fehlen noch einige
+
+          /// Befehl um von überall bestimmten Screen zu öffnen:
+          // => Navigator.of(context).pushNamed("Hier steht der ScreenName, z.B. login_screen"),
+
         },
       ),
     );

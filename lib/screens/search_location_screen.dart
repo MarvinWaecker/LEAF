@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/screens/search_screen.dart';
 import 'package:leaf/screens/search_time_screen.dart';
+import 'package:provider/provider.dart';
 
 class SearchLocationScreen extends StatefulWidget {
+  final Function toSearchTimeScreen;
+
+  SearchLocationScreen({
+    this.toSearchTimeScreen,
+  });
+
   @override
   _SearchLocationScreenState createState() => _SearchLocationScreenState();
 }
@@ -90,14 +98,10 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
             padding: EdgeInsets.all(16.0),
             alignment: Alignment.bottomRight,
             child: RaisedButton(
-              //onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SearchTimeScreen())),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => SearchTimeScreen(
-                  ),
-                ),
-              ),
+              onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SearchTimeScreen())),
+              //widget.toSearchTimeScreen(),
+
+
               color: Color(0xff0cce6b),
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0),

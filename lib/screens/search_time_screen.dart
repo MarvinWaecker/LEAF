@@ -207,7 +207,8 @@ class _SearchTimeScreenState extends State<SearchTimeScreen> {
             padding: EdgeInsets.all(16.0),
             alignment: Alignment.bottomRight,
             child: RaisedButton(
-              //onPressed: () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SuchenResultsPage())),
+              onPressed: () {print('Platzhalter damit Button grün ist');},
+              // => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SuchenResultsPage())),
               color: Color(0xff0cce6b),
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(18.0),
