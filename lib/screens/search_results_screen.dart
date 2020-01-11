@@ -1,4 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_model.dart';
+import 'package:leaf/screens/profile_screen.dart';
+import 'package:leaf/services/database_service.dart';
 
 class SearchResultsScreen extends StatefulWidget {
   @override
@@ -6,123 +12,104 @@ class SearchResultsScreen extends StatefulWidget {
 }
 
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          'LEAF',
-          style: TextStyle(
-            color: Colors.greenAccent,
-            fontSize: 35.0,
-            fontFamily: 'Raleway',
+  static List searchParameters;
+
+  TextEditingController _searchController = TextEditingController();
+  Future<QuerySnapshot> _users;
+  Future<QuerySnapshot> _rides = DatabaseService.searchRides('München', 'Freiburg');
+
+  _buildUserTile(User user) {
+    return ListTile(
+      leading: CircleAvatar(
+        radius: 20.0,
+        backgroundImage: user.profileImageUrl.isEmpty
+            ? AssetImage('assets/images/logo.png')
+            : CachedNetworkImageProvider(user.profileImageUrl),
+      ),
+      title: Text(user.name),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProfileScreen(
+            userId: user.id,
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+    );
+  }
+
+  _buildRideCard(Ride ride) {
+    return ExpansionTile(
+      /*
+      leading: CircleAvatar(
+        radius: 20.0,
+        backgroundImage: user.profileImageUrl.isEmpty
+            ? AssetImage('assets/images/logo.png')
+            : CachedNetworkImageProvider(user.profileImageUrl),
+      ),
+       */
+
+      title: Text(ride.origin),
+      children: <Widget>[
+        Text(ride.destination),
+      ],
+      /*
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProfileScreen(
+            userId: user.id,
+          ),
+        ),
+      ),
+       */
+    );
+  }
+
+  _clearSearch() {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _searchController.clear());
+    setState(() {
+      _rides = null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.white, title: Text('Ergebnisse')),
       body: FutureBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+        future: _rides,
+        builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
-          //User user = User.fromDoc(snapshot.data);
-
-          return ListView(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 0.0),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    '12',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'posts',
-                                    style: TextStyle(color: Colors.black54),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    '45',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Following',
-                                    style: TextStyle(color: Colors.black54),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    '4550',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Followers',
-                                    style: TextStyle(color: Colors.black54),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'test',
-                      style: TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Container(
-                      height: 80.0,
-                      child: Text(
-                        'test',
-                        style: TextStyle(fontSize: 15.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
+          if (snapshot.data.documents.length == 0) {
+            return Center(
+              child: Text('No users found.'),
+            );
+          }
+          return ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              itemBuilder: (BuildContext context, int index) {
+                Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+                return _buildRideCard(ride);
+              });
         },
       ),
     );
   }
+
+  //Methodenaufruf
+/*
+onSubmitted: (input) {
+            if (input.isNotEmpty) {
+              setState(() {
+                _rides = DatabaseService.searchRides(input);
+              });
+            }
+          },
+ */
 }
