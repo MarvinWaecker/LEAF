@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/profile_screen.dart';
 import 'package:leaf/screens/search_location_screen.dart';
@@ -16,6 +17,10 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+TextEditingController _searchController = TextEditingController();
+  Future<QuerySnapshot> _users;
+  Future<QuerySnapshot> _rides;
+  
   int _currentSearchTab = 0;
   PageController _searchPageController;
   // TextEditingController _searchController = TextEditingController();
@@ -51,6 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
       curve: Curves.easeIn,
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,11 +100,39 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  _buildRideCard(Ride ride) {
+    return ExpansionTile(
+      /*
+      leading: CircleAvatar(
+        radius: 20.0,
+        backgroundImage: user.profileImageUrl.isEmpty
+            ? AssetImage('assets/images/logo.png')
+            : CachedNetworkImageProvider(user.profileImageUrl),
+      ),
+       */
+
+      title: Text(ride.origin),
+      children: <Widget>[
+      ],
+      /*
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ProfileScreen(
+            userId: user.id,
+          ),
+        ),
+      ),
+       */
+
+    );
+  }
+
   _clearSearch() {
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _searchController.clear());
     setState(() {
-      _users = null;
+      _rides = null;
     });
   }
    */
@@ -131,18 +165,18 @@ class _SearchScreenState extends State<SearchScreen> {
           onSubmitted: (input) {
             if (input.isNotEmpty) {
               setState(() {
-                _users = DatabaseService.searchUsers(input);
+                _rides = DatabaseService.searchRides(input);
               });
             }
           },
         ),
       ),
-      body: _users == null
+      body: _rides == null
           ? Center(
               child: Text('Search here'),
             )
           : FutureBuilder(
-              future: _users,
+              future: _rides,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -157,8 +191,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 return ListView.builder(
                     itemCount: snapshot.data.documents.length,
                     itemBuilder: (BuildContext context, int index) {
-                      User user = User.fromDoc(snapshot.data.documents[index]);
-                      return _buildUserTile(user);
+                      Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+                      return _buildRideCard(ride);
                     });
               },
             ),
