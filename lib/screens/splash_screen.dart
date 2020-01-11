@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/screens/home_screen.dart';
 import 'dart:async';
 import 'package:leaf/screens/mainBar_screen.dart';
 import 'package:leaf/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:leaf/models/user_data.dart';
-
 
 
 
@@ -69,6 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
+/// Animiertes Logo
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
 
@@ -76,8 +77,6 @@ class MyStatefulWidget extends StatefulWidget {
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
 }
 
-
-// Animiertes Logo
 class _MyStatefulWidgetState extends State<MyStatefulWidget>
     with SingleTickerProviderStateMixin {
 
@@ -123,13 +122,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
   }
 }
 
+
+/// Navigation zu Login oder HomeScreen
 Widget _getScreenId() {
   return StreamBuilder<FirebaseUser>(
     stream: FirebaseAuth.instance.onAuthStateChanged,
     builder: (BuildContext context, snapshot) {
       if (snapshot.hasData) {
         Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
-        return mainBarScreen();
+        return MainBarScreen();
         // HomeScreen
       } else {
         return LoginScreen();

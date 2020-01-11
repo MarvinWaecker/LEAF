@@ -16,9 +16,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff111e2e),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
                       onPressed: widget.toSearchScreen,
-                      color: Color.fromARGB(200, 232, 182, 65),
+                      //color: Color.fromARGB(200, 232, 182, 65),
                       padding: EdgeInsets.all(10.0),
                       child: Text(
                         'Suche',
@@ -49,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: ((MediaQuery.of(context).size.height) / 2) - 78,
                     child: FlatButton(
                       onPressed: widget.toCreateRideScreen,
-                      color: Color.fromARGB(200, 12, 206, 107),
+                      //color: Color.fromARGB(200, 12, 206, 107),
                       padding: EdgeInsets.all(10.0),
                       child: Text(
                         'Biete',

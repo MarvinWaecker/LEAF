@@ -10,12 +10,12 @@ import 'package:leaf/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
 
-class mainBarScreen extends StatefulWidget {
+class MainBarScreen extends StatefulWidget {
   @override
   _MainBarScreenState createState() => _MainBarScreenState();
 }
 
-class _MainBarScreenState extends State<mainBarScreen> {
+class _MainBarScreenState extends State<MainBarScreen> {
   int _currentTab = 0;
   PageController _pageController;
 
@@ -29,10 +29,8 @@ class _MainBarScreenState extends State<mainBarScreen> {
     setState(() {
       _currentTab = 1;
     });
-    _pageController.animateToPage(
+    _pageController.jumpToPage(
       1,
-      duration: Duration(milliseconds: 200),
-      curve: Curves.easeIn,
     );
   }
 
@@ -40,10 +38,8 @@ class _MainBarScreenState extends State<mainBarScreen> {
     setState(() {
       _currentTab = 2;
     });
-    _pageController.animateToPage(
+    _pageController.jumpToPage(
       2,
-      duration: Duration(milliseconds: 200),
-      curve: Curves.easeIn,
     );
   }
 
@@ -68,46 +64,79 @@ class _MainBarScreenState extends State<mainBarScreen> {
           });
         },
       ),
-      bottomNavigationBar: CupertinoTabBar(
-          currentIndex: _currentTab,
-          onTap: (int index) {
-            setState(() {
-              _currentTab = index;
-            });
-            _pageController.animateToPage(
-              index,
-              duration: Duration(milliseconds: 200),
-              curve: Curves.easeIn,
-            );
-          },
-          activeColor: Colors.green,
-          items: [
-            BottomNavigationBarItem(
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 15)]),
+        child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Color(0xff111e2e),
+            iconSize: 25,
+            selectedFontSize: 12,
+            showUnselectedLabels: false,
+
+            currentIndex: _currentTab,
+            onTap: (int index) {
+              setState(() {
+                _currentTab = index;
+              });
+              _pageController.jumpToPage(
+                index,
+              );
+            },
+            // activeColor: Color(0xff0cce6b),
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home,
+                ),
+                title: Text('Home',
+                  style: TextStyle(
+                    fontFamily: 'UbuntuRegular',
+                  ),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search,
+                ),
+                title: Text('Suchen',
+                  style: TextStyle(
+                      fontFamily: 'UbuntuRegular'
+                  ),
+                ),
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(
-              Icons.home,
-              size: 32.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.search,
-              size: 32.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              LeafIcons.biete,
-              size: 17.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.directions_car,
-              size: 32.0,
-            )),
-            BottomNavigationBarItem(
-                icon: Icon(
-              Icons.account_circle,
-              size: 32.0,
-            ))
-          ]),
-    );
+                  LeafIcons.biete,
+                  size: 14,
+                ),
+                title: Text('Bieten',
+                  style: TextStyle(
+                      fontFamily: 'UbuntuRegular'
+                  ),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.directions_car,
+                ),
+                title: Text('Fahrten',
+                  style: TextStyle(
+                      fontFamily: 'UbuntuRegular'
+                  ),
+                ),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person,
+                ),
+                title: Text('Profil',
+                  style: TextStyle(
+                      fontFamily: 'UbuntuRegular'
+                  ),
+                ),
+              )
+            ],
+          selectedItemColor: Color(0xff0cce6b),
+          unselectedItemColor: Color(0xffE6EFE9),
+            ),
+        ),
+      );
   }
 }

@@ -3,19 +3,77 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/profile_screen.dart';
+import 'package:leaf/screens/search_location_screen.dart';
+import 'package:leaf/screens/search_time_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
 class SearchScreen extends StatefulWidget {
-  static final String id = 'search_screen';
+
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
+  static final String id = 'search_screen';
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController _searchController = TextEditingController();
-  Future<QuerySnapshot> _users;
+  int _currentSearchTab = 0;
+  PageController _searchPageController;
+  // TextEditingController _searchController = TextEditingController();
+  // Future<QuerySnapshot> _users;
 
+  void toSearchLocationScreen() {
+    /*
+    setState(() {
+      _currentSearchTab = 1;
+    });
+
+     */
+    //_searchPageController.nextPage(duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+    _currentSearchTab = 1;
+    _searchPageController.animateToPage(
+      1,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeIn,
+    );
+
+
+  }
+  void toSearchTimeScreen() {
+    setState(() {
+      _currentSearchTab = 2;
+    });
+
+    //_searchPageController.nextPage(duration: Duration(milliseconds: 100), curve: Curves.easeIn);
+    _currentSearchTab = 2;
+    _searchPageController.animateToPage(
+      2,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeIn,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    return Scaffold(
+      body: PageView(
+        controller: _searchPageController,
+        children: <Widget>[
+          SearchLocationScreen(
+            toSearchTimeScreen: toSearchTimeScreen,
+          ),
+          SearchTimeScreen(),
+        ],
+        onPageChanged: (int index) {
+          setState(() {
+            _currentSearchTab = index;
+          });
+        },
+      ),
+
+
+  /*
   _buildUserTile(User user) {
     return ListTile(
       leading: CircleAvatar(
@@ -43,10 +101,13 @@ class _SearchScreenState extends State<SearchScreen> {
       _users = null;
     });
   }
+   */
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+
+
+
+
+      /*
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: TextField(
@@ -101,6 +162,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     });
               },
             ),
+      */
     );
   }
 }
