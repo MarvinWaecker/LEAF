@@ -7,7 +7,7 @@ import 'package:leaf/screens/create_ride_screen.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/profile_screen.dart';
 import 'package:leaf/screens/search_screen.dart';
-import 'package:leaf/screens/test_Nav.dart';
+import 'package:leaf/screens/search_pages.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
 
@@ -55,7 +55,7 @@ class _MainBarScreenState extends State<MainBarScreen> {
             toSearchScreen: toSearchScreen,
             toCreateRideScreen: toCreateRideScreen,
           ),
-          FirstPage(),
+          SearchPages(),
           CreateRideScreen(),
           ActivityScreen(),
           ProfileScreen(userId: Provider.of<UserData>(context).currentUserId),

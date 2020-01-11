@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leaf/screens/search_screen.dart';
 import 'package:leaf/screens/search_time_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:leaf/screens/test_Nav.dart';
+import 'package:leaf/screens/search_pages.dart';
 
 class SearchLocationScreen extends StatefulWidget {
   final Function onItemTapped;

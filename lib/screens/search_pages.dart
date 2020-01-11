@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/search_results_screen.dart';
 
 
-class FirstPage extends StatefulWidget {
+class SearchPages extends StatefulWidget {
   @override
-  _FirstPageState createState() => new _FirstPageState();
+  _SearchPagesState createState() => new _SearchPagesState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _SearchPagesState extends State<SearchPages> {
 
   // Variables
   DateTime _dateTime;
@@ -143,7 +142,7 @@ class _FirstPageState extends State<FirstPage> {
             appBar: AppBar(
                 centerTitle: true,
                 backgroundColor: Color(0xff111e2e),
-                automaticallyImplyLeading: true,
+                automaticallyImplyLeading: false,
                 title: Text(
                   'Fahrt suchen',
                   style: TextStyle(
@@ -152,9 +151,6 @@ class _FirstPageState extends State<FirstPage> {
                     color: Color(0xffE6EFE9),
                   ),
                 ),
-                leading: IconButton(icon:Icon(Icons.arrow_back, color: Color(0xff111e2e),),
-                  //onPressed:() => HomeScreen(),
-                )
             ),
             body: Column(
               children: <Widget>[
@@ -255,7 +251,7 @@ class _FirstPageState extends State<FirstPage> {
                     color: Color(0xffE6EFE9),
                   ),
                 ),
-                leading: IconButton(icon:Icon(Icons.arrow_back, color: Color(0xffe8b641),),
+                leading: IconButton(icon:Icon(Icons.navigate_before, color: Color(0xffe8b641),),
                   onPressed:() {onItemTapped(0);},
                 )
             ),

@@ -6,7 +6,7 @@ import 'package:leaf/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:leaf/screens/signup_screen.dart';
 import 'package:leaf/screens/splash_screen.dart';
-import 'package:leaf/screens/test_Nav.dart';
+import 'package:leaf/screens/search_pages.dart';
 import 'package:provider/provider.dart';
 import 'models/user_data.dart';
 import 'package:flutter/services.dart';
