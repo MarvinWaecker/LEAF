@@ -40,4 +40,11 @@ class DatabaseService {
         usersRef.where('name', isGreaterThanOrEqualTo: name).getDocuments();
     return users;
   }
+
+  static Future<QuerySnapshot> searchRides(String origin) {
+    Future<QuerySnapshot> rides =
+        ridesRef.where('origin', isGreaterThanOrEqualTo: origin).getDocuments();
+    return rides;
+  }
 }
+
