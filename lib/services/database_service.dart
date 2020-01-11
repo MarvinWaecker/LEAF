@@ -40,11 +40,27 @@ class DatabaseService {
         usersRef.where('name', isGreaterThanOrEqualTo: name).getDocuments();
     return users;
   }
-
+/*
   static Future<QuerySnapshot> searchRides(String origin) {
     Future<QuerySnapshot> rides =
-        ridesRef.where('origin', isGreaterThanOrEqualTo: origin).getDocuments();
+        ridesRef.where('origin', isEqualTo: origin).getDocuments();
     return rides;
   }
+
+ */
+
+  static Future<QuerySnapshot> searchRides(String origin , String destination) {
+    //Future<QuerySnapshot> ridesOrigin = ridesRef.where('origin', isEqualTo: origin).getDocuments();
+
+    //Future<QuerySnapshot> ridesDestination = ridesRef.where('destination', isEqualTo: destination).getDocuments();
+
+    Future<QuerySnapshot> rides = Firestore.instance.collection('rides').where('origin', isEqualTo: origin).where('destination', isEqualTo: destination).getDocuments();
+
+
+
+    //ridesRef.where('origin', isGreaterThanOrEqualTo: origin).where('destination', isEqualTo: destination).getDocuments();
+    
+    return rides;
+    }
 }
 
