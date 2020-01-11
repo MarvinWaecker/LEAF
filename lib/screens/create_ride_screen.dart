@@ -39,115 +39,110 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            title: Text(
-              'LEAF',
-              style: TextStyle(
-                color: Colors.greenAccent,
-                fontSize: 35.0,
-                fontFamily: 'Raleway',
-              ),
-            ),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text(
+          'LEAF',
+          style: TextStyle(
+            color: Colors.greenAccent,
+            fontSize: 35.0,
+            fontFamily: 'Raleway',
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(labelText: 'Origin'),
-                          validator: (input) => input.trim().isEmpty
-                              ? 'Please enter a valid starting point'
-                              : null,
-                          onSaved: (input) => origin = input,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 10.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(labelText: 'Destination'),
-                          validator: (input) => input.trim().isEmpty
-                              ? 'Please enter a valid destination'
-                              : null,
-                          onSaved: (input) => destination = input,
-                        ),
-                      ),
-                      SizedBox(height: 20.0),
-                      Container(
-                        width: 250.0,
-                        child: FlatButton(
-                          onPressed: () async {
-                            //final selectedDate = await DatepickerService.selectDate(context);
-                            //print(selectedDate);
-                          },
-                          color: Colors.green,
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Pick Date',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20.0),
-                      Container(
-                        width: 250.0,
-                        child: FlatButton(
-                          onPressed: () async {
-                            final selectedTime = await TimepickerService.selectTime(context);
-                            print(selectedTime);
-                          },
-                          color: Colors.green,
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Pick Time',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18.0
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20.0),
-                      Container(
-                        width: 250.0,
-                        child: FlatButton(
-                          onPressed: _submit,
-                          color: Colors.green,
-                          padding: EdgeInsets.all(10.0),
-                          child: Text(
-                            'Create',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
-        );
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(labelText: 'Origin'),
+                        validator: (input) => input.trim().isEmpty
+                            ? 'Please enter a valid starting point'
+                            : null,
+                        onSaved: (input) => origin = input,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 30.0, vertical: 10.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(labelText: 'Destination'),
+                        validator: (input) => input.trim().isEmpty
+                            ? 'Please enter a valid destination'
+                            : null,
+                        onSaved: (input) => destination = input,
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Container(
+                      width: 250.0,
+                      child: FlatButton(
+                        onPressed: () async {
+                          //final selectedDate = await DatepickerService.selectDate(context);
+                          //print(selectedDate);
+                        },
+                        color: Colors.green,
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          'Pick Date',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Container(
+                      width: 250.0,
+                      child: FlatButton(
+                        onPressed: () async {
+                          final selectedTime = await TimepickerService.selectTime(context);
+                          print(selectedTime);
+                        },
+                        color: Colors.green,
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          'Pick Time',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Container(
+                      width: 250.0,
+                      child: FlatButton(
+                        onPressed: _submit,
+                        color: Colors.green,
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          'Create',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
   }
 }
