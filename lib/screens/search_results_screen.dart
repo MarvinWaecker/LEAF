@@ -7,16 +7,17 @@ import 'package:leaf/screens/profile_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
 class SearchResultsScreen extends StatefulWidget {
+  final String origin, destination, time, date;
+  SearchResultsScreen(this.origin, this.destination, this.time, this.date);
+
+  static final String id = 'search_results_screen';
+
   @override
   _SearchResultsScreenState createState() => _SearchResultsScreenState();
 }
 
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
-  static List searchParameters;
-
   TextEditingController _searchController = TextEditingController();
-  Future<QuerySnapshot> _users;
-  Future<QuerySnapshot> _rides = DatabaseService.searchRides('München', 'Freiburg');
 
   _buildUserTile(User user) {
     return ListTile(
@@ -66,6 +67,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     );
   }
 
+  /*
   _clearSearch() {
     WidgetsBinding.instance
         .addPostFrameCallback((_) => _searchController.clear());
@@ -73,13 +75,17 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
       _rides = null;
     });
   }
+   */
 
   @override
   Widget build(BuildContext context) {
+    //final String origin = ModalRoute.of(context).settings.arguments.toString();
+    final String origin = widget.origin;
+    final String destination = widget.destination;
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white, title: Text('Ergebnisse')),
       body: FutureBuilder(
-        future: _rides,
+        future: DatabaseService.searchRides(origin, destination),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -92,11 +98,12 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
             );
           }
           return ListView.builder(
-              itemCount: snapshot.data.documents.length,
-              itemBuilder: (BuildContext context, int index) {
-                Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-                return _buildRideCard(ride);
-              });
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (BuildContext context, int index) {
+              Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+              return _buildRideCard(ride);
+            },
+          );
         },
       ),
     );

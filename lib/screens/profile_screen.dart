@@ -2,10 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/edit_profile_screen.dart';
-import 'package:leaf/screens/search_location_screen.dart';
 import 'package:leaf/services/auth_service.dart';
 import 'package:leaf/utilities/constants.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String userId;
