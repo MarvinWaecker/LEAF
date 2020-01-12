@@ -15,38 +15,52 @@ class _SearchPagesState extends State<SearchPages> {
   TimeOfDay _time;
 
   String selectedDate = 'DATUM AUSWÄHLEN';
+  String selectedDateFirebase;
   String selectedTime = 'UHRZEIT WÄHLEN';
+  String selectedTimeFirebase;
 
   /// Date Picker --------------------------------------------------------------
+  changeDateFirebase() {
+    final dateFormatter = DateFormat("dd.MM.yyyy");
+    selectedDateFirebase = dateFormatter.format(_dateTime);
+  }
+
   changeDate() {
     setState(() {
       if(DateFormat('EEEE').format(_dateTime) == "Monday") {
         final dateFormatter = DateFormat("'Montag, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
       if(DateFormat('EEEE').format(_dateTime) == "Tuesday") {
         final dateFormatter = DateFormat("'Dienstag, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
       if(DateFormat('EEEE').format(_dateTime) == "Wednesday") {
         final dateFormatter = DateFormat("'Mittwoch, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
       if(DateFormat('EEEE').format(_dateTime) == "Thursday") {
         final dateFormatter = DateFormat("'Donnerstag, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
       if(DateFormat('EEEE').format(_dateTime) == "Friday") {
         final dateFormatter = DateFormat("'Fridays for Future, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
       if(DateFormat('EEEE').format(_dateTime) == "Saturday") {
         final dateFormatter = DateFormat("'Samstag, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
       if(DateFormat('EEEE').format(_dateTime) == "Sunday") {
         final dateFormatter = DateFormat("'Sonntag, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
+        changeDateFirebase();
       };
     });
   }
@@ -88,6 +102,8 @@ class _SearchPagesState extends State<SearchPages> {
       final now = new DateTime.now();
       final fakeTime = DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
       selectedTime = timeFormatter.format(fakeTime);
+      final timeFormatterFirebase = DateFormat("HH:mm");
+      selectedDateFirebase = timeFormatterFirebase.format(fakeTime);
     });
   }
   Future _selectTime() async {

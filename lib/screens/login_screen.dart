@@ -24,39 +24,62 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        title: Text(
-          'LEAF',
-          style: TextStyle(
-            color: Colors.greenAccent,
-            fontSize: 35.0,
-            fontFamily: 'Raleway',
-          ),
-        ),
-      ),
+      backgroundColor: Color(0xff111e2e),
       body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
+        child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'LEAF',
-                style: TextStyle(fontSize: 50.0),
+              Padding(
+                padding: EdgeInsets.only(top: 15, bottom: 15),
+                child: Container(
+                  height: 200,
+                  padding: EdgeInsets.only(top: 10.0, left: 30, right: 30),
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    'assets/images/LEAF_Logo_mehr_Abstand.png',
+                    //scale: 0.5,
+                  ),
+                ),
               ),
+
               Form(
                 key: _formKey,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
+                    SizedBox(
+                      height: 0,
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10.0),
+                          horizontal: 16.0, vertical: 10.0),
                       child: TextFormField(
-                        decoration: InputDecoration(labelText: 'Email'),
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                          fontSize: 15,
+                        ),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.mail,
+                            color: Color(0xffe8b641),
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
+                          labelText: 'E-mail',
+                          labelStyle: TextStyle(
+                            color: Color(0xff4171AB),
+                            fontFamily: 'UbuntuRegular',
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff0cce6b)),
+                          ),
+                        ),
                         validator: (input) => !input.contains('@')
                             ? 'Please enter a valid email'
                             : null,
@@ -65,49 +88,79 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10.0),
+                          horizontal: 16.0, vertical: 10.0),
                       child: TextFormField(
-                        decoration: InputDecoration(labelText: 'Password'),
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                          fontSize: 15,
+                        ),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: Color(0xffe8b641),
+                          ),
+                          contentPadding:
+                              EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
+                          labelText: 'Passwort',
+                          labelStyle: TextStyle(
+                            color: Color(0xff4171AB),
+                            fontFamily: 'UbuntuRegular',
+                          ),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff0cce6b)),
+                          ),
+                        ),
                         validator: (input) => input.length < 6
                             ? 'Password needs to be at least 6 characters long'
                             : null,
                         onSaved: (input) => _password = input,
-                        obscureText: true,
                       ),
                     ),
-                    SizedBox(height: 20.0),
-                    Container(
-                      width: 250.0,
-                      child: FlatButton(
-                        onPressed: _submit,
-                        color: Colors.green,
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
+                    SizedBox(height: 40.0),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: SizedBox(
+                        width: double.maxFinite,
+                        child: RaisedButton(
+                          onPressed: _submit,
+                          color: Color(0xff0cce6b),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                          ),
+                          child: Text(
+                            'EINLOGGEN',
+                            style: TextStyle(
+                              color: Color(0xff111e2e),
+                              fontSize: 14,
+                              fontFamily: 'UbuntuMedium',
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
-                    Container(
-                      width: 250.0,
-                      child: OutlineButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, SignupScreen.id),
-                        borderSide: BorderSide(color: Colors.green),
-                        padding: EdgeInsets.all(10.0),
-                        child: Text(
-                          'Signup',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 18.0,
+                    SizedBox(height: 10.0),
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, right: 16),
+                      child: SizedBox(
+                        child: FlatButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, SignupScreen.id),
+                          child: Text(
+                            "ANMELDEN",
+                            style: TextStyle(
+                              color: Color(0xffe8b641),
+                              fontFamily: 'UbuntuMedium',
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
