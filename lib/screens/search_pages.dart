@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:leaf/screens/search_location_screen.dart';
 import 'package:leaf/screens/search_results_screen.dart';
+import 'package:leaf/screens/search_time_screen.dart';
+import 'package:flutter/services.dart';
 
 class SearchPages extends StatefulWidget {
   @override
@@ -112,8 +115,7 @@ class _SearchPagesState extends State<SearchPages> {
     setState(() {
       final timeFormatter = DateFormat("HH:mm' Uhr'");
       final now = new DateTime.now();
-      final fakeTime =
-          DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
+      final fakeTime = DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
       selectedTime = timeFormatter.format(fakeTime);
       final timeFormatterFirebase = DateFormat("HH:mm");
       selectedDateFirebase = timeFormatterFirebase.format(fakeTime);
@@ -163,6 +165,8 @@ class _SearchPagesState extends State<SearchPages> {
       body: PageView(
         controller: _controllerS,
         children: <Widget>[
+          //SearchLocationScreen(controllerS: _controllerS, selectedIndex: _selectedIndex,),
+          //SearchTimeScreen(controllerS: _controllerS, selectedIndex: _selectedIndex,),
           /// Start Ziel picken ------------------------------------------------
           Form(
             key: _formKeyLocation,
@@ -248,7 +252,7 @@ class _SearchPagesState extends State<SearchPages> {
                     padding: EdgeInsets.all(16.0),
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
-                      onPressed: () {
+                      onPressed: () {FocusScope.of(context).unfocus();
                         _formKeyLocation.currentState.save();
                         onItemTapped(1);
                       },
