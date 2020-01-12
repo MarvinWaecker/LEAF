@@ -27,6 +27,8 @@ class DatabaseService {
         .setData({
       'origin': ride.origin,
       'destination': ride.destination,
+      'time': ride.time,
+      'date': ride.date,
       'creatorId': Provider.of<UserData>(context).currentUserId,
     });
   }

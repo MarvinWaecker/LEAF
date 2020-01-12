@@ -4,15 +4,15 @@ class Ride{
  // final String id;
   final String origin;
   final String destination;
-  //final Future<DateTime> date;
-  //final Future<DateTime> time;
+  final String date;
+  final String time;
 
   Ride({
   //  this.id,
     this.origin,
     this.destination,
-  //  this.date,
-  //  this.time,
+    this.date,
+    this.time,
 });
 
   factory Ride.fromDoc(DocumentSnapshot doc) {
@@ -20,8 +20,8 @@ class Ride{
     //  id: doc.documentID,
       origin:  doc['origin'],
       destination: doc['destination'],
-    //  date: doc['date'],
-    //  time: doc['time'],
+      date: doc['date'],
+      time: doc['time'],
     );
   }
 }
