@@ -351,7 +351,7 @@ class _SearchPagesState extends State<SearchPages> {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => SearchResultsScreen(origin),
+                        builder: (_) => SearchResultsScreen(origin, destination, time, date),
                       ),
                     ),
                     color: Color(0xff0cce6b),

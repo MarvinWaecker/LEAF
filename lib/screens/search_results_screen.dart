@@ -8,8 +8,11 @@ import 'package:leaf/services/database_service.dart';
 
 class SearchResultsScreen extends StatefulWidget {
   String origin;
+  String destination;
+  String time;
+  String date;
 
-  SearchResultsScreen(this.origin);
+  SearchResultsScreen(this.origin, this.destination, this.time, this.date);
 
   static final String id = 'search_results_screen';
   @override
