@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:leaf/screens/search_results_screen.dart';
 
-
+/*
 class SearchTimeScreen extends StatefulWidget {
   @override
   _SearchTimeScreenState createState() => _SearchTimeScreenState();
@@ -119,3 +119,4 @@ class _SearchTimeScreenState extends State<SearchTimeScreen> {
     );
   }
 }
+*/
