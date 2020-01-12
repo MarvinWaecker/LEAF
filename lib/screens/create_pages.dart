@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:leaf/models/ride_model.dart';
-import 'package:leaf/screens/create_ride_overview.dart';
+import 'package:leaf/screens/create_ride_overview_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
 
@@ -116,8 +117,7 @@ class _CreatePagesState extends State<CreatePages> {
     setState(() {
       final timeFormatter = DateFormat("HH:mm' Uhr'");
       final now = new DateTime.now();
-      final fakeTime =
-      DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
+      final fakeTime = DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
       selectedTime = timeFormatter.format(fakeTime);
       final timeFormatterFirebase = DateFormat("HH:mm");
       selectedDateFirebase = timeFormatterFirebase.format(fakeTime);
@@ -224,7 +224,7 @@ class _CreatePagesState extends State<CreatePages> {
                   ),
                   Container(
                     padding: EdgeInsets.all(16.0),
-                    child: TextField(
+                    child: TextFormField(
                       style: TextStyle(
                         color: Color(0xffE6EFE9),
                         fontFamily: 'UbuntuRegular',
@@ -243,11 +243,12 @@ class _CreatePagesState extends State<CreatePages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      onSaved: (input) => _origin = input,
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.all(16.0),
-                    child: TextField(
+                    child: TextFormField(
                       style: TextStyle(
                         color: Color(0xffE6EFE9),
                         fontFamily: 'UbuntuRegular',
@@ -266,6 +267,7 @@ class _CreatePagesState extends State<CreatePages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      onSaved: (input) => _destination = input,
                     ),
                   ),
                   Container(
@@ -389,16 +391,17 @@ class _CreatePagesState extends State<CreatePages> {
                     padding: EdgeInsets.all(16.0),
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
-                      onPressed: () {
+                      onPressed: () {print('Hallo' + selectedTime);
                         _formKeyDateTime.currentState.save();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => CreateRideOverview(
-                                //_origin, _destination, _passTime, _date),
+                            builder: (_) => CreateRideOverviewScreen(
+                                _origin, _destination, selectedDateFirebase, selectedTimeFirebase),
                           ),
-                        ));
-                      },                      color: Color(0xff0cce6b),
+                        );
+                      },
+                      color: Color(0xff0cce6b),
                       shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(18.0),
                       ),
