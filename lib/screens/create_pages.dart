@@ -18,9 +18,9 @@ class _CreatePagesState extends State<CreatePages> {
   TimeOfDay _time;
 
   String selectedDate = 'DATUM AUSWÄHLEN';
-  String selectedDateFirebase;
+  String selectedDateFirebase = "";
   String selectedTime = 'UHRZEIT WÄHLEN';
-  String selectedTimeFirebase;
+  String selectedTimeFirebase = "test";
 
   final _formKeyLocation = GlobalKey<FormState>();
   final _formKeyDateTime = GlobalKey<FormState>();
@@ -113,14 +113,21 @@ class _CreatePagesState extends State<CreatePages> {
   }
 
   /// Time Picker --------------------------------------------------------------
+
   changeTime() {
     setState(() {
+      // Formatter
       final timeFormatter = DateFormat("HH:mm' Uhr'");
-      final now = new DateTime.now();
-      final fakeTime = DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
-      selectedTime = timeFormatter.format(fakeTime);
       final timeFormatterFirebase = DateFormat("HH:mm");
-      selectedDateFirebase = timeFormatterFirebase.format(fakeTime);
+      // Fake erstellen
+      final fakeTime = DateTime(2000, 10, 10, _time.hour, _time.minute);
+      // Zeit an Variable übergeben
+      selectedTime = timeFormatter.format(fakeTime);
+      selectedTimeFirebase = timeFormatterFirebase.format(fakeTime);
+
+      // Test
+      print('selectedTime' + selectedTime);
+      print('selectedTimeFIrebase' + selectedTimeFirebase);
     });
   }
 
