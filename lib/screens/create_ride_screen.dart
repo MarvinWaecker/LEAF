@@ -14,8 +14,8 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
   //bool _isLoading = false;
   String origin = '';
   String destination = '';
-  //Future<DateTime> _date; 
-  //Future<DateTime> _time;
+  String date;
+  String time;
 
   final format = DateFormat("yyy-MM-dd");
 
@@ -23,12 +23,11 @@ class _CreateRideScreenState extends State<CreateRideScreen> {
 
   _submit() async {
     Ride ride = Ride(
-      //  id: Provider.of<UserData>(context).currentUserId =
-      //      UserData().currentUserId,
+      //  id: Provider.of<UserData>(context).currentUserId = UserData().currentUserId,
       origin: origin,
       destination: destination,
-      //  date: _date,
-      //  time: _time,
+      date: date,
+      time: time,
     );
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
