@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:leaf/screens/search_location_screen.dart';
 import 'package:leaf/screens/search_results_screen.dart';
-import 'package:leaf/screens/search_time_screen.dart';
-import 'package:flutter/services.dart';
+
 
 class SearchPages extends StatefulWidget {
   @override
@@ -113,12 +111,14 @@ class _SearchPagesState extends State<SearchPages> {
   /// Time Picker --------------------------------------------------------------
   changeTime() {
     setState(() {
+      // Formatter
       final timeFormatter = DateFormat("HH:mm' Uhr'");
-      final now = new DateTime.now();
-      final fakeTime = DateTime(now.year, now.month, now.day, _time.hour, _time.minute);
-      selectedTime = timeFormatter.format(fakeTime);
       final timeFormatterFirebase = DateFormat("HH:mm");
-      selectedDateFirebase = timeFormatterFirebase.format(fakeTime);
+      // Fake erstellen
+      final fakeTime = DateTime(2000, 10, 10, _time.hour, _time.minute);
+      // Zeit an Variable übergeben
+      selectedTime = timeFormatter.format(fakeTime);
+      selectedTimeFirebase = timeFormatterFirebase.format(fakeTime);
     });
   }
 
@@ -294,13 +294,14 @@ class _SearchPagesState extends State<SearchPages> {
                   ),
                   leading: IconButton(
                     icon: Icon(
-                      Icons.navigate_before,
+                      Icons.arrow_back_ios,
                       color: Color(0xffe8b641),
                     ),
                     onPressed: () {
                       onItemTapped(0);
                     },
-                  )),
+                  )
+              ),
               body: Column(
                 children: <Widget>[
                   Container(

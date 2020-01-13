@@ -4,13 +4,12 @@ import 'package:leaf/icons/leaf_icons_icons.dart';
 import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/activity_screen.dart';
 import 'package:leaf/screens/create_pages.dart';
-import 'package:leaf/screens/create_ride_screen.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/profile_screen.dart';
-import 'package:leaf/screens/search_screen.dart';
 import 'package:leaf/screens/search_pages.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 
 class MainBarScreen extends StatefulWidget {
   @override
@@ -47,6 +46,10 @@ class _MainBarScreenState extends State<MainBarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /// StatusBar Text weiß machen
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
+
     return Scaffold(
       body: PageView(
         physics: new NeverScrollableScrollPhysics(),
@@ -111,7 +114,7 @@ class _MainBarScreenState extends State<MainBarScreen> {
                   LeafIcons.biete,
                   size: 14,
                 ),
-                title: Text('Bieten',
+                title: Text('Anbieten',
                   style: TextStyle(
                       fontFamily: 'UbuntuRegular'
                   ),

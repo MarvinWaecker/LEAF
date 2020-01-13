@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () => Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => _getScreenId())),
+    Timer(Duration(seconds: 3), () => Navigator.of(context).push(new PageRouteBuilder(transitionDuration: Duration(seconds: 3), pageBuilder: (_, __, ___) => _getScreenId())),
     );
   }
 
@@ -114,8 +114,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
       position: _offsetAnimation,
       child: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Image.asset(
-          'assets/images/LEAF_Logo_mehr_Abstand.png',
+        child: Hero(
+          tag: 'startLogo',
+          child: Image.asset(
+            'assets/images/LEAF_Logo_mehr_Abstand.png',
+            //scale: 0.5,
+          ),
         ),
       ),
     );
@@ -139,3 +143,4 @@ Widget _getScreenId() {
     },
   );
 }
+

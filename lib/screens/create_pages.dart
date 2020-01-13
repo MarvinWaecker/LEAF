@@ -124,10 +124,6 @@ class _CreatePagesState extends State<CreatePages> {
       // Zeit an Variable übergeben
       selectedTime = timeFormatter.format(fakeTime);
       selectedTimeFirebase = timeFormatterFirebase.format(fakeTime);
-
-      // Test
-      print('selectedTime' + selectedTime);
-      print('selectedTimeFIrebase' + selectedTimeFirebase);
     });
   }
 
