@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/screens/signup_screen.dart';
 import 'package:leaf/services/auth_service.dart';
+import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
   static final String id = 'login_screen';
@@ -23,6 +24,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    /// StatusBar Text weiß machen
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
       body: SingleChildScrollView(
@@ -37,9 +41,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 200,
                   padding: EdgeInsets.only(top: 10.0, left: 30, right: 30),
                   alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/images/LEAF_Logo_mehr_Abstand.png',
-                    //scale: 0.5,
+                  child: Hero(
+                    tag: 'startLogo',
+                    child: Image.asset(
+                      'assets/images/LEAF_Logo_mehr_Abstand.png',
+                      //scale: 0.5,
+                    ),
                   ),
                 ),
               ),
@@ -49,12 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    SizedBox(
-                      height: 0,
-                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 10.0),
+                          horizontal: 16.0, vertical: 16.0),
                       child: TextFormField(
                         style: TextStyle(
                           color: Color(0xffE6EFE9),
@@ -68,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 10.0),
-                          labelText: 'E-mail',
+                          labelText: 'E-Mail',
                           labelStyle: TextStyle(
                             color: Color(0xff4171AB),
                             fontFamily: 'UbuntuRegular',
@@ -121,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onSaved: (input) => _password = input,
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    SizedBox(height: 64.0),
                     Padding(
                       padding: EdgeInsets.only(left: 16, right: 16),
                       child: SizedBox(
@@ -143,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10.0),
+                    SizedBox(height: 16.0),
                     Padding(
                       padding: EdgeInsets.only(left: 16, right: 16),
                       child: SizedBox(
