@@ -36,11 +36,17 @@ class _CreateRideOverviewScreenState extends State<CreateRideOverviewScreen> {
           },
         ),
       ),
-      body: Center(
-        child: Text(
-          widget.time,
-          style: TextStyle(color: Colors.white),
-        ),
+      body: Column(
+        children: <Widget>[
+          Text(
+            widget.time,
+            style: TextStyle(color: Colors.white),
+          ),
+          Text(
+            widget.date,
+            style: TextStyle(color: Colors.white),
+          ),
+        ],
       ),
     );
   }
