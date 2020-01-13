@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_data.dart';
@@ -29,7 +30,7 @@ class DatabaseService {
       'destination': ride.destination,
       'time': ride.time,
       'date': ride.date,
-      'creatorId': Provider.of<UserData>(context).currentUserId,
+      'creatorId': Provider.of<UserData>(context, listen: false).currentUserId,
     });
   }
 

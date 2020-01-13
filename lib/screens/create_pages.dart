@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/create_ride_overview_screen.dart';
 import 'package:leaf/services/database_service.dart';
-
+import 'package:provider/provider.dart';
 
 class CreatePages extends StatefulWidget {
+
   @override
   _CreatePagesState createState() => _CreatePagesState();
 }
 
 class _CreatePagesState extends State<CreatePages> {
-
   // Variables
   DateTime _dateTime;
   TimeOfDay _time;
@@ -25,7 +26,7 @@ class _CreatePagesState extends State<CreatePages> {
   final _formKeyLocation = GlobalKey<FormState>();
   final _formKeyDateTime = GlobalKey<FormState>();
 
-  String _origin, _destination, _passTime, _date;
+  String _origin, _destination;
 
   /// Date Picker --------------------------------------------------------------
 
@@ -62,7 +63,7 @@ class _CreatePagesState extends State<CreatePages> {
 
       if (DateFormat('EEEE').format(_dateTime) == "Friday") {
         final dateFormatter =
-        DateFormat("'Fridays for Future, den 'dd.MM.yyyy");
+            DateFormat("'Fridays for Future, den 'dd.MM.yyyy");
         selectedDate = dateFormatter.format(_dateTime);
         changeDateFirebase();
       }
@@ -178,11 +179,8 @@ class _CreatePagesState extends State<CreatePages> {
     setState(() {
       _selectedIndex = index;
     });
-    _controllerS.animateToPage(
-        _selectedIndex,
-        duration: Duration(milliseconds: 200),
-        curve: Curves.easeInOut
-    );
+    _controllerS.animateToPage(_selectedIndex,
+        duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
   @override
@@ -237,12 +235,12 @@ class _CreatePagesState extends State<CreatePages> {
                         fontFamily: 'UbuntuRegular',
                       ),
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
                         labelText: 'Start',
                         labelStyle: TextStyle(
                             color: Color(0xff4171AB),
-                            fontFamily: 'UbuntuRegular'
-                        ),
+                            fontFamily: 'UbuntuRegular'),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Color(0xff4171AB)),
                         ),
@@ -261,12 +259,12 @@ class _CreatePagesState extends State<CreatePages> {
                         fontFamily: 'UbuntuRegular',
                       ),
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                        contentPadding:
+                            EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
                         labelText: 'Ziel',
                         labelStyle: TextStyle(
                             color: Color(0xff4171AB),
-                            fontFamily: 'UbuntuRegular'
-                        ),
+                            fontFamily: 'UbuntuRegular'),
                         enabledBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Color(0xff4171AB)),
                         ),
@@ -303,6 +301,7 @@ class _CreatePagesState extends State<CreatePages> {
               ),
             ),
           ),
+
           /// Date Time picken -------------------------------------------------
           Form(
             key: _formKeyDateTime,
@@ -320,10 +319,15 @@ class _CreatePagesState extends State<CreatePages> {
                       color: Color(0xffE6EFE9),
                     ),
                   ),
-                  leading: IconButton(icon:Icon(Icons.navigate_before, color: Color(0xffe8b641),),
-                    onPressed:() {onItemTapped(0);},
-                  )
-              ),
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.navigate_before,
+                      color: Color(0xffe8b641),
+                    ),
+                    onPressed: () {
+                      onItemTapped(0);
+                    },
+                  )),
               body: Column(
                 children: <Widget>[
                   Container(
@@ -341,7 +345,9 @@ class _CreatePagesState extends State<CreatePages> {
                   Container(
                     padding: EdgeInsets.all(16.0),
                     child: GestureDetector(
-                      onTap: () {_selectDate();},
+                      onTap: () {
+                        _selectDate();
+                      },
                       child: AbsorbPointer(
                         child: TextField(
                           style: TextStyle(
@@ -349,12 +355,12 @@ class _CreatePagesState extends State<CreatePages> {
                             fontFamily: 'UbuntuRegular',
                           ),
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
                             labelText: "$selectedDate",
                             labelStyle: TextStyle(
                                 color: Color(0xff0cce6b),
-                                fontFamily: 'UbuntuMedium'
-                            ),
+                                fontFamily: 'UbuntuMedium'),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xff4171AB)),
                             ),
@@ -369,7 +375,9 @@ class _CreatePagesState extends State<CreatePages> {
                   Container(
                     padding: EdgeInsets.all(16.0),
                     child: GestureDetector(
-                      onTap: () {_selectTime();},
+                      onTap: () {
+                        _selectTime();
+                      },
                       child: AbsorbPointer(
                         child: TextField(
                           style: TextStyle(
@@ -377,12 +385,12 @@ class _CreatePagesState extends State<CreatePages> {
                             fontFamily: 'UbuntuRegular',
                           ),
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                            contentPadding:
+                                EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
                             labelText: '$selectedTime',
                             labelStyle: TextStyle(
                                 color: Color(0xff0cce6b),
-                                fontFamily: 'UbuntuMedium'
-                            ),
+                                fontFamily: 'UbuntuMedium'),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xff4171AB)),
                             ),
@@ -398,13 +406,18 @@ class _CreatePagesState extends State<CreatePages> {
                     padding: EdgeInsets.all(16.0),
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
-                      onPressed: () {print('Hallo' + selectedTime);
+                      onPressed: () {
                         _formKeyDateTime.currentState.save();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => CreateRideOverviewScreen(
-                                _origin, _destination, selectedDateFirebase, selectedTimeFirebase),
+                              _origin,
+                              _destination,
+                              selectedDateFirebase,
+                              selectedTimeFirebase,
+                              //Provider.of<UserData>(context, listen: false).currentUserId,
+                            ),
                           ),
                         );
                       },
