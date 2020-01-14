@@ -80,9 +80,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff111e2e),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff111e2e),
         title: Text(
           'Edit Profile',
           style: TextStyle(color: Colors.black),

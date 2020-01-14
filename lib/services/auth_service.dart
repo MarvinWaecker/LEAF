@@ -16,6 +16,7 @@ class AuthService {
         password: password,
       );
       FirebaseUser signedInUser = authResult.user;
+      String userId = authResult.user.uid;
       if (signedInUser != null) {
         _firestore.collection('/users').document(signedInUser.uid).setData({
           'name': name,

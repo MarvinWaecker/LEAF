@@ -111,8 +111,8 @@ class _MainBarScreenState extends State<MainBarScreen> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  LeafIcons.biete,
-                  size: 14,
+                  LeafIcons.anbieten_hand___fluttericons,
+                  size: 32,
                 ),
                 title: Text('Anbieten',
                   style: TextStyle(
