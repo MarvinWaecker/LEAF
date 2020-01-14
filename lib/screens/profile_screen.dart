@@ -110,6 +110,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: TextStyle(fontSize: 15.0),
                       ),
                     ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Container(
+                      height: 80.0,
+                      child: Text(
+                        user.music,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ),
                   ],
                 ),
               ),
