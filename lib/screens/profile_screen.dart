@@ -20,17 +20,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xff111e2e),
         title: Text(
-          'LEAF',
+          'Profil',
           style: TextStyle(
-            color: Colors.greenAccent,
-            fontSize: 35.0,
-            fontFamily: 'Raleway',
+            fontFamily: 'UbuntuRegular',
+            fontSize: 24,
+            color: Color(0xffE6EFE9),
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor:Color(0xff111e2e),
       body: FutureBuilder(
         future: usersRef.document(widget.userId).get(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -62,47 +62,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  Text(
-                                    '12',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'posts',
-                                    style: TextStyle(color: Colors.black54),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    '45',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Following',
-                                    style: TextStyle(color: Colors.black54),
-                                  )
-                                ],
-                              ),
-                              Column(
-                                children: <Widget>[
-                                  Text(
-                                    '4550',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Followers',
-                                    style: TextStyle(color: Colors.black54),
-                                  )
                                 ],
                               )
                             ],

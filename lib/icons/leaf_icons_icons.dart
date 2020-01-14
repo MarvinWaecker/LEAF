@@ -20,5 +20,5 @@ class LeafIcons {
 
   static const _kFontFam = 'LeafIcons';
 
-  static const IconData biete = const IconData(0xe800, fontFamily: _kFontFam);
+  static const IconData anbieten_hand___fluttericons = const IconData(0xe802, fontFamily: _kFontFam);
 }
