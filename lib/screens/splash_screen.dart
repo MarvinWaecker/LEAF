@@ -11,17 +11,22 @@ import 'package:leaf/models/user_data.dart';
 
 class SplashScreen extends StatefulWidget {
 
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  // Variables
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () => Navigator.of(context).push(new PageRouteBuilder(transitionDuration: Duration(seconds: 3), pageBuilder: (_, __, ___) => _getScreenId())),
+    Timer(Duration(milliseconds: 1500), () => Navigator.of(context).push(new PageRouteBuilder(transitionDuration: Duration(seconds: 1), pageBuilder: (_, __, ___) => _getScreenId())),
     );
-  }
+}
+
 
 
   @override
@@ -38,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   'LEAF',
                   style: TextStyle(
-                    fontFamily: 'RalewayThin',
+                    fontFamily: 'UbuntuLight',
                     fontSize: 113,
                     color: Color(0xffE6EFE9),
                   ),
@@ -51,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   'your static life.',
                   style: TextStyle(
-                    fontFamily: 'RalewayThin',
+                    fontFamily: 'UbuntuLight',
                     fontSize: 40,
                     color: Color(0xffE6EFE9),
                   ),
@@ -108,6 +113,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
     _controller.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
@@ -128,19 +135,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
 
 
 /// Navigation zu Login oder HomeScreen
-Widget _getScreenId() {
+Widget _getScreenId()
+{
+  int check = 0;
   return StreamBuilder<FirebaseUser>(
     stream: FirebaseAuth.instance.onAuthStateChanged,
     builder: (BuildContext context, snapshot) {
       if (snapshot.hasData) {
         Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
+        check = 1;
         return MainBarScreen();
         // HomeScreen
       } else {
+        check = 2;
         return LoginScreen();
         // LoginScreen
       }
     },
   );
 }
+
+
 

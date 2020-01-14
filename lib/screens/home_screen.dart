@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+
   final Function toSearchScreen;
   final Function toCreateRideScreen;
 
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
 
 
   @override
