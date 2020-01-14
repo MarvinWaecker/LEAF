@@ -45,19 +45,30 @@ class _SignupScreenState extends State<SignupScreen> {
           leading: IconButton(
             onPressed: () {FocusScope.of(context).unfocus(); Navigator.pop(context);},
             icon:Icon(
-              Icons.clear,
+              Icons.arrow_back_ios,
               color: Color(0xffe8b641),
             ),
           ),
         ),
-        body: Container(
-          alignment: Alignment.bottomCenter,
+        body: Center(
           child: SingleChildScrollView(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 48, left: 90, right: 90),
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Hero(
+                          tag: 'startLogo',
+                          child: Image.asset(
+                            'assets/images/LEAF_Logo_mehr_Abstand.png',
+                          ),
+                        ),
+                      ),
+                    ),
                     Form(
                       key: _formKey,
                       child: Column(

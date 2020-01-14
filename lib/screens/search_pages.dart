@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:leaf/screens/search_results_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 
 class SearchPages extends StatefulWidget {
@@ -384,7 +385,7 @@ class _SearchPagesState extends State<SearchPages> {
                         _formKeyDateTime.currentState.save();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
                             builder: (_) => SearchResultsScreen(
                                 _origin, _destination, _passTime, _date),
                           ),
