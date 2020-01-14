@@ -20,6 +20,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   File _profileImage;
   String _name = '';
   String _bio = '';
+  String _music = '';
   bool _isLoading = false;
 
   @override
@@ -27,6 +28,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
     _name = widget.user.name;
     _bio = widget.user.bio;
+    _music = widget.user.music;
   }
 
   _handleImageFromGallery() async {
@@ -70,7 +72,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           id: widget.user.id,
           name: _name,
           profileImageUrl: _profileImageUrl,
-          bio: _bio);
+          bio: _bio,
+          music: _music,);
       DatabaseService.updateUser(user);
 
       Navigator.pop(context);
@@ -94,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           children: <Widget>[
             _isLoading
                 ? LinearProgressIndicator(
-                    backgroundColor: Colors.green[200],
+                    backgroundColor: Color(0xff0cce6b),
                     valueColor: AlwaysStoppedAnimation(Colors.green),
                   )
                 : SizedBox.shrink(),
@@ -114,7 +117,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Text(
                         'Change Profile Picture',
                         style: TextStyle(
-                            color: Theme.of(context).accentColor,
+                            color: Color(0xff0cce6b),
                             fontSize: 16.0),
                       ),
                     ),
@@ -148,13 +151,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           : null,
                       onSaved: (input) => _bio = input,
                     ),
+                    TextFormField(
+                      initialValue: _music,
+                      style: TextStyle(fontSize: 18.0),
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.library_music,
+                          size: 30.0,
+                        ),
+                        labelText: 'Favorite Music',
+                      ),
+                      validator: (input) => input.trim().length > 150
+                          ? 'Please enter a bio less than 150 characters'
+                          : null,
+                      onSaved: (input) => _music = input,
+                    ),
                     Container(
                       margin: EdgeInsets.all(40.0),
                       height: 40.0,
                       width: 250.0,
                       child: FlatButton(
                         onPressed: _submit,
-                        color: Colors.greenAccent,
+                        color: Color(0xff0cce6b),
                         child: Text(
                           'Save Profile',
                           style: TextStyle(fontSize: 18.0),
