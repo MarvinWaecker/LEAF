@@ -30,13 +30,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
       ),
-      backgroundColor:Color(0xff111e2e),
+      backgroundColor: Color(0xff111e2e),
       body: FutureBuilder(
         future: usersRef.document(widget.userId).get(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                backgroundColor: Color(0xff0cce6b),
+                valueColor: AlwaysStoppedAnimation(Color(0xff0cce6b)),
+              ),
             );
           }
           User user = User.fromDoc(snapshot.data);
@@ -61,8 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Column(
-                                children: <Widget>[
-                                ],
+                                children: <Widget>[],
                               )
                             ],
                           ),
@@ -77,7 +79,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                               ),
-                              color: Colors.greenAccent,
+                              color: Color(0xff0cce6b),
                               child: Text(
                                 'Edit Profile',
                                 style: TextStyle(fontSize: 18.0),
