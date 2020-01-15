@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:leaf/screens/page_transition1.dart';
-import 'package:leaf/screens/page_transition2.dart';
+import 'package:leaf/animations/page_transition1.dart';
+import 'package:leaf/animations/page_transition2.dart';
+import 'package:leaf/screens/mainBar_screen.dart';
 import 'package:leaf/screens/signup_screen.dart';
 import 'package:leaf/services/auth_service.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _formKey.currentState.save();
       // Logging in the user with Firebase
       AuthService.login(_email.trim(), _password);
+      //Navigator.push(context, ScaleRoute(page: MainBarScreen()));
     }
   }
 
@@ -152,8 +154,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         padding: EdgeInsets.only(left: 16, right: 16),
                         child: SizedBox(
                           child: FlatButton(
-                            onPressed: () => Navigator.push(
-                                context, CupertinoPageRoute(builder: (context) => SignupScreen())),
+                            onPressed: () {{
+                              FocusScopeNode currentFocus = FocusScope.of(context);
+
+                              if (!currentFocus.hasPrimaryFocus) {
+                                currentFocus.unfocus();
+                              }
+                            };
+                            Navigator.push(
+                                    context, CupertinoPageRoute(builder: (context) => SignupScreen()));},
                             child: Text(
                               "ANMELDEN",
                               style: TextStyle(
