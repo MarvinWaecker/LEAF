@@ -36,10 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Container(
-              height: 120,
-              width: 220,
-              child: Image.asset('assets/images/LEAF_Logo_mehr_Abstand.png'),
+            Hero(
+              tag: 'startLogo',
+              child: Container(
+                width: 235,
+                child: Image.asset('assets/images/Drag_LEAF.png'),
+              ),
             ),
             Container(
               width: 500,

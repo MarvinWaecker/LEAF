@@ -11,6 +11,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+
+
   final _formKey = GlobalKey<FormState>();
   String _name, _email, _password;
 
@@ -26,7 +28,15 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     /// StatusBar Text weiß machen
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    ///// Funktioniert nicht !!!
+
+    /// Keyboard bleibt unten sonst flipp ich aus
+    FocusScopeNode currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+    // Funktioniert nicht
+
 
     return Scaffold(
         backgroundColor: Color(0xff111e2e),

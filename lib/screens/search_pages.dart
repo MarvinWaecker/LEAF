@@ -250,7 +250,7 @@ class _SearchPagesState extends State<SearchPages> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.only(top:16.0, right: 16, left: 16),
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
                       onPressed: () {FocusScope.of(context).unfocus();
