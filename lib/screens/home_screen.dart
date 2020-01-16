@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-
   final Function toSearchScreen;
   final Function toCreateRideScreen;
 
@@ -16,9 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,20 +28,57 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(top: 10),
               child: Container(
                 width: 500,
-                child: Image.asset('assets/images/Imprint_Lupe_Suche.png'
+                child: DragTarget(
+                  builder: (context, List<int> candidateData, rejectedData) {
+                    return Image.asset('assets/images/Imprint_Lupe_Suche.png');
+                  },
+                  onWillAccept: (data) {
+                    return true;
+                  },
+                  onAccept: (data) {
+                    if (data == 1) {
+                      widget.toSearchScreen();
+                    }
+                  },
                 ),
               ),
             ),
-            Hero(
-              tag: 'startLogo',
-              child: Container(
-                width: 235,
-                child: Image.asset('assets/images/Drag_LEAF.png'),
+            Container(
+              width: 245,
+              child: Draggable(
+                axis: Axis.vertical,
+                //dragAnchor: ,
+                child: Image.asset(
+                  'assets/images/Drag_LEAF.png',
+                ),
+                feedback: Container(
+                  width: 245,
+                  child: Image.asset(
+                    'assets/images/Drag_LEAF.png',
+                  ),
+                ),
+
+                childWhenDragging: Container(
+                  height: 142,
+                ),
+                data: 1,
               ),
             ),
             Container(
               width: 500,
-              child: Image.asset('assets/images/Imprint_Hand_Biete.png'),
+              child: DragTarget(
+                builder: (context, List<int> candidateData, rejectedData) {
+                  return Image.asset('assets/images/Imprint_Hand_Biete.png');
+                },
+                onWillAccept: (data) {
+                  return true;
+                },
+                onAccept: (data) {
+                  if (data == 1) {
+                    widget.toCreateRideScreen();
+                  }
+                },
+              ),
             ),
           ],
         ),
