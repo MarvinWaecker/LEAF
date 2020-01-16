@@ -22,7 +22,7 @@ class _SearchPagesState extends State<SearchPages> {
   final _formKeyLocation = GlobalKey<FormState>();
   final _formKeyDateTime = GlobalKey<FormState>();
 
-  String _origin, _destination, _passTime, _date;
+  String _origin, _destination, _price;
 
   /// Date Picker --------------------------------------------------------------
 
@@ -387,7 +387,7 @@ class _SearchPagesState extends State<SearchPages> {
                           context,
                           CupertinoPageRoute(
                             builder: (_) => SearchResultsScreen(
-                                _origin, _destination, _passTime, _date),
+                                _origin, _destination, selectedTimeFirebase, selectedDateFirebase, _price),
                           ),
                         );
                       },

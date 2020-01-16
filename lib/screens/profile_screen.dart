@@ -19,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Color(0xff111e2e),
         title: Text(
@@ -37,8 +38,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(
-                backgroundColor: Color(0xff0cce6b),
-                valueColor: AlwaysStoppedAnimation(Color(0xff0cce6b)),
+                backgroundColor: Color(0xff192C43),
+                valueColor: AlwaysStoppedAnimation(
+                  Color(0xff213a59),
+                ),
               ),
             );
           }
@@ -119,6 +122,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 80.0,
                       child: Text(
                         user.music,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Container(
+                      height: 80.0,
+                      child: Text(
+                        user.car,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Container(
+                      height: 80.0,
+                      child: Text('Konversationstyp: ' +
+                        user.mood,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Container(
+                      height: 80.0,
+                      child: Text(
+                        user.smoke,
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Container(
+                      height: 80.0,
+                      child: Text(
+                        user.pet,
                         style: TextStyle(fontSize: 15.0),
                       ),
                     ),
