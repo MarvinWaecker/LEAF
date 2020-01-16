@@ -4,6 +4,7 @@ import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:leaf/screens/search_results_screen.dart';
+import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/screens/signup_screen.dart';
 import 'package:leaf/screens/splash_screen.dart';
 import 'package:provider/provider.dart';

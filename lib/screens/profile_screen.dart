@@ -19,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Color(0xff111e2e),
         title: Text(
@@ -55,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       backgroundImage: user.profileImageUrl.isEmpty
                           ? AssetImage('assets/images/logo.png')
                           : CachedNetworkImageProvider(user.profileImageUrl),
-                      backgroundColor: Colors.grey,
+                      backgroundColor: Colors.transparent,
                     ),
                     Expanded(
                       child: Column(

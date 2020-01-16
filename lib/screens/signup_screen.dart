@@ -20,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       AuthService.signUpUser(context, _name, _email, _password);
-      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainBarScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainBarScreen(0)));
     }
   }
 

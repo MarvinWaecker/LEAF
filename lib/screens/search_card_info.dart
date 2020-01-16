@@ -11,8 +11,6 @@ class SearchCardInfo extends StatefulWidget {
 }
 
 class _SearchCardInfoState extends State<SearchCardInfo> {
-
-
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -28,7 +26,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
             child: Material(
               color: Color(0xff111e2e),
               child: Text(
-                'Info',
+                'Pauls Fahrt',
                 style: TextStyle(
                   fontFamily: 'UbuntuRegular',
                   fontSize: 22,
@@ -58,12 +56,12 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
               Hero(
                 tag: 'card$num',
                 flightShuttleBuilder: (
-                    BuildContext flightContext,
-                    Animation<double> animation,
-                    HeroFlightDirection flightDirection,
-                    BuildContext fromHeroContext,
-                    BuildContext toHeroContext,
-                    ) {
+                  BuildContext flightContext,
+                  Animation<double> animation,
+                  HeroFlightDirection flightDirection,
+                  BuildContext fromHeroContext,
+                  BuildContext toHeroContext,
+                ) {
                   return SingleChildScrollView(
                     child: fromHeroContext.widget,
                   );
@@ -97,13 +95,13 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                               child: Container(
                                 child: Column(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     /// Start Ziel -----------------------------------------
                                     Column(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
                                         Material(
                                           color: Color(0xff192C43),
@@ -134,7 +132,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                     Container(
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         //crossAxisAlignment: CrossAxisAlignment.,
                                         children: <Widget>[
                                           Padding(
@@ -156,10 +154,10 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                       'Abfahrt',
                                                       style: TextStyle(
                                                         fontFamily:
-                                                        'UbuntuLight',
+                                                            'UbuntuLight',
                                                         fontSize: 12,
                                                         color:
-                                                        Color(0xffE6EFE9),
+                                                            Color(0xffE6EFE9),
                                                       ),
                                                     ),
                                                   ),
@@ -169,10 +167,10 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                       '13:30',
                                                       style: TextStyle(
                                                         fontFamily:
-                                                        'UbuntuLight',
+                                                            'UbuntuLight',
                                                         fontSize: 16,
                                                         color:
-                                                        Color(0xffE6EFE9),
+                                                            Color(0xffE6EFE9),
                                                       ),
                                                     ),
                                                   ),
@@ -199,10 +197,10 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                       'Fahrtdauer',
                                                       style: TextStyle(
                                                         fontFamily:
-                                                        'UbuntuLight',
+                                                            'UbuntuLight',
                                                         fontSize: 12,
                                                         color:
-                                                        Color(0xffE6EFE9),
+                                                            Color(0xffE6EFE9),
                                                       ),
                                                     ),
                                                   ),
@@ -212,10 +210,10 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                       '1,5',
                                                       style: TextStyle(
                                                         fontFamily:
-                                                        'UbuntuLight',
+                                                            'UbuntuLight',
                                                         fontSize: 16,
                                                         color:
-                                                        Color(0xffE6EFE9),
+                                                            Color(0xffE6EFE9),
                                                       ),
                                                     ),
                                                   ),
@@ -274,7 +272,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                             child: Container(
                               child: Column(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   /// Flagge oben ------------------------------------------
                                   GestureDetector(
@@ -289,9 +287,9 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                           BoxShadow(
                                             color: Colors.black12,
                                             blurRadius:
-                                            3.0, // soften the shadow
+                                                3.0, // soften the shadow
                                             spreadRadius:
-                                            2.0, //extend the shadow
+                                                2.0, //extend the shadow
                                             offset: Offset(
                                               2.5, // Move to right 10  horizontally
                                               2.5, // Move to bottom 5 Vertically
@@ -376,138 +374,155 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                 color: Color(0xff111e2e),
                 child: Padding(
                   padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                  child: Hero(
-                    tag: 'animateBox$num',
-                    child: Container(
-                      //height: match_child,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3.0),
                       color: Color(0xff213A59),
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'Auto',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 16,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                      // Schatten???
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'Auto',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 16,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 5,
-                              width: double.maxFinite,
-                            ),
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'VW Golf - Schwarz',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 14,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                            width: double.maxFinite,
+                          ),
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'VW Golf - Schwarz',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 14,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 40,
-                              width: double.maxFinite,
-                            ),
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'Info',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 16,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: double.maxFinite,
+                          ),
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'Info',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 16,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 5,
-                              width: double.maxFinite,
-                            ),
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'Fährt die Strecke regelmäßig\nStudent der HFU\nGesprächig\nNichtraucher\nHaustiere erlaubt',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 14,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                            width: double.maxFinite,
+                          ),
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'Fährt die Strecke regelmäßig\nStudent der HFU\nGesprächig\nNichtraucher\nHaustiere erlaubt',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 14,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 40,
-                              width: double.maxFinite,
-                            ),
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'Bezahlung',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 16,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: double.maxFinite,
+                          ),
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'Bezahlung',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 16,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 5,
-                              width: double.maxFinite,
-                            ),
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'PayPal',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 14,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                            width: double.maxFinite,
+                          ),
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'PayPal',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 14,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 40,
-                              width: double.maxFinite,
-                            ),
-                            Material(
-                              color: Color(0xff213A59),
-                              child: Text(
-                                'Verfügbare Plätze',
-                                style: TextStyle(
-                                  fontFamily: 'UbuntuLight',
-                                  fontSize: 16,
-                                  color: Color(0xffE6EFE9),
-                                ),
+                          ),
+                          SizedBox(
+                            height: 40,
+                            width: double.maxFinite,
+                          ),
+                          Material(
+                            color: Color(0xff213A59),
+                            child: Text(
+                              'Verfügbare Plätze',
+                              style: TextStyle(
+                                fontFamily: 'UbuntuLight',
+                                fontSize: 16,
+                                color: Color(0xffE6EFE9),
                               ),
                             ),
-                            SizedBox(
-                              height: 12,
-                              width: double.maxFinite,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Flexible(
+                          ),
+                          SizedBox(
+                            height: 12,
+                            width: double.maxFinite,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await Future.delayed(
+                                        Duration(milliseconds: 200));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {return SeatSelectionScreen();}, fullscreenDialog: true,),
+                                    );
+                                  },
                                   child: Container(
-                                    child: Image.asset(
-                                        'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                    child: Hero(
+                                      tag: 'animateCar',
+                                      child: Image.asset(
+                                          'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                    ),
                                   ),
                                 ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 52,
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -516,44 +531,65 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
             ]),
           ),
           Container(
+            width: MediaQuery.of(context).size.width,
             alignment: Alignment.bottomCenter,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(bottom: 12, right: 8),
-                  child: RaisedButton(
-                    onPressed: () => Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => SeatSelectionScreen())),
-                    color: Color(0xff213A59),
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Color(0xff0cce6b)),
-                      borderRadius: new BorderRadius.circular(18.0),
-                    ),
-                    child: Text(
-                      'SITZPLATZWAHL',
-                      style: TextStyle(
-                        color: Color(0xff0cce6b),
-                        fontSize: 14,
-                        fontFamily: 'UbuntuMedium',
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 26, right: 8, left: 32),
+                    child: SizedBox(
+                      child: RaisedButton(
+                        onPressed: () async {
+                          await Future.delayed(Duration(milliseconds: 200));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return SeatSelectionScreen();
+                              },
+                              fullscreenDialog: true,
+                            ),
+                          );
+                        },
+                        color: Color(0xff213A59),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Color(0xff0cce6b)),
+                          borderRadius: new BorderRadius.circular(18.0),
+                        ),
+                        child: Text(
+                          'SITZPLATZWAHL',
+                          style: TextStyle(
+                            color: Color(0xff0cce6b),
+                            fontSize: 14,
+                            fontFamily: 'UbuntuMedium',
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 12, left: 8),
-                  child: RaisedButton(
-                    onPressed: () {},
-                    color: Color(0xff0cce6b),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(18.0),
-                    ),
-                    child: Text(
-                      'FAHRT BUCHEN',
-                      style: TextStyle(
-                        color: Color(0xff111e2e),
-                        fontSize: 14,
-                        fontFamily: 'UbuntuMedium',
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 26, left: 8, right: 32),
+                    child: SizedBox(
+                      child: RaisedButton(
+                        onPressed: () {},
+                        color: Color(0xff0cce6b),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(18.0),
+                        ),
+                        child: Text(
+                          'FAHRT BUCHEN',
+                          style: TextStyle(
+                            color: Color(0xff111e2e),
+                            fontSize: 14,
+                            fontFamily: 'UbuntuMedium',
+                          ),
+                        ),
                       ),
                     ),
                   ),
