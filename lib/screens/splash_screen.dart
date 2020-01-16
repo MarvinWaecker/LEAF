@@ -144,7 +144,7 @@ Widget _getScreenId()
       if (snapshot.hasData) {
         Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
         check = 1;
-        return MainBarScreen();
+        return MainBarScreen(0);
         // HomeScreen
       } else {
         check = 2;
