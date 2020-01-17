@@ -205,6 +205,9 @@ class _SearchPagesState extends State<SearchPages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gib einen gültigen Abfahrtsort ein'
+                          : null,
                       onSaved: (input) => _origin = input,
                     ),
                   ),
@@ -229,6 +232,9 @@ class _SearchPagesState extends State<SearchPages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gib ein gültiges Ziel ein'
+                          : null,
                       onSaved: (input) => _destination = input,
                       //destination = input,
                     ),
@@ -366,14 +372,17 @@ class _SearchPagesState extends State<SearchPages> {
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
                       onPressed: () {
-                        _formKeyDateTime.currentState.save();
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (_) => SearchResultsScreen(
-                                _origin, _destination, selectedTimeFirebase, selectedDateFirebase, _price),
-                          ),
-                        );
+                        if(_formKeyDateTime.currentState.validate()){
+                          _formKeyDateTime.currentState.save();
+
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => SearchResultsScreen(
+                                  _origin, _destination, selectedTimeFirebase, selectedDateFirebase, _price),
+                            ),
+                          );
+                        }
                       },
                       color: Color(0xff0cce6b),
                       shape: RoundedRectangleBorder(

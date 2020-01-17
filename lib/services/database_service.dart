@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_data.dart';
@@ -37,7 +38,7 @@ class DatabaseService {
 
   static void updateRide(Ride ride, BuildContext context) {
     ridesRef.document(ride.id).updateData({
-    'passenger1': Provider.of<UserData>(context, listen: false).currentUserId,
+      'passenger1': Provider.of<UserData>(context, listen: false).currentUserId,
     });
   }
 
@@ -51,5 +52,25 @@ class DatabaseService {
         .where('time', isEqualTo: time)
         .getDocuments();
     return rides;
+  }
+
+  static getUser() {
+    DatabaseReference userRef =
+        FirebaseDatabase.instance.reference().child('users');
+
+    userRef.once().then((DataSnapshot snap) {
+      var keys = snap.value.keys;
+      var data = snap.value;
+    });
+  }
+
+  static Future<String> getRiderTest(String creatorId) async {
+    var document = await Firestore.instance
+        .collection('users')
+        .document(creatorId)
+        .get()
+        .then((DocumentSnapshot snap) => snap.data);
+
+    return document['name'];
   }
 }

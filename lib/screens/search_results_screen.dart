@@ -16,6 +16,14 @@ import 'package:leaf/utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
+// Variablen
+String name = 'Paul';
+String car = 'Golf';
+String bio = 'Bio';
+String music = 'Rap';
+String mood = 'Ich liebe es zu quatschen';
+String smoke = 'Nichtraucher';
+String pet = 'Sorry, ich nehme keine Haustiere mit';
 
 class SearchResultsScreen extends StatefulWidget {
   final String origin, destination, time, date, price;
@@ -29,6 +37,17 @@ class SearchResultsScreen extends StatefulWidget {
 
 
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
+
+  /*
+  void initState()
+  {
+    super.initState();
+
+    getUserData(ride.creatorId, 'name', name)
+  }
+
+   */
+
   // Variables
   //TextEditingController _searchController = TextEditingController();
 
@@ -119,25 +138,23 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
 }
 
 class SearchCardItem extends StatelessWidget {
+
   final int num;
   final Ride ride;
 
   const SearchCardItem({Key key, this.num, this.ride}) : super(key: key);
 
-
-
+  getData(String creatorId) async{
+    return await Firestore.instance.
+    collection(creatorId).getDocuments();
+  }
 
   @override
   Widget build(BuildContext context) {
 
-// Variablen
-    String name = 'Paul';
-    String car = 'Golf';
-    String bio = 'Bio';
-    String music = 'Rap';
-    String mood = 'Ich liebe es zu quatschen';
-    String smoke = 'Nichtraucher';
-    String pet = 'Sorry, ich nehme keine Haustiere mit';
+
+
+
 
     getUserData(ride.creatorId, 'name', name);
     getUserData(ride.creatorId, 'car', car);
