@@ -16,7 +16,8 @@ class Ride{
     this.destination,
     this.date,
     this.time,
-    this.price
+    this.price,
+
 });
 
 
@@ -28,7 +29,7 @@ class Ride{
       destination: doc['destination'],
       date: doc['date'],
       time: doc['time'],
-      price: doc['price'],
+      price: doc['price']
     );
   }
 }

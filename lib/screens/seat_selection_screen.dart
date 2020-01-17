@@ -12,25 +12,53 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
     with SingleTickerProviderStateMixin {
 
   // Variables
+  GlobalKey _keyCar = GlobalKey();
   Duration _animationDuration = Duration(milliseconds: 200);
   bool _visible = false;
   bool _position = false;
   bool _radius = false;
-  bool _top = false;
+  bool _bottom = false;
   bool _right = false;
+  double sizeCarHeight = 0;
+  double sizeCarWidth = 0;
+  double width100 = 0;
+  double height100 = 0;
+  double fadePositionBottom = 0;
+  double fadePositionRight = 0;
+  double finalPositionBottom = 0;
+  double finalPositionRight = 0;
+
+
+  _getSizes() {
+    final RenderBox renderBoxCar = _keyCar.currentContext.findRenderObject();
+    sizeCarWidth = renderBoxCar.size.width;
+    sizeCarHeight = renderBoxCar.size.height;
+    print("Width of Car: $sizeCarWidth");
+    print("Height of Car: $sizeCarHeight");
+
+    width100 = MediaQuery.of(context).size.width;
+    height100 = MediaQuery.of(context).size.height;
+
+    double factorHeight = 0.39178467028586605;
+    double factorWidth = 0.22327044025157233;
+
+    fadePositionBottom = sizeCarHeight*factorHeight;
+    finalPositionRight = sizeCarWidth*factorWidth;
+
+    finalPositionBottom = fadePositionBottom-20;
+    fadePositionRight = finalPositionRight-20;
+
+    print("test" + sizeCarHeight.toString());
+    print("test0" + factorWidth.toString());
+    print("test: " + finalPositionBottom.toString());
+    print("test2: " + fadePositionBottom.toString());
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    // Variables
-    double width100 = MediaQuery.of(context).size.width;
-    /// 414
-    // top 346
-    double factorWidth = 346/414;
-    double height100 = MediaQuery.of(context).size.height;
-    ///896
-    // right 103
-    double factorHeight = 103/896;
+
+
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
       appBar: AppBar(
@@ -101,12 +129,45 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                               child: Container(
                                 alignment: Alignment.topCenter,
                                 child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 32, left: 32, right: 32, bottom: 16),
-                                  child: Hero(
-                                    tag: 'animateCar',
-                                    child: Image.asset(
-                                        'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                  padding: EdgeInsets.only(top: 32, left: 32, right: 32, bottom: 16),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Hero(
+                                        tag: 'animateCar',
+                                        child: Image.asset(
+                                            'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                        key: _keyCar,
+                                      ),
+                                      AnimatedPositioned(
+                                        bottom: _bottom ? finalPositionBottom : fadePositionBottom,
+                                        right: _right ? finalPositionRight : fadePositionRight,
+                                        duration: _animationDuration,
+                                        child: AnimatedOpacity(
+                                          opacity: _visible ? 1.0 : 0.0,
+                                          duration: _animationDuration,
+                                          child: Container(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  _position = !_position;
+                                                  _visible = !_visible;
+                                                  _radius = !_radius;
+                                                  _bottom = !_bottom;
+                                                  _right = !_right;
+                                                });
+                                              },
+                                              child: CircleAvatar(
+                                                radius: _radius ? 30.0 : 50.0,
+                                                backgroundImage: AssetImage(
+                                                    'assets/images/Profilbild_Paul.png'),
+                                                backgroundColor: Colors.transparent,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                    ],
                                   ),
                                 ),
                               ),
@@ -191,34 +252,6 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                               ),
                             ),
                           ],
-                        ),
-                        AnimatedPositioned(
-                          top: _top ? width100*factorWidth : (width100*factorWidth)-20,
-                          right: _right ? height100*factorHeight : (height100*factorHeight)-20,
-                          duration: _animationDuration,
-                          child: AnimatedOpacity(
-                            opacity: _visible ? 1.0 : 0.0,
-                            duration: _animationDuration,
-                            child: Container(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _position = !_position;
-                                    _visible = !_visible;
-                                    _radius = !_radius;
-                                    _top = !_top;
-                                    _right = !_right;
-                                  });
-                                },
-                                child: CircleAvatar(
-                                  radius: _radius ? 30.0 : 50.0,
-                                  backgroundImage: AssetImage(
-                                      'assets/images/Profilbild_Paul.png'),
-                                  backgroundColor: Colors.transparent,
-                                ),
-                              ),
-                            ),
-                          ),
                         ),
                       ],
                     ),

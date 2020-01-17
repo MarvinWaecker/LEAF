@@ -33,6 +33,7 @@ class DatabaseService {
       'time': ride.time,
       'date': ride.date,
       'creatorId': Provider.of<UserData>(context, listen: false).currentUserId,
+      'price': ride.price,
     });
   }
 
