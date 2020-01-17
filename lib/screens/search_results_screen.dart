@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
@@ -18,9 +19,30 @@ Future<Demo> getDemoResponse() async{
   return responseFromJson(response.body);
 }
 
+import 'package:leaf/utilities/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_data.dart';
+import 'package:leaf/models/user_model.dart';
+import 'package:leaf/utilities/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+// Variablen
+String name = 'Paul';
+String car = 'Golf';
+String bio = 'Bio';
+String music = 'Rap';
+String mood = 'Ich liebe es zu quatschen';
+String smoke = 'Nichtraucher';
+String pet = 'Sorry, ich nehme keine Haustiere mit';
+
+
 class SearchResultsScreen extends StatefulWidget {
-  final String origin, destination, time, date;
-  SearchResultsScreen(this.origin, this.destination, this.time, this.date);
+  final String origin, destination, time, date, price;
+  SearchResultsScreen(this.origin, this.destination, this.time, this.date, this.price);
 
   static final String id = 'search_results_screen';
 
@@ -28,7 +50,19 @@ class SearchResultsScreen extends StatefulWidget {
   _SearchResultsScreenState createState() => _SearchResultsScreenState();
 }
 
+
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
+
+  /*
+  void initState()
+  {
+    super.initState();
+
+    getUserData(ride.creatorId, 'name', name)
+  }
+
+   */
+
   // Variables
   //TextEditingController _searchController = TextEditingController();
 
@@ -37,6 +71,11 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     //final String origin = ModalRoute.of(context).settings.arguments.toString();
     final String origin = widget.origin;
     final String destination = widget.destination;
+    final String time = widget.time;
+    final String date = widget.date;
+    final String price = widget.price;
+
+
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
       appBar: AppBar(
@@ -72,11 +111,16 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         ),
       ),
       body: FutureBuilder(
-        future: DatabaseService.searchRides('München', 'Tuttlingen'),
+        future: DatabaseService.searchRides(origin, destination, date, time),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                backgroundColor: Color(0xff192C43),
+                valueColor: AlwaysStoppedAnimation(
+                  Color(0xff213a59),
+                ),
+              ),
             );
           }
           if (snapshot.data.documents.length == 0) {
@@ -98,7 +142,8 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
             itemCount: snapshot.data.documents.length,
             itemBuilder: (BuildContext context, int index) {
               Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-              return SearchCardItem(num: index);
+
+              return SearchCardItem(num: index, ride: ride);
             },
           );
         },
@@ -107,15 +152,28 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
   }
 }
 
-
-
 class SearchCardItem extends StatelessWidget {
-  final int num;
 
-  const SearchCardItem({Key key, this.num}) : super(key: key);
+  final int num;
+  final Ride ride;
+
+  const SearchCardItem({Key key, this.num, this.ride}) : super(key: key);
+
+  getData(String creatorId) async{
+    return await Firestore.instance.
+    collection(creatorId).getDocuments();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    getUserData(ride.creatorId, 'name', name);
+    getUserData(ride.creatorId, 'car', car);
+    getUserData(ride.creatorId, 'bio', bio);
+    getUserData(ride.creatorId, 'music', music);
+    getUserData(ride.creatorId, 'mood', mood);
+    getUserData(ride.creatorId, 'smoke', smoke);
+    getUserData(ride.creatorId, 'pet', pet);
 
     return Column(
       children: <Widget>[
@@ -170,7 +228,7 @@ class SearchCardItem extends StatelessWidget {
                                   Material(
                                     color: Color(0xff192C43),
                                     child: Text(
-                                      'Von ' + 'München',
+                                      'Von ' + ride.origin,
                                       style: TextStyle(
                                         fontFamily: 'UbuntuLight',
                                         fontSize: 20,
@@ -181,7 +239,7 @@ class SearchCardItem extends StatelessWidget {
                                   Material(
                                     color: Color(0xff192C43),
                                     child: Text(
-                                      'nach ' + 'Tuttlingen',
+                                      'nach ' + ride.destination,
                                       style: TextStyle(
                                         fontFamily: 'UbuntuLight',
                                         fontSize: 20,
@@ -226,7 +284,7 @@ class SearchCardItem extends StatelessWidget {
                                             Material(
                                               color: Color(0xff192C43),
                                               child: Text(
-                                                '13:30',
+                                                ride.time,
                                                 style: TextStyle(
                                                   fontFamily: 'UbuntuLight',
                                                   fontSize: 16,
@@ -301,8 +359,7 @@ class SearchCardItem extends StatelessWidget {
                                           ),
                                           Material(
                                             color: Color(0xff192C43),
-                                            child: Text(
-                                              '7',
+                                            child: Text(ride.price,
                                               style: TextStyle(
                                                 fontFamily: 'UbuntuLight',
                                                 fontSize: 16,
@@ -331,7 +388,8 @@ class SearchCardItem extends StatelessWidget {
                           children: <Widget>[
                             /// Flagge oben ------------------------------------------
                             GestureDetector(
-                              onTap: () async {},
+                              onTap: () async {
+                              },
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
@@ -359,8 +417,7 @@ class SearchCardItem extends StatelessWidget {
                                       children: <Widget>[
                                         Material(
                                           color: Color(0xff294970),
-                                          child: Text(
-                                            'Paul',
+                                          child: Text(name,
                                             style: TextStyle(
                                               fontFamily: 'UbuntuLight',
                                               fontSize: 12,
@@ -390,13 +447,16 @@ class SearchCardItem extends StatelessWidget {
                             /// Flagge unten -----------------------------------------
                             GestureDetector(
                               onTap: () async {
+                                print(name);
                                 await Future.delayed(
                                     Duration(milliseconds: 200));
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return new SearchCardInfo(num: num);
+                                      return new SearchCardInfo(
+                                        num: num, ride: ride, bio: bio, name: name, car: car, music: music, mood: mood, smoke: smoke, pet: pet,
+                                      );
                                     },
                                     fullscreenDialog: true,
                                   ),
@@ -446,8 +506,20 @@ class SearchCardItem extends StatelessWidget {
             ),
           ),
         ),
-
       ],
     );
   }
+}
+
+getUserData(creatorId, keyword, string)  {
+  var documentName = Firestore.instance
+      .collection('users')
+      .document(creatorId)
+      .get()
+      .then((DocumentSnapshot) {
+    String data = (DocumentSnapshot.data['$keyword'].toString());
+    //print('Test2: ' + data.toString());
+    string = data;
+    //return data;
+  });
 }

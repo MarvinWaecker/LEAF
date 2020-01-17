@@ -22,7 +22,7 @@ class _SearchPagesState extends State<SearchPages> {
   final _formKeyLocation = GlobalKey<FormState>();
   final _formKeyDateTime = GlobalKey<FormState>();
 
-  String _origin, _destination, _passTime, _date;
+  String _origin, _destination, _price;
 
   /// Date Picker --------------------------------------------------------------
 
@@ -84,22 +84,6 @@ class _SearchPagesState extends State<SearchPages> {
       initialDate: _dateTime == null ? DateTime.now() : _dateTime,
       firstDate: DateTime.now().add(Duration(days: -1)),
       lastDate: DateTime.now().add(Duration(days: 365)),
-      /*
-      builder: (BuildContext context, Widget child) {
-          return Theme(
-            data: ThemeData(
-              primaryColorBrightness: Brightness.dark,
-              buttonColor: Color(0xff0cce6b),
-              accentColor: Color(0xff0cce6b),
-              primaryColor: Color(0xff0cce6b),
-              backgroundColor: Color(0xff111e2e),
-              cardColor: Color(0xff111e2e),
-              highlightColor: Color(0xff111e2e),
-            ),
-            child: child,
-          );
-        },
-      */
     );
     if (picked != null) {
       setState(() => _dateTime = picked);
@@ -221,6 +205,9 @@ class _SearchPagesState extends State<SearchPages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gib einen gültigen Abfahrtsort ein'
+                          : null,
                       onSaved: (input) => _origin = input,
                     ),
                   ),
@@ -245,6 +232,9 @@ class _SearchPagesState extends State<SearchPages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gib ein gültiges Ziel ein'
+                          : null,
                       onSaved: (input) => _destination = input,
                       //destination = input,
                     ),
@@ -382,14 +372,17 @@ class _SearchPagesState extends State<SearchPages> {
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
                       onPressed: () {
-                        _formKeyDateTime.currentState.save();
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (_) => SearchResultsScreen(
-                                _origin, _destination, _passTime, _date),
-                          ),
-                        );
+                        if(_formKeyDateTime.currentState.validate()){
+                          _formKeyDateTime.currentState.save();
+
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (_) => SearchResultsScreen(
+                                  _origin, _destination, selectedTimeFirebase, selectedDateFirebase, _price),
+                            ),
+                          );
+                        }
                       },
                       color: Color(0xff0cce6b),
                       shape: RoundedRectangleBorder(
