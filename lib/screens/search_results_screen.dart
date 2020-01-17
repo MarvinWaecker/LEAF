@@ -16,21 +16,17 @@ import 'package:leaf/utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
-// Variablen
-String name;
-
-
 
 class SearchResultsScreen extends StatefulWidget {
   final String origin, destination, time, date, price;
   SearchResultsScreen(this.origin, this.destination, this.time, this.date, this.price);
-
 
   static final String id = 'search_results_screen';
 
   @override
   _SearchResultsScreenState createState() => _SearchResultsScreenState();
 }
+
 
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
   // Variables
@@ -128,8 +124,29 @@ class SearchCardItem extends StatelessWidget {
 
   const SearchCardItem({Key key, this.num, this.ride}) : super(key: key);
 
+
+
+
   @override
   Widget build(BuildContext context) {
+
+// Variablen
+    String name = 'Paul';
+    String car = 'Golf';
+    String bio = 'Bio';
+    String music = 'Rap';
+    String mood = 'Ich liebe es zu quatschen';
+    String smoke = 'Nichtraucher';
+    String pet = 'Sorry, ich nehme keine Haustiere mit';
+
+    getUserData(ride.creatorId, 'name', name);
+    getUserData(ride.creatorId, 'car', car);
+    getUserData(ride.creatorId, 'bio', bio);
+    getUserData(ride.creatorId, 'music', music);
+    getUserData(ride.creatorId, 'mood', mood);
+    getUserData(ride.creatorId, 'smoke', smoke);
+    getUserData(ride.creatorId, 'pet', pet);
+
     return Column(
       children: <Widget>[
         Hero(
@@ -410,7 +427,7 @@ class SearchCardItem extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return new SearchCardInfo(
-                                        num: num,
+                                        num: num, ride: ride, bio: bio, name: name, car: car, music: music, mood: mood, smoke: smoke, pet: pet,
                                       );
                                     },
                                     fullscreenDialog: true,
@@ -466,16 +483,15 @@ class SearchCardItem extends StatelessWidget {
   }
 }
 
-
-void getUserData(creatorId, keyword) {
+getUserData(creatorId, keyword, string)  {
   var documentName = Firestore.instance
       .collection('users')
       .document(creatorId)
       .get()
       .then((DocumentSnapshot) {
     String data = (DocumentSnapshot.data['$keyword'].toString());
-    print('Test2: ' + data.toString());
-    name = data;
+    //print('Test2: ' + data.toString());
+    string = data;
     //return data;
   });
 }

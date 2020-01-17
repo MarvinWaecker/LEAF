@@ -4,5 +4,4 @@ class UserData extends ChangeNotifier {
 
   String currentUserId;
 
-
 }

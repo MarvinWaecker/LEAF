@@ -1,16 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/screens/search_results_screen.dart';
 import 'package:leaf/screens/seat_selection_screen.dart';
+import 'package:leaf/services/database_service.dart';
 
 class SearchCardInfo extends StatefulWidget {
   final int num;
+  final Ride ride;
+  final String name;
+  final String car;
+  final String bio;
+  final String mood;
+  final String music;
+  final String smoke;
+  final String pet;
 
-  const SearchCardInfo({Key key, this.num}) : super(key: key);
+  const SearchCardInfo(
+      {Key key,
+      this.num,
+      this.ride,
+      this.name,
+      this.car,
+      this.bio,
+      this.music,
+      this.mood,
+      this.smoke,
+      this.pet})
+      : super(key: key);
 
   @override
   _SearchCardInfoState createState() => _SearchCardInfoState();
 }
 
 class _SearchCardInfoState extends State<SearchCardInfo> {
+
+  _submit() async {
+    DatabaseService.updateRide(widget.ride, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -26,7 +53,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
             child: Material(
               color: Color(0xff111e2e),
               child: Text(
-                'Pauls Fahrt',
+                widget.name + 's Fahrt',
                 style: TextStyle(
                   fontFamily: 'UbuntuRegular',
                   fontSize: 22,
@@ -404,7 +431,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                           Material(
                             color: Color(0xff213A59),
                             child: Text(
-                              'VW Golf - Schwarz',
+                              widget.car,
                               style: TextStyle(
                                 fontFamily: 'UbuntuLight',
                                 fontSize: 14,
@@ -434,7 +461,12 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                           Material(
                             color: Color(0xff213A59),
                             child: Text(
-                              'Fährt die Strecke regelmäßig\nStudent der HFU\nGesprächig\nNichtraucher\nHaustiere erlaubt',
+                              'Fährt die Strecke regelmäßig\nStudent der HFU\n' +
+                                  widget.mood +
+                                  '\n' +
+                                  widget.smoke +
+                                  '\n' +
+                                  widget.pet,
                               style: TextStyle(
                                 fontFamily: 'UbuntuLight',
                                 fontSize: 14,
@@ -502,7 +534,11 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) {return SeatSelectionScreen();}, fullscreenDialog: true,),
+                                        builder: (context) {
+                                          return SeatSelectionScreen();
+                                        },
+                                        fullscreenDialog: true,
+                                      ),
                                     );
                                   },
                                   child: Container(
@@ -577,7 +613,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                     padding: EdgeInsets.only(bottom: 26, left: 8, right: 32),
                     child: SizedBox(
                       child: RaisedButton(
-                        onPressed: () {},
+                        onPressed: _submit,
                         color: Color(0xff0cce6b),
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(18.0),
