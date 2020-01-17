@@ -24,9 +24,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String _car = '';
   String mood = null;
   List<String> moods = [
-    'Schnauze halten',
-    'Mal schauen',
-    'Gesprächig',
+    'Ich bin eher der ruhige Typ',
+    'Meine Gesprächigkeit hängt von meiner Laune ab',
+    'Ich liebe es zu quatschen',
   ];
   String smoke = null;
   List<String> smokes = [

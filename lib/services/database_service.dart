@@ -35,11 +35,15 @@ class DatabaseService {
     });
   }
 
-  static void updateRide(Ride ride) {}
+  static void updateRide(Ride ride, BuildContext context) {
+    ridesRef.document(ride.id).updateData({
+    'passenger1': Provider.of<UserData>(context, listen: false).currentUserId,
+    });
+  }
 
   static Future<QuerySnapshot> searchRides(
       String origin, String destination, String date, String time) {
-    Future<QuerySnapshot> rides = Firestore.instance
+    Future<QuerySnapshot> rides = _firestore
         .collection('rides')
         .where('origin', isEqualTo: origin)
         .where('destination', isEqualTo: destination)
