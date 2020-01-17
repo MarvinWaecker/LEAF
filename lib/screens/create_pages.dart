@@ -268,6 +268,9 @@ class _CreatePagesState extends State<CreatePages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gib ein gültiges Ziel ein'
+                          : null,
                       onSaved: (input) => _destination = input,
                     ),
                   ),

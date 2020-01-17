@@ -161,7 +161,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         labelText: 'Name',
                       ),
-                      validator: (input) => input.trim().length < 1
+                      validator: (input) => input.trim().isEmpty
                           ? 'Please enter a valid name'
                           : null,
                       onSaved: (input) => _name = input,
