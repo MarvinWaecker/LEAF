@@ -1,9 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/search_card_info.dart';
 import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
+import 'package:leaf/services/demo.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+
+String name = "test";
+String url = 'https://jsonplaceholder.typicode.com/posts';
+
+///Method for GET Request
+Future<Demo> getDemoResponse() async{
+  final response = await http.get('$url/1');
+  return responseFromJson(response.body);
+}
 
 class SearchResultsScreen extends StatefulWidget {
   final String origin, destination, time, date;
@@ -103,6 +116,7 @@ class SearchCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: <Widget>[
         Hero(

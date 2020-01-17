@@ -21,41 +21,43 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
   bool _right = false;
   double sizeCarHeight = 0;
   double sizeCarWidth = 0;
+  double width100 = 0;
+  double height100 = 0;
+  double fadePositionBottom = 0;
+  double fadePositionRight = 0;
+  double finalPositionBottom = 0;
+  double finalPositionRight = 0;
+
 
   _getSizes() {
     final RenderBox renderBoxCar = _keyCar.currentContext.findRenderObject();
-    final sizeCar = renderBoxCar.size;
     sizeCarWidth = renderBoxCar.size.width;
     sizeCarHeight = renderBoxCar.size.height;
     print("Width of Car: $sizeCarWidth");
     print("Height of Car: $sizeCarHeight");
+
+    width100 = MediaQuery.of(context).size.width;
+    height100 = MediaQuery.of(context).size.height;
+
+    double factorHeight = 0.39178467028586605;
+    double factorWidth = 0.22327044025157233;
+
+    fadePositionBottom = sizeCarHeight*factorHeight;
+    finalPositionRight = sizeCarWidth*factorWidth;
+
+    finalPositionBottom = fadePositionBottom-20;
+    fadePositionRight = finalPositionRight-20;
+
+    print("test" + sizeCarHeight.toString());
+    print("test0" + factorWidth.toString());
+    print("test: " + finalPositionBottom.toString());
+    print("test2: " + fadePositionBottom.toString());
   }
 
 
   @override
   Widget build(BuildContext context) {
 
-    _getSizes();
-    // Variables
-    double width100 = MediaQuery.of(context).size.width;
-    double height100 = MediaQuery.of(context).size.height;
-
-    final double positionBottom = 240;
-    final double positionRight = 71;
-
-    double factorHeight = positionBottom/sizeCarHeight;
-    double factorWidth = positionRight/sizeCarWidth;
-
-    double fadePositionBottom = sizeCarHeight*factorHeight;
-    double finalPositionRight = sizeCarWidth*factorWidth;
-
-    double finalPositionBottom = fadePositionBottom-20;
-    double fadePositionRight = finalPositionRight-20;
-
-    print("test" + sizeCarHeight.toString());
-    print("test0" + factorHeight.toString());
-    print("test: " + finalPositionBottom.toString());
-    print("test2: " + fadePositionBottom.toString());
 
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
@@ -127,8 +129,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                               child: Container(
                                 alignment: Alignment.topCenter,
                                 child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 32, left: 32, right: 32, bottom: 16),
+                                  padding: EdgeInsets.only(top: 32, left: 32, right: 32, bottom: 16),
                                   child: Stack(
                                     children: <Widget>[
                                       Hero(
@@ -142,13 +143,12 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                         right: _right ? finalPositionRight : fadePositionRight,
                                         duration: _animationDuration,
                                         child: AnimatedOpacity(
-                                          opacity: _visible ? 1.0 : 1.0,
+                                          opacity: _visible ? 1.0 : 0.0,
                                           duration: _animationDuration,
                                           child: Container(
                                             child: GestureDetector(
                                               onTap: () {
                                                 setState(() {
-                                                  _getSizes();
                                                   _position = !_position;
                                                   _visible = !_visible;
                                                   _radius = !_radius;
