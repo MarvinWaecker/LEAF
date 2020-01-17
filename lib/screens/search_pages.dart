@@ -396,7 +396,7 @@ class _SearchPagesState extends State<SearchPages> {
                         borderRadius: new BorderRadius.circular(18.0),
                       ),
                       child: Text(
-                        'WEITER',
+                        'SUCHEN',
                         style: TextStyle(
                           color: Color(0xff111e2e),
                           fontSize: 14,

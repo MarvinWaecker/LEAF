@@ -25,8 +25,12 @@ class _CreatePagesState extends State<CreatePages> {
 
   final _formKeyLocation = GlobalKey<FormState>();
   final _formKeyDateTime = GlobalKey<FormState>();
+  final _formKeyPrice = GlobalKey<FormState>();
 
   String _origin, _destination;
+  double _priceDouble = 10.0;
+
+  double _sliderValue = 0;
 
   /// Date Picker --------------------------------------------------------------
 
@@ -244,6 +248,9 @@ class _CreatePagesState extends State<CreatePages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gebe einen Startpunkt ein'
+                          : null,
                       onSaved: (input) => _origin = input,
                     ),
                   ),
@@ -268,6 +275,9 @@ class _CreatePagesState extends State<CreatePages> {
                           borderSide: BorderSide(color: Color(0xff0cce6b)),
                         ),
                       ),
+                      validator: (input) => input.trim().isEmpty
+                          ? 'Bitte gebe ein Ziel ein'
+                          : null,
                       onSaved: (input) => _destination = input,
                     ),
                   ),
@@ -404,6 +414,106 @@ class _CreatePagesState extends State<CreatePages> {
                     child: RaisedButton(
                       onPressed: () {
                         _formKeyDateTime.currentState.save();
+                        onItemTapped(2);
+                      },
+                      color: Color(0xff0cce6b),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(18.0),
+                      ),
+                      child: Text(
+                        'WEITER',
+                        style: TextStyle(
+                          color: Color(0xff111e2e),
+                          fontSize: 14,
+                          fontFamily: 'UbuntuMedium',
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          /// Preis festlegen --------------------------------------------------
+          Form(
+            key: _formKeyPrice,
+            child: Scaffold(
+              backgroundColor: Color(0xff111e2e),
+              appBar: AppBar(
+                  centerTitle: true,
+                  backgroundColor: Color(0xff111e2e),
+                  automaticallyImplyLeading: true,
+                  title: Text(
+                    'Fahrt anbieten',
+                    style: TextStyle(
+                      fontFamily: 'UbuntuRegular',
+                      fontSize: 24,
+                      color: Color(0xffE6EFE9),
+                    ),
+                  ),
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.navigate_before,
+                      color: Color(0xffe8b641),
+                    ),
+                    onPressed: () {
+                      onItemTapped(1);
+                    },
+                  )),
+              body: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 16, left: 16),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Wie viel kostet das Mitfahren?',
+                      style: TextStyle(
+                        fontFamily: 'UbuntuLight',
+                        fontSize: 20,
+                        color: Color(0xffE6EFE9),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          child: Slider(
+                            activeColor: Color(0xff0cce6b),
+                            inactiveColor: Color(0xff0F774C),
+                            min: 0.0,
+                            max: 20.0,
+                            onChanged: (newPrice) {
+                              setState(() => _priceDouble = newPrice);
+                            },
+                            value: _priceDouble,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 16),
+                        child: Container(
+                          width: 40.0,
+                          alignment: Alignment.center,
+                          child: Text('${_priceDouble.toInt()}'+' €',
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.all(16.0),
+                    alignment: Alignment.bottomRight,
+                    child: RaisedButton(
+                      onPressed: () {
+                        _formKeyPrice.currentState.save();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -412,6 +522,7 @@ class _CreatePagesState extends State<CreatePages> {
                               _destination,
                               selectedDateFirebase,
                               selectedTimeFirebase,
+                              _priceDouble.toString(),
                               //Provider.of<UserData>(context, listen: false).currentUserId,
                             ),
                           ),
@@ -422,7 +533,7 @@ class _CreatePagesState extends State<CreatePages> {
                         borderRadius: new BorderRadius.circular(18.0),
                       ),
                       child: Text(
-                        'WEITER',
+                        'ANBIETEN',
                         style: TextStyle(
                           color: Color(0xff111e2e),
                           fontSize: 14,

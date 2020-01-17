@@ -25,7 +25,7 @@ class _MainBarScreenState extends State<MainBarScreen> {
 
   _MainBarScreenState(this.test);
 
-  int _currentTab = 3;
+  int _currentTab = 0;
   PageController _pageController;
 
   @override

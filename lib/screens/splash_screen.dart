@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'dart:async';
@@ -7,9 +8,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:leaf/models/user_data.dart';
 
-
+int check;
 
 class SplashScreen extends StatefulWidget {
+
 
 
   @override
@@ -23,8 +25,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 1500), () => Navigator.of(context).push(new PageRouteBuilder(transitionDuration: Duration(seconds: 1), pageBuilder: (_, __, ___) => _getScreenId())),
-    );
+
+    Widget hallo = _getScreenId();
+
+    if (check == 1) {
+      Timer(Duration(milliseconds: 1500), () =>
+          Navigator.of(context).push(
+              new CupertinoPageRoute(builder: (context) => hallo)),
+      );
+    }
+    else {
+      Timer(Duration(milliseconds: 1500), () =>
+          Navigator.of(context).push(
+              new MaterialPageRoute(builder: (context) => hallo)),
+      );
+    }
 }
 
 
@@ -137,7 +152,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
 /// Navigation zu Login oder HomeScreen
 Widget _getScreenId()
 {
-  int check = 0;
   return StreamBuilder<FirebaseUser>(
     stream: FirebaseAuth.instance.onAuthStateChanged,
     builder: (BuildContext context, snapshot) {

@@ -6,8 +6,8 @@ import 'package:leaf/services/database_service.dart';
 import 'package:provider/provider.dart';
 
 class CreateRideOverviewScreen extends StatefulWidget {
-  final String origin, destination, date, time;
-  CreateRideOverviewScreen(this.origin, this.destination, this.date, this.time);
+  final String origin, destination, date, time, price;
+  CreateRideOverviewScreen(this.origin, this.destination, this.date, this.time, this.price);
 
   @override
   _CreateRideOverviewScreenState createState() =>
@@ -22,6 +22,7 @@ class _CreateRideOverviewScreenState extends State<CreateRideOverviewScreen> {
       destination: widget.destination,
       date: widget.date,
       time: widget.time,
+      price: widget.price,
     );
     DatabaseService.createRide(ride, context);
   }
