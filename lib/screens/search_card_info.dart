@@ -35,7 +35,7 @@ class SearchCardInfo extends StatefulWidget {
 class _SearchCardInfoState extends State<SearchCardInfo> {
 
   _submit() async {
-    DatabaseService.createRide(widget.ride, context);
+    DatabaseService.updateRide(widget.ride, context);
   }
 
   @override
