@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
@@ -10,7 +11,7 @@ import 'package:leaf/services/demo.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-String name = "test";
+
 String url = 'https://jsonplaceholder.typicode.com/posts';
 
 ///Method for GET Request
@@ -19,16 +20,7 @@ Future<Demo> getDemoResponse() async{
   return responseFromJson(response.body);
 }
 
-import 'package:leaf/utilities/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:leaf/models/ride_model.dart';
-import 'package:leaf/models/user_data.dart';
-import 'package:leaf/models/user_model.dart';
-import 'package:leaf/utilities/constants.dart';
-import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
+
 
 // Variablen
 String name = 'Paul';
