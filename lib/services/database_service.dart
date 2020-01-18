@@ -56,7 +56,6 @@ class DatabaseService {
   }
 
 
-
   static Future<String> getRiderTest(String creatorId) async {
     var document = await Firestore.instance
         .collection('users')
