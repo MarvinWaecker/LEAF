@@ -8,8 +8,17 @@ class ActivityScreen extends StatefulWidget {
   _ActivityScreenState createState() => _ActivityScreenState();
 }
 
-class _ActivityScreenState extends State<ActivityScreen> {
-  final Map<int, Widget> logoWidgets = const <int, Widget>{
+class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProviderStateMixin{
+
+  TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = new TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  final Map<int, Widget> segmentOptions = const <int, Widget>{
     0: Text(
       'Gebucht',
       style: TextStyle(
@@ -25,24 +34,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
       ),
     ),
   };
-  final Map<int, Widget> icons = const <int, Widget>{
-    0: Center(
-      child: FlutterLogo(
-        colors: Colors.indigo,
-        size: 220.0,
-      ),
-    ),
-    1: Center(
-      child: FlutterLogo(
-        colors: Colors.teal,
-        size: 200.0,
-      ),
-    ),
-  };
+  // 0 = Gebucht, 1 = Angeboten
   int sharedValue = 0;
 
-  // Angeboten = true, Gebucht = false
-  var isSelected = [false, true];
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +68,12 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 selectedColor: Color(0xff0cce6b),
                 borderColor: Color(0xff0cce6b),
                 pressedColor: Color(0xff213A59),
-                children: logoWidgets,
+                children: segmentOptions,
                 onValueChanged: (int val) {
                   setState(() {
                     sharedValue = val;
+                    print("sharedValue" + sharedValue.toString());
+                    print("val" + val.toString());
                   });
                 },
                 groupValue: sharedValue,
@@ -106,6 +102,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 child: Container(
                   color: Color(0xff111e2e),
                   child: TabBar(
+                    controller: _tabController,
                       labelColor: Color(0xffE6EFE9),
                       unselectedLabelColor: Color(0xffAAAEB2),
                       indicatorColor: Color(0xff0cce6b),
@@ -135,48 +132,99 @@ class _ActivityScreenState extends State<ActivityScreen> {
               ),
             ),
           ),
-          /*
-          FutureBuilder(
-            future: DatabaseService.searchRides(origin, destination, date, time),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Color(0xff192C43),
-                    valueColor: AlwaysStoppedAnimation(
-                      Color(0xff213a59),
-                    ),
-                  ),
-                );
-              }
-              if (snapshot.data.documents.length == 0) {
-                return Center(
-                  child: Text(
-                    'Uppss..\n'
-                        'Leider wurden keine passenden Fahrten gefunden.\n'
-                        'Schau doch später noch mal vorbei.',
-                    style: TextStyle(
-                      fontFamily: 'UbuntuLight',
-                      fontSize: 14,
-                      color: Color(0xffE6EFE9),
-                    ),
-                  ),
-                );
-              }
-              return ListView.builder(
-                physics: new BouncingScrollPhysics(),
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (BuildContext context, int index) {
-                  Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-
-                  return SearchCardItem(num: index, ride: ride);
-                },
-              );
-            },
+          Expanded(
+            child: Container(
+              child: getTabView(sharedValue, _tabController),
+            ),
           ),
-          */
         ],
       ),
     );
   }
 }
+
+
+Widget futureRidesBooked() {
+  return new Text("Zukünftige gebuchte Fahrten");
+}
+
+Widget pastRidesBooked() {
+  return new Text("Vergangene gebuchte Fahrten");
+}
+Widget futureRidesCreated() {
+  return new Text("Zukünftige angebotene Fahrten");
+}
+
+Widget pastRidesCreated() {
+  return new Text("Vergangene angebotene Fahrten");
+}
+
+Widget getTabView(int sharedValue, TabController _tabController) {
+
+  if(sharedValue == 0) {
+    return TabBarView(
+      children: [
+        // Future Builder aufrufen
+        futureRidesBooked(),
+        // Future Builder aufrufen
+        pastRidesBooked(),
+      ],
+      controller: _tabController,
+    );
+  }
+  else {
+    return TabBarView(
+      children: [
+        // Future Builder aufrufen
+        futureRidesCreated(),
+        // Future Builder aufrufen
+        pastRidesCreated(),
+      ],
+      controller: _tabController,
+    );
+  }
+}
+
+/*
+Widget test () {
+  FutureBuilder(
+    future: DatabaseService.searchRides(origin, destination, date, time),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color(0xff192C43),
+            valueColor: AlwaysStoppedAnimation(
+              Color(0xff213a59),
+            ),
+          ),
+        );
+      }
+      if (snapshot.data.documents.length == 0) {
+        return Center(
+          child: Text(
+            'Uppss..\n'
+                'Leider wurden keine passenden Fahrten gefunden.\n'
+                'Schau doch später noch mal vorbei.',
+            style: TextStyle(
+              fontFamily: 'UbuntuLight',
+              fontSize: 14,
+              color: Color(0xffE6EFE9),
+            ),
+          ),
+        );
+      }
+      return ListView.builder(
+        physics: new BouncingScrollPhysics(),
+        itemCount: snapshot.data.documents.length,
+        itemBuilder: (BuildContext context, int index) {
+          Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+
+          return SearchCardItem(num: index, ride: ride);
+        },
+      );
+    },
+  );
+}
+
+ */
