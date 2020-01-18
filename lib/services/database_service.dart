@@ -53,7 +53,7 @@ class DatabaseService {
         .getDocuments();
     return rides;
   }
-
+/*
   static getUser() {
     DatabaseReference userRef =
         FirebaseDatabase.instance.reference().child('users');
@@ -63,6 +63,8 @@ class DatabaseService {
       var data = snap.value;
     });
   }
+
+ */
 
   static Future<String> getRiderTest(String creatorId) async {
     var document = await Firestore.instance

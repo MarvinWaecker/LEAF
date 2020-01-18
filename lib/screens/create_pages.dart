@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/create_ride_overview_screen.dart';
+import 'package:leaf/screens/mainBar_screen.dart';
 import 'package:leaf/services/database_service.dart';
 import 'package:provider/provider.dart';
 
@@ -174,6 +175,17 @@ class _CreatePagesState extends State<CreatePages> {
   /// Fahrt anbieten -------------------------------------------------------------
   PageController _controllerS;
   int _selectedIndex = 0;
+
+  _submit() async {
+    Ride ride = Ride(
+      origin: _origin,
+      destination: _destination,
+      date: selectedDateFirebase,
+      time: selectedTimeFirebase,
+      price: _priceDouble.toInt().toString(),
+    );
+    DatabaseService.createRide(ride, context);
+  }
 
   void onItemTapped(int index) {
     setState(() {
@@ -513,20 +525,17 @@ class _CreatePagesState extends State<CreatePages> {
                     alignment: Alignment.bottomRight,
                     child: RaisedButton(
                       onPressed: () {
-                        _formKeyPrice.currentState.save();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => CreateRideOverviewScreen(
-                              _origin,
-                              _destination,
-                              selectedDateFirebase,
-                              selectedTimeFirebase,
-                              _priceDouble.toString(),
-                              //Provider.of<UserData>(context, listen: false).currentUserId,
+                        if (_formKeyPrice.currentState.validate()) {
+                          _formKeyPrice.currentState.save();
+
+                          _submit();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => MainBarScreen(0),
                             ),
-                          ),
-                        );
+                          );
+                        }
                       },
                       color: Color(0xff0cce6b),
                       shape: RoundedRectangleBorder(
