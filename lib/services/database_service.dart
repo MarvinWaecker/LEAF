@@ -7,6 +7,7 @@ import 'package:leaf/models/user_model.dart';
 import 'package:leaf/utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter/cupertino.dart';
 
 class DatabaseService {
   static final _firestore = Firestore.instance;
@@ -54,15 +55,7 @@ class DatabaseService {
     return rides;
   }
 
-  static getUser() {
-    DatabaseReference userRef =
-        FirebaseDatabase.instance.reference().child('users');
 
-    userRef.once().then((DataSnapshot snap) {
-      var keys = snap.value.keys;
-      var data = snap.value;
-    });
-  }
 
   static Future<String> getRiderTest(String creatorId) async {
     var document = await Firestore.instance
