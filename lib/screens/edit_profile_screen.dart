@@ -23,13 +23,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String _music = '';
   String _car = '';
   String mood = 'One';
-  String dropdown = 'One';
+  String dropdown = 'Ich bin eher der ruhige Typ';
+  String dropdownValue = 'One';
 
   List<String> moods = [
     'Ich bin eher der ruhige Typ',
     'Meine Gesprächigkeit hängt von meiner Laune ab',
     'Ich liebe es zu quatschen',
   ];
+
+  /*
+  List<DropdownMenuItem> moodsDrop = items: [
+    DropdownMenuItem(
+        value: '1', child: Text(
+  'Ich bin eher der ruhige Typ'
+      ),
+        ),
+  DropdownMenuItem(
+      value: '2', child: Text(
+  'Meine Gesprächigkeit hängt von meiner Laune ab',
+
+  ),
+      ),
+  DropdownMenuItem(
+       value: '3', child: Text(    'Ich liebe es zu quatschen',
+  ),
+      ),
+  ];
+
+   */
   String smoke = null;
   List<String> smokes = [
     'Im Auto darf nicht geraucht werden',
@@ -228,15 +250,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                     Row(
                       children: <Widget>[
+                        /*
                         DropdownButton<String>(
                           value: dropdown,
+                          hint: Text(
+                            'Redseligkeit',
+                            style: TextStyle(fontSize: 15.0),
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdown = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'Ich bin eher der ruhige Typ',
+                            'Meine Gesprächigkeit hängt von meiner Laune ab',
+                            'Ich liebe es zu quatschen',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                         */
+                        DropdownButton<String>(
+                          value: dropdownValue,
+                          icon: Icon(Icons.arrow_downward),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: TextStyle(color: Colors.deepPurple),
                           underline: Container(
                             height: 2,
                             color: Colors.deepPurpleAccent,
                           ),
                           onChanged: (String newValue) {
                             setState(() {
-                              dropdown = newValue;
+                              dropdownValue = newValue;
                             });
                           },
                           items: <String>['One', 'Two', 'Free', 'Four']
@@ -247,7 +297,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             );
                           }).toList(),
                         ),
-
                         /*
                         DropdownButton<String>(
                           value: mood,
@@ -324,6 +373,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
 
                      */
+
+                    Container(),
                     Container(
                       margin: EdgeInsets.all(40.0),
                       height: 40.0,
