@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/screens/search_results_screen.dart';
+import 'package:leaf/services/database_service.dart';
 
 class ActivityScreen extends StatefulWidget {
   static final String id = 'activity_screen';
@@ -145,18 +148,170 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
 
 
 Widget futureRidesBooked() {
-  return new Text("Zukünftige gebuchte Fahrten");
+  //return new Text("Zukünftige gebuchte Fahrten");
+  FutureBuilder(
+    future: DatabaseService.futureRidesBooked(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color(0xff192C43),
+            valueColor: AlwaysStoppedAnimation(
+              Color(0xff213a59),
+            ),
+          ),
+        );
+      }
+      if (snapshot.data.documents.length == 0) {
+        return Center(
+          child: Text(
+            'Uppss..\n'
+                'Leider wurden keine passenden Fahrten gefunden.\n'
+                'Schau doch später noch mal vorbei.',
+            style: TextStyle(
+              fontFamily: 'UbuntuLight',
+              fontSize: 14,
+              color: Color(0xffE6EFE9),
+            ),
+          ),
+        );
+      }
+      return ListView.builder(
+        physics: new BouncingScrollPhysics(),
+        itemCount: snapshot.data.documents.length,
+        itemBuilder: (BuildContext context, int index) {
+          Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+
+          return SearchCardItem(num: index, ride: ride);
+        },
+      );
+    },
+  );
 }
 
-Widget pastRidesBooked() {
-  return new Text("Vergangene gebuchte Fahrten");
+Widget pastRidesBooked(context) {
+  //return new Text("Vergangene gebuchte Fahrten");
+  FutureBuilder(
+    future: DatabaseService.pastRidesBooked(context),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color(0xff192C43),
+            valueColor: AlwaysStoppedAnimation(
+              Color(0xff213a59),
+            ),
+          ),
+        );
+      }
+      if (snapshot.data.documents.length == 0) {
+        return Center(
+          child: Text(
+            'Uppss..\n'
+                'Leider wurden keine passenden Fahrten gefunden.\n'
+                'Schau doch später noch mal vorbei.',
+            style: TextStyle(
+              fontFamily: 'UbuntuLight',
+              fontSize: 14,
+              color: Color(0xffE6EFE9),
+            ),
+          ),
+        );
+      }
+      return ListView.builder(
+        physics: new BouncingScrollPhysics(),
+        itemCount: snapshot.data.documents.length,
+        itemBuilder: (BuildContext context, int index) {
+          Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+
+          return SearchCardItem(num: index, ride: ride);
+        },
+      );
+    },
+  );
 }
-Widget futureRidesCreated() {
-  return new Text("Zukünftige angebotene Fahrten");
+Widget futureRidesCreated(context) {
+  //return new Text("Zukünftige angebotene Fahrten");
+  FutureBuilder(
+    future: DatabaseService.futureRidesCreated(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color(0xff192C43),
+            valueColor: AlwaysStoppedAnimation(
+              Color(0xff213a59),
+            ),
+          ),
+        );
+      }
+      if (snapshot.data.documents.length == 0) {
+        return Center(
+          child: Text(
+            'Uppss..\n'
+                'Leider wurden keine passenden Fahrten gefunden.\n'
+                'Schau doch später noch mal vorbei.',
+            style: TextStyle(
+              fontFamily: 'UbuntuLight',
+              fontSize: 14,
+              color: Color(0xffE6EFE9),
+            ),
+          ),
+        );
+      }
+      return ListView.builder(
+        physics: new BouncingScrollPhysics(),
+        itemCount: snapshot.data.documents.length,
+        itemBuilder: (BuildContext context, int index) {
+          Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+
+          return SearchCardItem(num: index, ride: ride);
+        },
+      );
+    },
+  );
 }
 
 Widget pastRidesCreated() {
-  return new Text("Vergangene angebotene Fahrten");
+  //return new Text("Vergangene angebotene Fahrten");
+  FutureBuilder(
+    future: DatabaseService.pastRidesCreated(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return Center(
+          child: CircularProgressIndicator(
+            backgroundColor: Color(0xff192C43),
+            valueColor: AlwaysStoppedAnimation(
+              Color(0xff213a59),
+            ),
+          ),
+        );
+      }
+      if (snapshot.data.documents.length == 0) {
+        return Center(
+          child: Text(
+            'Uppss..\n'
+                'Leider wurden keine passenden Fahrten gefunden.\n'
+                'Schau doch später noch mal vorbei.',
+            style: TextStyle(
+              fontFamily: 'UbuntuLight',
+              fontSize: 14,
+              color: Color(0xffE6EFE9),
+            ),
+          ),
+        );
+      }
+      return ListView.builder(
+        physics: new BouncingScrollPhysics(),
+        itemCount: snapshot.data.documents.length,
+        itemBuilder: (BuildContext context, int index) {
+          Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
+
+          return SearchCardItem(num: index, ride: ride);
+        },
+      );
+    },
+  );
 }
 
 Widget getTabView(int sharedValue, TabController _tabController) {
@@ -228,3 +383,4 @@ Widget test () {
 }
 
  */
+
