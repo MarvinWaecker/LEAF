@@ -55,7 +55,6 @@ class DatabaseService {
     return rides;
   }
 
-
   static Future<String> getRiderTest(String creatorId) async {
     var document = await Firestore.instance
         .collection('users')
@@ -64,5 +63,16 @@ class DatabaseService {
         .then((DocumentSnapshot snap) => snap.data);
 
     return document['name'];
+  }
+
+  static String getUserData(creatorId, keyword) {
+    var documentName = Firestore.instance
+        .collection('users')
+        .document(creatorId)
+        .get()
+        .then((DocumentSnapshot) {
+      String data = (DocumentSnapshot.data['$keyword'].toString());
+      return data;
+    });
   }
 }
