@@ -5,6 +5,7 @@ import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_data.dart';
 import 'package:leaf/screens/create_ride_overview_screen.dart';
 import 'package:leaf/screens/mainBar_screen.dart';
+import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/services/database_service.dart';
 import 'package:provider/provider.dart';
 
@@ -202,7 +203,7 @@ class _CreatePagesState extends State<CreatePages> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
       body: PageView(
         controller: _controllerS,
@@ -532,7 +533,7 @@ class _CreatePagesState extends State<CreatePages> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => MainBarScreen(0),
+                              builder: (_) => ActivityScreen(),
                             ),
                           );
                         }

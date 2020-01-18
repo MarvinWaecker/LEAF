@@ -8,6 +8,8 @@ import 'package:leaf/utilities/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
+
 
 class DatabaseService {
   static final _firestore = Firestore.instance;
@@ -74,5 +76,70 @@ class DatabaseService {
       String data = (DocumentSnapshot.data['$keyword'].toString());
       return data;
     });
+  }
+  
+  static Future<QuerySnapshot> futureRidesCreated(){
+    String id = UserData().currentUserId;
+
+    final dateFormatter = DateFormat("dd.MM.yyyy");
+    String dateNow = dateFormatter.format(DateTime.now());
+
+    Future<QuerySnapshot> rides = _firestore
+        .collection('rides')
+    .where('creatorId', isEqualTo: id)
+    .where('date', isGreaterThan: dateNow)
+        .getDocuments();
+
+    return rides;
+    
+  }
+
+  static Future<QuerySnapshot> futureRidesBooked(){
+    String id = UserData().currentUserId;
+
+    final dateFormatter = DateFormat("dd.MM.yyyy");
+    String dateNow = dateFormatter.format(DateTime.now());
+
+    Future<QuerySnapshot> rides = _firestore
+        .collection('rides')
+        .where('passenger1', isEqualTo: id)
+        .where('date', isGreaterThan: dateNow)
+        .getDocuments();
+
+    return rides;
+  }
+
+  static Future<QuerySnapshot> pastRidesCreated(){
+    String id = UserData().currentUserId;
+
+    final dateFormatter = DateFormat("dd.MM.yyyy");
+    String dateNow = dateFormatter.format(DateTime.now());
+
+    Future<QuerySnapshot> rides = _firestore
+        .collection('rides')
+        .where('creatorId', isEqualTo: id)
+        .where('date', isLessThan: dateNow)
+        .getDocuments();
+
+    return rides;
+
+  }
+
+  static Future<QuerySnapshot> pastRidesBooked(BuildContext context){
+    String id = Provider.of<UserData>(context).currentUserId;
+        //UserData().currentUserId;
+    print(id);
+
+    final dateFormatter = DateFormat("dd.MM.yyyy");
+    String dateNow = dateFormatter.format(DateTime.now());
+    print(dateNow);
+
+    Future<QuerySnapshot> rides = _firestore
+        .collection('rides')
+        .where('passenger1', isEqualTo: id)
+        .where('date', isGreaterThan: dateNow)
+        .getDocuments();
+
+    return rides;
   }
 }
