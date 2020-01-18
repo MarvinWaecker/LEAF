@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leaf/screens/activity_screen.dart';
+import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

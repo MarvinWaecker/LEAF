@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/animations/page_transition1.dart';
-import 'package:leaf/screens/activity_screen.dart';
+import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/screens/mainBar_screen.dart';
 
 class SeatSelectionScreen extends StatefulWidget {

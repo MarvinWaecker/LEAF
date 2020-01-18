@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/icons/leaf_icons_icons.dart';
 import 'package:leaf/models/user_data.dart';
-import 'package:leaf/screens/activity_screen.dart';
+import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/screens/create_pages.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'package:leaf/screens/profile_screen.dart';
