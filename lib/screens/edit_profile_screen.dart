@@ -22,7 +22,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String _bio = '';
   String _music = '';
   String _car = '';
-  String mood = null;
+  String mood = 'One';
+  String dropdown = 'One';
+
   List<String> moods = [
     'Ich bin eher der ruhige Typ',
     'Meine Gesprächigkeit hängt von meiner Laune ab',
@@ -155,10 +157,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _name,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.person,
-                          size: 30.0,
-                        ),
                         labelText: 'Name',
                       ),
                       validator: (input) => input.trim().isEmpty
@@ -170,10 +168,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _bio,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.book,
-                          size: 30.0,
-                        ),
                         labelText: 'Bio',
                       ),
                       validator: (input) => input.trim().length > 150
@@ -185,10 +179,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _music,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.library_music,
-                          size: 30.0,
-                        ),
                         labelText: 'Favorite Music',
                       ),
                       validator: (input) => input.trim().length > 150
@@ -200,10 +190,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _car,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.directions_car,
-                          size: 30.0,
-                        ),
                         labelText: 'Automodell',
                       ),
                       validator: (input) => input.trim().length > 150
@@ -212,6 +198,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       onSaved: (input) => _car = input,
                     ),
 
+                    /*
                     DropdownButtonFormField(
                       hint: Text(
                         'Redseligkeit',
@@ -237,40 +224,54 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       }).toList(),
                     ),
 
+                     */
 
-
-
-/*
-                   Row(
-                     children: <Widget>[
-                       Icon(Icons.people, size: 10.0,),
-                       DropdownButton<String>(
-                            value: mood,
-                            hint: Text(
-                              'Redseligkeit',
-                              style: TextStyle(fontSize: 15.0),
-                            ),
-                            items: moods.map((talk) {
-                              return DropdownMenuItem(
-                                child: new Text(talk),
-                                value: talk,
-                              );
-                            }).toList(),
-                            onChanged: (newValue){
-                              setState(() {
-                                mood = newValue;
-                              });
-                            },
-                            isExpanded: true,
+                    Row(
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          value: dropdown,
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
                           ),
-                     ],
-                   ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdown = newValue;
+                            });
+                          },
+                          items: <String>['One', 'Two', 'Free', 'Four']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
 
+                        /*
+                        DropdownButton<String>(
+                          value: mood,
+                          hint: Text(
+                            'Redseligkeit',
+                            style: TextStyle(fontSize: 15.0),
+                          ),
+                          items: moods.map((talk) {
+                            return DropdownMenuItem(
+                              child: new Text(talk),
+                              value: talk,
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            setState(() {
+                              mood = newValue;
+                            });
+                          },
+                          isExpanded: true,
+                        ),
 
- */
-
-
-
+                         */
+                      ],
+                    ),
 
 /*
                     DropdownButtonFormField(
