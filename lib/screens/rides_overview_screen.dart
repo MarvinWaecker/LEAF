@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ActivityScreen extends StatefulWidget {
+class RidesOverviewScreen extends StatefulWidget {
   static final String id = 'activity_screen';
 
   @override
-  _ActivityScreenState createState() => _ActivityScreenState();
+  _RidesOverviewScreenState createState() => _RidesOverviewScreenState();
 }
 
-class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProviderStateMixin{
+class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTickerProviderStateMixin{
 
   TabController _tabController;
 
@@ -228,3 +228,4 @@ Widget test () {
 }
 
  */
+

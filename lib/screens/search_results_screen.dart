@@ -118,13 +118,15 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
           if (snapshot.data.documents.length == 0) {
             return Center(
               child: Text(
-                'Uppss..\n'
+                'Uppss...\n'
                 'Leider wurden keine passenden Fahrten gefunden.\n'
                 'Schau doch später noch mal vorbei.',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'UbuntuLight',
                   fontSize: 14,
                   color: Color(0xffE6EFE9),
+                  height: 1.6,
                 ),
               ),
             );
