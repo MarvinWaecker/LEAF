@@ -57,27 +57,17 @@ class DatabaseService {
     return rides;
   }
 
-  static Future<String> getRiderTest(String creatorId) async {
-    var document = await Firestore.instance
+  static Future<QuerySnapshot> getUserData(String creatorId) async {
+    Future<QuerySnapshot> data = _firestore
         .collection('users')
-        .document(creatorId)
-        .get()
-        .then((DocumentSnapshot snap) => snap.data);
+        .where('creatorId', isEqualTo: creatorId)
+        .getDocuments();
+    return data;
 
-    return document['name'];
+    //return document;
   }
 
-  static String getUserData(creatorId, keyword) {
-    var documentName = Firestore.instance
-        .collection('users')
-        .document(creatorId)
-        .get()
-        .then((DocumentSnapshot) {
-      String data = (DocumentSnapshot.data['$keyword'].toString());
-      return data;
-    });
-  }
-  
+  //Übersicht
   static Future<QuerySnapshot> futureRidesCreated(){
     String id = UserData().currentUserId;
 
