@@ -533,7 +533,7 @@ class _CreatePagesState extends State<CreatePages> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => ActivityScreen(),
+                              builder: (_) => RidesOverviewScreen(),
                             ),
                           );
                         }
