@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(
           brightness: Brightness.dark,
           //primaryColor: Color(0xff0cce6b),
-          accentColor: Color(0xff213A59),
+          accentColor: Color(0xff0cce6b),
           //buttonColor: Color(0xff0cce6b),
           //backgroundColor: Color(0xff111e2e),
           fontFamily: 'UbuntuRegular',

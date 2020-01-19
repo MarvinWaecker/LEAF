@@ -213,8 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea dsfhhj hdjsaf.',
-                                    // user.bio
+                                    user.bio,
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -469,23 +468,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   Icons.navigate_next,
                                 )
                               ],
-                            ),
-                            SizedBox(height: 32.0),
-                            Padding(
-                              padding: EdgeInsets.only(left: 16, right: 16),
-                              child: SizedBox(
-                                child: FlatButton(
-                                  onPressed: () => AuthService.logout(),
-                                  child: Text(
-                                    "AUSLOGGEN",
-                                    style: TextStyle(
-                                      color: Color(0xffe8b641),
-                                      fontFamily: 'UbuntuMedium',
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ),
                             SizedBox(height: 16,),
                           ],

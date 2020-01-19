@@ -29,13 +29,6 @@ class _SignupScreenState extends State<SignupScreen> {
     /// StatusBar Text weiß machen
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
-    /// Keyboard bleibt unten sonst flipp ich aus
-    FocusScopeNode currentFocus = FocusScope.of(context);
-
-    if (!currentFocus.hasPrimaryFocus) {
-      currentFocus.unfocus();
-    }
-    // Funktioniert nicht
 
 
     return Scaffold(
