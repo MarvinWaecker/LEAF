@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
@@ -137,7 +138,7 @@ class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProvid
           ),
           Expanded(
             child: Container(
-              child: getTabView(sharedValue, _tabController),
+              child: getTabView(context, sharedValue, _tabController),
             ),
           ),
         ],
@@ -314,7 +315,7 @@ Widget pastRidesCreated() {
   );
 }
 
-Widget getTabView(int sharedValue, TabController _tabController) {
+Widget getTabView(BuildContext context, int sharedValue, TabController _tabController) {
 
   if(sharedValue == 0) {
     return TabBarView(
@@ -322,7 +323,7 @@ Widget getTabView(int sharedValue, TabController _tabController) {
         // Future Builder aufrufen
         futureRidesBooked(),
         // Future Builder aufrufen
-        pastRidesBooked(),
+        pastRidesBooked(context),
       ],
       controller: _tabController,
     );
@@ -331,7 +332,7 @@ Widget getTabView(int sharedValue, TabController _tabController) {
     return TabBarView(
       children: [
         // Future Builder aufrufen
-        futureRidesCreated(),
+        futureRidesCreated(context),
         // Future Builder aufrufen
         pastRidesCreated(),
       ],
