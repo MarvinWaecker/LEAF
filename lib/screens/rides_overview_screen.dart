@@ -148,10 +148,10 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
 }
 
 
-Widget futureRidesBooked() {
+Widget futureRidesBooked(context) {
   //return new Text("Zukünftige gebuchte Fahrten");
   FutureBuilder(
-    future: DatabaseService.futureRidesBooked(),
+    future: DatabaseService.futureRidesBooked(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return Center(
@@ -234,7 +234,7 @@ Widget pastRidesBooked(context) {
 Widget futureRidesCreated(context) {
   //return new Text("Zukünftige angebotene Fahrten");
   FutureBuilder(
-    future: DatabaseService.futureRidesCreated(),
+    future: DatabaseService.futureRidesCreated(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return Center(
@@ -273,10 +273,10 @@ Widget futureRidesCreated(context) {
   );
 }
 
-Widget pastRidesCreated() {
+Widget pastRidesCreated(context) {
   //return new Text("Vergangene angebotene Fahrten");
   FutureBuilder(
-    future: DatabaseService.pastRidesCreated(),
+    future: DatabaseService.pastRidesCreated(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
         return Center(
@@ -321,7 +321,7 @@ Widget getTabView(BuildContext context, int sharedValue, TabController _tabContr
     return TabBarView(
       children: [
         // Future Builder aufrufen
-        futureRidesBooked(),
+        futureRidesBooked(context),
         // Future Builder aufrufen
         pastRidesBooked(context),
       ],
@@ -334,7 +334,7 @@ Widget getTabView(BuildContext context, int sharedValue, TabController _tabContr
         // Future Builder aufrufen
         futureRidesCreated(context),
         // Future Builder aufrufen
-        pastRidesCreated(),
+        pastRidesCreated(context),
       ],
       controller: _tabController,
     );
