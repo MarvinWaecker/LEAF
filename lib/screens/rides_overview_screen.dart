@@ -4,14 +4,14 @@ import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/screens/search_results_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
-class ActivityScreen extends StatefulWidget {
+class RidesOverviewScreen extends StatefulWidget {
   static final String id = 'activity_screen';
 
   @override
-  _ActivityScreenState createState() => _ActivityScreenState();
+  _RidesOverviewScreenState createState() => _RidesOverviewScreenState();
 }
 
-class _ActivityScreenState extends State<ActivityScreen> with SingleTickerProviderStateMixin{
+class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTickerProviderStateMixin{
 
   TabController _tabController;
 

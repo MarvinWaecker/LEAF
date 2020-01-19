@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         theme: new ThemeData(
           brightness: Brightness.dark,
           //primaryColor: Color(0xff0cce6b),
-          //accentColor: Color(0xff0cce6b),
+          accentColor: Color(0xff0cce6b),
           //buttonColor: Color(0xff0cce6b),
           //backgroundColor: Color(0xff111e2e),
           fontFamily: 'UbuntuRegular',
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id: (context) => LoginScreen(),
           SignupScreen.id: (context) => SignupScreen(),
           HomeScreen.id: (context) => HomeScreen(),
-          ActivityScreen.id: (context) => ActivityScreen(),
+          RidesOverviewScreen.id: (context) => RidesOverviewScreen(),
           // Fehlen noch einige
 
           /// Befehl um von überall bestimmten Screen zu öffnen:

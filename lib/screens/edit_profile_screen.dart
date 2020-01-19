@@ -91,7 +91,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   _displayProfileImage() {
     if (_profileImage == null) {
       if (widget.user.profileImageUrl.isEmpty) {
-        return AssetImage('assets/images/logo.png');
+        return AssetImage('assets/images/Profilbild_Paul.png');
       } else {
         return CachedNetworkImageProvider(widget.user.profileImageUrl);
       }
@@ -137,18 +137,31 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Color(0xff111e2e),
-        title: Text(
-          'Edit Profile',
-          style: TextStyle(
-            color: Color(0xffE6EFE9),
+          centerTitle: true,
+          backgroundColor: Color(0xff111e2e),
+          automaticallyImplyLeading: true,
+          title: Text(
+            'Profil bearbeiten',
+            style: TextStyle(
+              fontFamily: 'UbuntuRegular',
+              fontSize: 24,
+              color: Color(0xffE6EFE9),
+            ),
           ),
-        ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.close,
+              color: Color(0xffe8b641),
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: ListView(
+          physics: new BouncingScrollPhysics(),
           children: <Widget>[
             _isLoading
                 ? LinearProgressIndicator(
@@ -157,13 +170,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   )
                 : SizedBox.shrink(),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: const EdgeInsets.all(16.0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 60.0,
+                      radius: 42.0,
                       backgroundColor: Colors.grey,
                       backgroundImage: _displayProfileImage(),
                     ),

@@ -53,7 +53,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
             child: Material(
               color: Color(0xff111e2e),
               child: Text(
-                widget.name + 's Fahrt',
+                widget.name + "'s Fahrt",
                 style: TextStyle(
                   fontFamily: 'UbuntuRegular',
                   fontSize: 22,

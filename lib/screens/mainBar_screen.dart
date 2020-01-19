@@ -77,7 +77,7 @@ class _MainBarScreenState extends State<MainBarScreen> {
           ),
           SearchPages(),
           CreatePages(),
-          ActivityScreen(),
+          RidesOverviewScreen(),
           ProfileScreen(userId: Provider.of<UserData>(context).currentUserId),
         ],
         onPageChanged: (int index) {
