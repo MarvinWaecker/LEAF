@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
-import 'package:leaf/screens/search_results_screen.dart';
 import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
@@ -21,7 +20,6 @@ class SearchCardInfo extends StatefulWidget {
 }
 
 class _SearchCardInfoState extends State<SearchCardInfo> {
-
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -59,8 +57,11 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
           ),
         ),
       ),
-      body: StreamBuilder(
-        stream: Firestore.instance.collection("users/$widget.ride.creatorId").snapshots(),
+      body: FutureBuilder(
+        future: Firestore.instance
+            .collection("users")
+            .document(widget.ride.creatorId)
+            .get(),
         //future: DatabaseService.searchRides('Oberhausen', 'Unterhausen', '23.01.2020', '12:00'),
         builder: (context, snapshot) {
           // if (!snapshot.hasData) {
@@ -79,25 +80,18 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
             );
           }
 
-          if(snapshot.data.documents.length != 0) {
-            User user = User.fromDoc(snapshot.data.documents[0]);
-            //Ride ride = Ride.fromDoc(snapshot.data.documents[0]);
-            print(widget.ride.creatorId);
-            print('Hallo');
-            //return Container(child: Text(user.name,));
-
-            return SearchCardItemExtended(user: user, ride: widget.ride,);
-          }
-          return Container();
+          User user = User.fromDoc(snapshot.data);
+          return SearchCardItemExtended(
+            user: user,
+            ride: widget.ride,
+          );
         },
       ),
     );
   }
 }
 
-
 class SearchCardItemExtended extends StatelessWidget {
-
   final User user;
   final Ride ride;
 
@@ -105,7 +99,6 @@ class SearchCardItemExtended extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     _submit() async {
       DatabaseService.updateRide(ride, context);
     }
@@ -117,11 +110,13 @@ class SearchCardItemExtended extends StatelessWidget {
           child: Column(children: <Widget>[
             Hero(
               tag: 'card$num',
-              flightShuttleBuilder: (BuildContext flightContext,
-                  Animation<double> animation,
-                  HeroFlightDirection flightDirection,
-                  BuildContext fromHeroContext,
-                  BuildContext toHeroContext,) {
+              flightShuttleBuilder: (
+                BuildContext flightContext,
+                Animation<double> animation,
+                HeroFlightDirection flightDirection,
+                BuildContext fromHeroContext,
+                BuildContext toHeroContext,
+              ) {
                 return SingleChildScrollView(
                   child: fromHeroContext.widget,
                 );
@@ -155,15 +150,13 @@ class SearchCardItemExtended extends StatelessWidget {
                             child: Container(
                               child: Column(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-
                                   /// Start Ziel -----------------------------------------
                                   Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Material(
                                         color: Color(0xff192C43),
@@ -179,8 +172,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                       Material(
                                         color: Color(0xff192C43),
                                         child: Text(
-                                          'nach ' +
-                                              ride.destination,
+                                          'nach ' + ride.destination,
                                           style: TextStyle(
                                             fontFamily: 'UbuntuLight',
                                             fontSize: 20,
@@ -195,12 +187,11 @@ class SearchCardItemExtended extends StatelessWidget {
                                   Container(
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       //crossAxisAlignment: CrossAxisAlignment.,
                                       children: <Widget>[
                                         Padding(
-                                          padding:
-                                          EdgeInsets.only(right: 0),
+                                          padding: EdgeInsets.only(right: 0),
                                           child: Container(
                                             child: Column(
                                               children: <Widget>[
@@ -213,30 +204,24 @@ class SearchCardItemExtended extends StatelessWidget {
                                                   height: 4,
                                                 ),
                                                 Material(
-                                                  color:
-                                                  Color(0xff192C43),
+                                                  color: Color(0xff192C43),
                                                   child: Text(
                                                     'Abfahrt',
                                                     style: TextStyle(
-                                                      fontFamily:
-                                                      'UbuntuLight',
+                                                      fontFamily: 'UbuntuLight',
                                                       fontSize: 12,
-                                                      color: Color(
-                                                          0xffE6EFE9),
+                                                      color: Color(0xffE6EFE9),
                                                     ),
                                                   ),
                                                 ),
                                                 Material(
-                                                  color:
-                                                  Color(0xff192C43),
+                                                  color: Color(0xff192C43),
                                                   child: Text(
                                                     ride.time,
                                                     style: TextStyle(
-                                                      fontFamily:
-                                                      'UbuntuLight',
+                                                      fontFamily: 'UbuntuLight',
                                                       fontSize: 16,
-                                                      color: Color(
-                                                          0xffE6EFE9),
+                                                      color: Color(0xffE6EFE9),
                                                     ),
                                                   ),
                                                 ),
@@ -245,8 +230,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                           ),
                                         ),
                                         Padding(
-                                          padding:
-                                          EdgeInsets.only(right: 0),
+                                          padding: EdgeInsets.only(right: 0),
                                           child: Container(
                                             child: Column(
                                               children: <Widget>[
@@ -259,30 +243,24 @@ class SearchCardItemExtended extends StatelessWidget {
                                                   height: 4,
                                                 ),
                                                 Material(
-                                                  color:
-                                                  Color(0xff192C43),
+                                                  color: Color(0xff192C43),
                                                   child: Text(
                                                     'Fahrtdauer',
                                                     style: TextStyle(
-                                                      fontFamily:
-                                                      'UbuntuLight',
+                                                      fontFamily: 'UbuntuLight',
                                                       fontSize: 12,
-                                                      color: Color(
-                                                          0xffE6EFE9),
+                                                      color: Color(0xffE6EFE9),
                                                     ),
                                                   ),
                                                 ),
                                                 Material(
-                                                  color:
-                                                  Color(0xff192C43),
+                                                  color: Color(0xff192C43),
                                                   child: Text(
                                                     '1,5',
                                                     style: TextStyle(
-                                                      fontFamily:
-                                                      'UbuntuLight',
+                                                      fontFamily: 'UbuntuLight',
                                                       fontSize: 16,
-                                                      color: Color(
-                                                          0xffE6EFE9),
+                                                      color: Color(0xffE6EFE9),
                                                     ),
                                                   ),
                                                 ),
@@ -306,11 +284,9 @@ class SearchCardItemExtended extends StatelessWidget {
                                                 child: Text(
                                                   ride.price,
                                                   style: TextStyle(
-                                                    fontFamily:
-                                                    'UbuntuLight',
+                                                    fontFamily: 'UbuntuLight',
                                                     fontSize: 12,
-                                                    color:
-                                                    Color(0xffE6EFE9),
+                                                    color: Color(0xffE6EFE9),
                                                   ),
                                                 ),
                                               ),
@@ -319,11 +295,9 @@ class SearchCardItemExtended extends StatelessWidget {
                                                 child: Text(
                                                   '7',
                                                   style: TextStyle(
-                                                    fontFamily:
-                                                    'UbuntuLight',
+                                                    fontFamily: 'UbuntuLight',
                                                     fontSize: 16,
-                                                    color:
-                                                    Color(0xffE6EFE9),
+                                                    color: Color(0xffE6EFE9),
                                                   ),
                                                 ),
                                               ),
@@ -344,28 +318,22 @@ class SearchCardItemExtended extends StatelessWidget {
                           padding: EdgeInsets.only(right: 16, left: 32),
                           child: Container(
                             child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-
                                 /// Flagge oben ------------------------------------------
                                 GestureDetector(
                                   onTap: () async {},
                                   child: Container(
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
-                                          bottomRight:
-                                          Radius.circular(3.0),
-                                          bottomLeft:
-                                          Radius.circular(3.0)),
+                                          bottomRight: Radius.circular(3.0),
+                                          bottomLeft: Radius.circular(3.0)),
                                       color: Color(0xff294970),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.black12,
-                                          blurRadius:
-                                          3.0, // soften the shadow
-                                          spreadRadius:
-                                          2.0, //extend the shadow
+                                          blurRadius: 3.0, // soften the shadow
+                                          spreadRadius: 2.0, //extend the shadow
                                           offset: Offset(
                                             2.5,
                                             // Move to right 10  horizontally
@@ -386,11 +354,9 @@ class SearchCardItemExtended extends StatelessWidget {
                                               child: Text(
                                                 user.name,
                                                 style: TextStyle(
-                                                  fontFamily:
-                                                  'UbuntuLight',
+                                                  fontFamily: 'UbuntuLight',
                                                   fontSize: 12,
-                                                  color:
-                                                  Color(0xff0cce6b),
+                                                  color: Color(0xff0cce6b),
                                                 ),
                                               ),
                                             ),
@@ -399,8 +365,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                                 radius: 21.0,
                                                 backgroundImage: AssetImage(
                                                     'assets/images/Profilbild_Paul.png'),
-                                                backgroundColor:
-                                                Colors.grey,
+                                                backgroundColor: Colors.grey,
                                               ),
                                             ),
                                           ],
@@ -577,8 +542,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           width: double.maxFinite,
                         ),
                         Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Flexible(
                               child: GestureDetector(
@@ -621,10 +585,7 @@ class SearchCardItemExtended extends StatelessWidget {
           ]),
         ),
         Container(
-          width: MediaQuery
-              .of(context)
-              .size
-              .width,
+          width: MediaQuery.of(context).size.width,
           alignment: Alignment.bottomCenter,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -632,8 +593,7 @@ class SearchCardItemExtended extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding:
-                  EdgeInsets.only(bottom: 26, right: 8, left: 32),
+                  padding: EdgeInsets.only(bottom: 26, right: 8, left: 32),
                   child: SizedBox(
                     child: RaisedButton(
                       onPressed: () async {
@@ -668,8 +628,7 @@ class SearchCardItemExtended extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding:
-                  EdgeInsets.only(bottom: 26, left: 8, right: 32),
+                  padding: EdgeInsets.only(bottom: 26, left: 8, right: 32),
                   child: SizedBox(
                     child: RaisedButton(
                       onPressed: _submit,
