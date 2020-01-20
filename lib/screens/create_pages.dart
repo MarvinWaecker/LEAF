@@ -93,22 +93,6 @@ class _CreatePagesState extends State<CreatePages> {
       initialDate: _dateTime == null ? DateTime.now() : _dateTime,
       firstDate: DateTime.now().add(Duration(days: -1)),
       lastDate: DateTime.now().add(Duration(days: 365)),
-      /*
-      builder: (BuildContext context, Widget child) {
-          return Theme(
-            data: ThemeData(
-              primaryColorBrightness: Brightness.dark,
-              buttonColor: Color(0xff0cce6b),
-              accentColor: Color(0xff0cce6b),
-              primaryColor: Color(0xff0cce6b),
-              backgroundColor: Color(0xff111e2e),
-              cardColor: Color(0xff111e2e),
-              highlightColor: Color(0xff111e2e),
-            ),
-            child: child,
-          );
-        },
-      */
     );
     if (picked != null) {
       setState(() => _dateTime = picked);
@@ -205,6 +189,7 @@ class _CreatePagesState extends State<CreatePages> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        physics: new ClampingScrollPhysics(),
         controller: _controllerS,
         children: <Widget>[
           GestureDetector(
@@ -532,7 +517,7 @@ class _CreatePagesState extends State<CreatePages> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => RidesOverviewScreen(),
+                              builder: (_) => MainBarScreen(),
                             ),
                           );
                         }

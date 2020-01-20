@@ -12,18 +12,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 
 class MainBarScreen extends StatefulWidget {
-  final test;
 
-  MainBarScreen(this.test);
 
   @override
-  _MainBarScreenState createState() => _MainBarScreenState(test);
+  _MainBarScreenState createState() => _MainBarScreenState();
 }
 
 class _MainBarScreenState extends State<MainBarScreen> {
-  final test;
-
-  _MainBarScreenState(this.test);
 
   int _currentTab = 0;
   PageController _pageController;
@@ -61,7 +56,6 @@ class _MainBarScreenState extends State<MainBarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int test = widget.test;
 
     /// StatusBar Text weiß machen
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);

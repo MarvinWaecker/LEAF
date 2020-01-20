@@ -137,6 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                             padding: EdgeInsets.all(16),
                             child: Column(
                               children: <Widget>[
+                                SizedBox(height: 16,),
                                 CircleAvatar(
                                   radius: 42.5,
                                   backgroundImage: user.profileImageUrl.isEmpty
@@ -147,7 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   backgroundColor: Colors.transparent,
                                 ),
                                 SizedBox(
-                                  height: 16,
+                                  height: 8,
                                 ),
                                 Container(
                                   child: Text(
@@ -161,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 16,
+                                  height:16,
                                 ),
                                 Container(
                                   child: Container(
@@ -194,7 +195,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           ),
                           Padding(
                             padding:
-                                EdgeInsets.only(top: 32, left: 16, right: 16),
+                                EdgeInsets.only(top: 16, left: 16, right: 16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -227,7 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Fahrerinfos',
+                                    'Über mich',
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 16,
@@ -240,8 +241,115 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea dsfhhj hdjsaf.',
-                                    // user.bio
+                                    'Hier muss die Bio Variable eingefügt werden.',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 14,
+                                      color: Color(0xffE6EFE9),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Lieblingsmusik',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 16,
+                                      color: Color(0xffE6EFE9),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Hier muss die Music Variable eingefügt werden.',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 14,
+                                      color: Color(0xffE6EFE9),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Mein Auto',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 16,
+                                      color: Color(0xffE6EFE9),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Hier muss die Car Variable eingefügt werden.',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 14,
+                                      color: Color(0xffE6EFE9),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Kommunikationstyp',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 16,
+                                      color: Color(0xffE6EFE9),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Hier muss die mood Variable eingefügt werden.',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 14,
+                                      color: Color(0xffE6EFE9),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 32,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Rauchertyp',
+                                    style: TextStyle(
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 16,
+                                      color: Color(0xffE6EFE9),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Container(
+                                  child: Text(
+                                    'Hier muss die smoke Variable eingefügt werden.',
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,

@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 axis: Axis.vertical,
                 //dragAnchor: ,
                 child: Image.asset(
-                  'assets/images/Drag_LEAF.png',
+                  'assets/images/Drag_LEAF_3.png',
                 ),
                 feedback: Container(
                   width: 245,
