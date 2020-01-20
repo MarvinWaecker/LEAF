@@ -5,25 +5,23 @@ import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
-class SearchCardInfo extends StatefulWidget {
+class OverviewCardInfo extends StatefulWidget {
   final int num;
   final Ride ride;
 
-  const SearchCardInfo({
+  const OverviewCardInfo({
     Key key,
     this.num,
     this.ride,
   }) : super(key: key);
 
   @override
-  _SearchCardInfoState createState() => _SearchCardInfoState();
+  _OverviewCardInfoState createState() => _OverviewCardInfoState();
 }
 
-class _SearchCardInfoState extends State<SearchCardInfo> {
+class _OverviewCardInfoState extends State<OverviewCardInfo> {
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
-
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
       appBar: AppBar(
@@ -92,10 +90,6 @@ class SearchCardItemExtended extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _submit() async {
-      DatabaseService.updateRide(ride, context);
-    }
-
     /// UI
     return Stack(
       children: <Widget>[
@@ -103,7 +97,7 @@ class SearchCardItemExtended extends StatelessWidget {
           physics: new BouncingScrollPhysics(),
           child: Column(children: <Widget>[
             Hero(
-              tag: 'card$num',
+              tag: 'cverviewCard$num',
               flightShuttleBuilder: (
                 BuildContext flightContext,
                 Animation<double> animation,
@@ -181,7 +175,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                   Container(
                                     child: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       //crossAxisAlignment: CrossAxisAlignment.,
                                       children: <Widget>[
                                         Container(
@@ -300,6 +294,7 @@ class SearchCardItemExtended extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         /// Flaggen ------------------------------------------------------
                         Padding(
                           padding: EdgeInsets.only(right: 16, left: 32),
@@ -410,7 +405,6 @@ class SearchCardItemExtended extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3.0),
                     color: Color(0xff213A59),
-                    // Schatten???
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -421,7 +415,7 @@ class SearchCardItemExtended extends StatelessWidget {
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            user.car,
+                            'Über ' + user.name,
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 16,
@@ -430,13 +424,18 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 8,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            user.car,
+                            (() {
+                              if (user.bio == "" || user.bio == null) {
+                                return " - ";
+                              }
+                              return user.bio;
+                            })(),
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
@@ -445,13 +444,13 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 32,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            'Info',
+                            "Auto",
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 16,
@@ -460,18 +459,18 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 8,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            'Fährt die Strecke regelmäßig\nStudent der HFU\n' +
-                                user.mood +
-                                '\n' +
-                                user.smoke +
-                                '\n' +
-                                user.pet,
+                            (() {
+                              if (user.car == "" || user.car == null) {
+                                return " - ";
+                              }
+                              return user.car;
+                            })(),
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
@@ -480,7 +479,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 32,
                           width: double.maxFinite,
                         ),
                         Material(
@@ -495,13 +494,13 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 8,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            'PayPal',
+                            "Hier muss die Pay Variable rein.",
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
@@ -510,7 +509,112 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 32,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            "Kommunikationstyp",
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            (() {
+                              if (user.mood == "" || user.mood == null) {
+                                return " - ";
+                              }
+                              return user.mood;
+                            })(),
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 14,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            "Lieblingsmusik",
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            (() {
+                              if (user.music == "" || user.music == null) {
+                                return " - ";
+                              }
+                              return user.music;
+                            })(),
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 14,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            "Rauchertyp",
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            (() {
+                              if (user.smoke == "" || user.smoke == null) {
+                                return " - ";
+                              }
+                              return user.smoke;
+                            })(),
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 14,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
                           width: double.maxFinite,
                         ),
                         Material(
@@ -525,7 +629,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 12,
+                          height: 14,
                           width: double.maxFinite,
                         ),
                         Row(
@@ -533,19 +637,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           children: <Widget>[
                             Flexible(
                               child: GestureDetector(
-                                onTap: () async {
-                                  await Future.delayed(
-                                      Duration(milliseconds: 200));
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return SeatSelectionScreen();
-                                      },
-                                      fullscreenDialog: true,
-                                    ),
-                                  );
-                                },
+                                onTap: () async {},
                                 child: Container(
                                   child: Hero(
                                     tag: 'animateCar',
@@ -571,6 +663,7 @@ class SearchCardItemExtended extends StatelessWidget {
             ),
           ]),
         ),
+        /*
         Container(
           width: MediaQuery.of(context).size.width,
           alignment: Alignment.bottomCenter,
@@ -584,16 +677,6 @@ class SearchCardItemExtended extends StatelessWidget {
                   child: SizedBox(
                     child: RaisedButton(
                       onPressed: () async {
-                        await Future.delayed(Duration(milliseconds: 200));
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return SeatSelectionScreen();
-                            },
-                            fullscreenDialog: true,
-                          ),
-                        );
                       },
                       color: Color(0xff213A59),
                       shape: RoundedRectangleBorder(
@@ -638,6 +721,8 @@ class SearchCardItemExtended extends StatelessWidget {
             ],
           ),
         ),
+
+         */
       ],
     );
   }

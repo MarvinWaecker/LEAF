@@ -57,8 +57,6 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
       appBar: AppBar(
@@ -118,7 +116,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                 child: SingleChildScrollView(
                   physics: new NeverScrollableScrollPhysics(),
                   child: Container(
-                    height: height100,
+                    height: MediaQuery.of(context).size.height-10,
                     child: Stack(
                       children: <Widget>[
                         Column(
@@ -135,12 +133,12 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                       Hero(
                                         tag: 'animateCar',
                                         child: Image.asset(
-                                            'assets/images/Sitzwahl_Auto_Draufsicht_GMD.png'),
+                                            'assets/images/Auto_Draufsicht_GMD.png'),
                                         key: _keyCar,
                                       ),
                                       AnimatedPositioned(
-                                        bottom: _bottom ? finalPositionBottom : fadePositionBottom,
-                                        right: _right ? finalPositionRight : fadePositionRight,
+                                        bottom: _bottom ? 250 : 230,
+                                        right: _right ? 70 : 50,
                                         duration: _animationDuration,
                                         child: AnimatedOpacity(
                                           opacity: _visible ? 1.0 : 0.0,
@@ -182,7 +180,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                     curve: Curves.easeIn,
                                     duration: _animationDuration,
                                     child: Container(
-                                      width: width100 - 32,
+                                      width: MediaQuery.of(context).size.width - 32,
                                       alignment: Alignment.bottomCenter,
                                       child: Row(
                                         mainAxisAlignment:
