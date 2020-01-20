@@ -23,49 +23,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String _bio = '';
   String _music = '';
   String _car = '';
-  String mood = 'One';
-  String dropdown = 'Ich bin eher der ruhige Typ';
-  String dropdownValue = 'Two';
+  String _mood;
+  String _smoke;
 
-  List<String> moods = [
-    'Ich bin eher der ruhige Typ',
-    'Meine Gesprächigkeit hängt von meiner Laune ab',
-    'Ich liebe es zu quatschen',
-  ];
-
-  /*
-  List<DropdownMenuItem> moodsDrop = items: [
-    DropdownMenuItem(
-        value: '1', child: Text(
-  'Ich bin eher der ruhige Typ'
-      ),
-        ),
-  DropdownMenuItem(
-      value: '2', child: Text(
-  'Meine Gesprächigkeit hängt von meiner Laune ab',
-
-  ),
-      ),
-  DropdownMenuItem(
-       value: '3', child: Text(    'Ich liebe es zu quatschen',
-  ),
-      ),
-  ];
-
-   */
-  String smoke = null;
-  List<String> smokes = [
-    'Im Auto darf nicht geraucht werden',
-    'Manchmal erlaube ich Rauchen',
-    'Zigarettenrauch stört mich nicht',
-    'Bitte noch festlegen'
-  ];
-  String pet = null;
-  List<String> pets = [
-    'Sorry, ich nehme keine Haustiere mit',
-    'Kommt auf das Tier an',
-    'Haustiere sind erlaubt'
-  ];
   bool _isLoading = false;
 
   @override
@@ -75,8 +35,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _bio = widget.user.bio;
     _music = widget.user.music;
     _car = widget.user.car;
-    mood = widget.user.mood;
-    smoke = widget.user.smoke;
+    if (widget.user.mood == '') {
+      _mood = null;
+    } else {
+      _mood = widget.user.mood;
+    }
+    if (widget.user.smoke == '') {
+      _smoke = null;
+    } else {
+      _smoke = widget.user.smoke;
+    }
   }
 
   _handleImageFromGallery() async {
@@ -118,12 +86,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       }
       User user = User(
         id: widget.user.id,
-        name: _name,
         profileImageUrl: _profileImageUrl,
+        name: _name,
         bio: _bio,
         music: _music,
-        mood: mood,
-        smoke: smoke,
+        car: _car,
+        mood: _mood,
+        smoke: _smoke,
       );
       DatabaseService.updateUser(user);
 
@@ -132,8 +101,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   // Variables Dropdowns
-  String _currentSelectedValueComm;
-  String _currentSelectedValueSmoke;
+  //String _mood;
 
   // Listen
   var _commType = [
@@ -325,14 +293,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   color: Colors.redAccent, fontSize: 16.0),
                               labelText: 'Kommunikationstyp',
                             ),
-                            isEmpty: _currentSelectedValueComm == null,
+                            isEmpty: _mood == null,
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
-                                value: _currentSelectedValueComm,
+                                value: _mood,
                                 isDense: true,
                                 onChanged: (String newValue) {
                                   setState(() {
-                                    _currentSelectedValueComm = newValue;
+                                    _mood = newValue;
                                     state.didChange(newValue);
                                   });
                                 },
@@ -372,14 +340,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   color: Colors.redAccent, fontSize: 16.0),
                               labelText: 'Rauchertyp',
                             ),
-                            isEmpty: _currentSelectedValueSmoke == null,
+                            isEmpty: _smoke == null,
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton<String>(
-                                value: _currentSelectedValueSmoke,
+                                value: _smoke,
                                 isDense: true,
                                 onChanged: (String newValue) {
                                   setState(() {
-                                    _currentSelectedValueSmoke = newValue;
+                                    _smoke = newValue;
                                     state.didChange(newValue);
                                   });
                                 },

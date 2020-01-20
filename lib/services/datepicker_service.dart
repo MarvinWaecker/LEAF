@@ -36,7 +36,6 @@ class DatepickerService {
       //setState(() => _dateTime = picked);
     }
     else {
-      print('DatePicker cancelled');
     }
   }
 

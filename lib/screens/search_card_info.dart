@@ -488,9 +488,7 @@ class SearchCardItemExtended extends StatelessWidget {
                             'Fährt die Strecke regelmäßig\nStudent der HFU\n' +
                                 user.mood +
                                 '\n' +
-                                user.smoke +
-                                '\n' +
-                                user.pet,
+                                user.smoke,
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
