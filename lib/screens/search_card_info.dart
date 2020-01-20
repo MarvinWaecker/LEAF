@@ -180,96 +180,88 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                 MainAxisAlignment.spaceBetween,
                                             //crossAxisAlignment: CrossAxisAlignment.,
                                             children: <Widget>[
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 0),
-                                                child: Container(
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        height: 22,
-                                                        child: Image.asset(
-                                                            'assets/images/thin_clock.png'),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Material(
-                                                        color:
-                                                            Color(0xff192C43),
-                                                        child: Text(
-                                                          'Abfahrt',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                'UbuntuLight',
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xffE6EFE9),
-                                                          ),
+                                              Container(
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 22,
+                                                      child: Image.asset(
+                                                          'assets/images/thin_hourglass.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                    Material(
+                                                      color:
+                                                      Color(0xff192C43),
+                                                      child: Text(
+                                                        'Datum',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                          'UbuntuLight',
+                                                          fontSize: 12,
+                                                          color: Color(
+                                                              0xffE6EFE9),
                                                         ),
                                                       ),
-                                                      Material(
-                                                        color:
-                                                            Color(0xff192C43),
-                                                        child: Text(
-                                                          widget.ride.time,
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                'UbuntuLight',
-                                                            fontSize: 16,
-                                                            color: Color(
-                                                                0xffE6EFE9),
-                                                          ),
+                                                    ),
+                                                    Material(
+                                                      color:
+                                                      Color(0xff192C43),
+                                                      child: Text(
+                                                        widget.ride.date,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                          'UbuntuLight',
+                                                          fontSize: 16,
+                                                          color: Color(
+                                                              0xffE6EFE9),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 0),
-                                                child: Container(
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        height: 22,
-                                                        child: Image.asset(
-                                                            'assets/images/thin_hourglass.png'),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 4,
-                                                      ),
-                                                      Material(
-                                                        color:
-                                                            Color(0xff192C43),
-                                                        child: Text(
-                                                          'Fahrtdauer',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                'UbuntuLight',
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xffE6EFE9),
-                                                          ),
+                                              Container(
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 22,
+                                                      child: Image.asset(
+                                                          'assets/images/thin_clock.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                    Material(
+                                                      color:
+                                                      Color(0xff192C43),
+                                                      child: Text(
+                                                        'Abfahrt',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                          'UbuntuLight',
+                                                          fontSize: 12,
+                                                          color: Color(
+                                                              0xffE6EFE9),
                                                         ),
                                                       ),
-                                                      Material(
-                                                        color:
-                                                            Color(0xff192C43),
-                                                        child: Text(
-                                                          '1,5',
-                                                          style: TextStyle(
-                                                            fontFamily:
-                                                                'UbuntuLight',
-                                                            fontSize: 16,
-                                                            color: Color(
-                                                                0xffE6EFE9),
-                                                          ),
+                                                    ),
+                                                    Material(
+                                                      color:
+                                                      Color(0xff192C43),
+                                                      child: Text(
+                                                        widget.ride.time,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                          'UbuntuLight',
+                                                          fontSize: 16,
+                                                          color: Color(
+                                                              0xffE6EFE9),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                               Container(
@@ -289,10 +281,10 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                         widget.ride.price,
                                                         style: TextStyle(
                                                           fontFamily:
-                                                              'UbuntuLight',
+                                                          'UbuntuLight',
                                                           fontSize: 12,
                                                           color:
-                                                              Color(0xffE6EFE9),
+                                                          Color(0xffE6EFE9),
                                                         ),
                                                       ),
                                                     ),
@@ -302,10 +294,10 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                                         '7',
                                                         style: TextStyle(
                                                           fontFamily:
-                                                              'UbuntuLight',
+                                                          'UbuntuLight',
                                                           fontSize: 16,
                                                           color:
-                                                              Color(0xffE6EFE9),
+                                                          Color(0xffE6EFE9),
                                                         ),
                                                       ),
                                                     ),
@@ -580,7 +572,7 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
                                         child: Hero(
                                           tag: 'animateCar',
                                           child: Image.asset(
-                                              'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                              'assets/images/Sitzwahl_Auto_Draufsicht_GMD.png'),
                                         ),
                                       ),
                                     ),

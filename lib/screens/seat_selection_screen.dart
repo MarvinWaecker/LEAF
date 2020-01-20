@@ -135,7 +135,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                       Hero(
                                         tag: 'animateCar',
                                         child: Image.asset(
-                                            'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                            'assets/images/Sitzwahl_Auto_Draufsicht_GMD.png'),
                                         key: _keyCar,
                                       ),
                                       AnimatedPositioned(
