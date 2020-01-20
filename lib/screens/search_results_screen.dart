@@ -5,20 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/screens/search_card_info.dart';
 import 'package:leaf/services/database_service.dart';
-import 'package:leaf/services/demo.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
 
 String url = 'https://jsonplaceholder.typicode.com/posts';
-
-///Method for GET Request
-Future<Demo> getDemoResponse() async{
-  final response = await http.get('$url/1');
-  return responseFromJson(response.body);
-}
-
-
 
 // Variablen
 String name = 'Paul';
@@ -431,7 +422,6 @@ class SearchCardItem extends StatelessWidget {
                             /// Flagge unten -----------------------------------------
                             GestureDetector(
                               onTap: () async {
-                                print(name);
                                 await Future.delayed(
                                     Duration(milliseconds: 200));
                                 Navigator.push(

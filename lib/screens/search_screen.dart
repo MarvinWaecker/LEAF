@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/profile_screen.dart';
-import 'package:leaf/screens/search_location_screen.dart';
-import 'package:leaf/screens/search_time_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
 /*

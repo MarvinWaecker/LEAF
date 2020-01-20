@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
@@ -58,15 +59,14 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
           ),
         ),
       ),
-      body: FutureBuilder(
-        future: DatabaseService.getUserData(widget.ride.creatorId),
-        //future: DatabaseService.getUserData(widget.ride.creatorId),
+      body: StreamBuilder(
+        stream: Firestore.instance.collection("users/$widget.ride.creatorId").snapshots(),
+        //future: DatabaseService.searchRides('Oberhausen', 'Unterhausen', '23.01.2020', '12:00'),
         builder: (context, snapshot) {
           // if (!snapshot.hasData) {
 
           // }
           //User user = User.fromDoc(snapshot.data);
-          print('ID ' + widget.ride.creatorId);
 
           if (!snapshot.hasData) {
             return Center(
@@ -78,8 +78,17 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
               ),
             );
           }
-          User user = User.fromDoc(snapshot.data.documents[0]);
-          return SearchCardItemExtended(user: user, ride: widget.ride,);
+
+          if(snapshot.data.documents.length != 0) {
+            User user = User.fromDoc(snapshot.data.documents[0]);
+            //Ride ride = Ride.fromDoc(snapshot.data.documents[0]);
+            print(widget.ride.creatorId);
+            print('Hallo');
+            //return Container(child: Text(user.name,));
+
+            return SearchCardItemExtended(user: user, ride: widget.ride,);
+          }
+          return Container();
         },
       ),
     );
