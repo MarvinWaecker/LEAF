@@ -271,7 +271,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                                     Container(
                                                       height: 22,
                                                       child: Image.asset(
-                                                          'assets/images/thin_hourglass.png'),
+                                                          'assets/images/thin_calendar.png'),
                                                     ),
                                                     SizedBox(
                                                       height: 4,
@@ -293,7 +293,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                                       color: Color(0xff192C43),
                                                       child: Text(
                                                         ride.date
-                                                            .substring(0, 5),
+                                                            .substring(0, 6),
                                                         style: TextStyle(
                                                           fontFamily:
                                                               'UbuntuLight',

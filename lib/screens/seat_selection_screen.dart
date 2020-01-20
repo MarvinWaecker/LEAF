@@ -223,7 +223,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                                 child: RaisedButton(
                                                   onPressed: () {
                                                     Navigator.push(
-                                                        context, ScaleRoute(page: MainBarScreen(3)));
+                                                        context, ScaleRoute(page: MainBarScreen()));
                                                   },
                                                   color: Color(0xff0cce6b),
                                                   shape: RoundedRectangleBorder(

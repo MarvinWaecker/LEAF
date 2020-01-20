@@ -67,11 +67,9 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
             padding: EdgeInsets.only(top: 16),
             child: Container(
               width: 250,
-              child: CupertinoSegmentedControl<int>(
-                unselectedColor: Color(0xff111e2e),
-                selectedColor: Color(0xff0cce6b),
-                borderColor: Color(0xff0cce6b),
-                pressedColor: Color(0xff213A59),
+              child: CupertinoSlidingSegmentedControl<int>(
+                thumbColor: Color(0xff2A4870),
+                backgroundColor: Color(0xff192C43),
                 children: segmentOptions,
                 onValueChanged: (int val) {
                   setState(() {
@@ -150,7 +148,6 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
 
 /// Widgets --------------------------------------------------------------------
 Widget futureRidesBooked(context) {
-  //return new Text("Zukünftige gebuchte Fahrten");
   return FutureBuilder(
     key: UniqueKey(),
     future: DatabaseService.futureRidesBooked(context),
@@ -167,13 +164,23 @@ Widget futureRidesBooked(context) {
       }
       if (snapshot.data.documents.length == 0) {
         return Center(
-          child: Text(
-            'Hier gibt es im Moment nichts zu sehen.',
-            style: TextStyle(
-              fontFamily: 'UbuntuLight',
-              fontSize: 14,
-              color: Color(0xffE6EFE9),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 160,
+                child: Image.asset('assets/images/LEAF_im_Regen.png'),
+              ),
+              SizedBox(height: 16,),
+              Text(
+                'Hier gibt es im Moment nichts zu sehen.',
+                style: TextStyle(
+                  fontFamily: 'UbuntuLight',
+                  fontSize: 14,
+                  color: Color(0xffE6EFE9),
+                ),
+              ),
+            ],
           ),
         );
       }
@@ -192,7 +199,6 @@ Widget futureRidesBooked(context) {
 }
 
 Widget pastRidesBooked(context) {
-  //return new Text("Vergangene gebuchte Fahrten");
   return FutureBuilder(
       key: UniqueKey(),
     future: DatabaseService.pastRidesBooked(context),
@@ -209,13 +215,23 @@ Widget pastRidesBooked(context) {
       }
       if (snapshot.data.documents.length == 0) {
         return Center(
-          child: Text(
-            'Hier gibt es im Moment nichts zu sehen.',
-            style: TextStyle(
-              fontFamily: 'UbuntuLight',
-              fontSize: 14,
-              color: Color(0xffE6EFE9),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 160,
+                child: Image.asset('assets/images/LEAF_im_Regen.png'),
+              ),
+              SizedBox(height: 16,),
+              Text(
+                'Hier gibt es im Moment nichts zu sehen.',
+                style: TextStyle(
+                  fontFamily: 'UbuntuLight',
+                  fontSize: 14,
+                  color: Color(0xffE6EFE9),
+                ),
+              ),
+            ],
           ),
         );
       }
@@ -233,7 +249,6 @@ Widget pastRidesBooked(context) {
   );
 }
 Widget futureRidesCreated(context) {
-  //return new Text("Zukünftige angebotene Fahrten");
   return FutureBuilder(
     key: UniqueKey(),
     future: DatabaseService.futureRidesCreated(context),
@@ -250,13 +265,23 @@ Widget futureRidesCreated(context) {
       }
       if (snapshot.data.documents.length == 0) {
         return Center(
-          child: Text(
-            'Hier gibt es im Moment nichts zu sehen.',
-            style: TextStyle(
-              fontFamily: 'UbuntuLight',
-              fontSize: 14,
-              color: Color(0xffE6EFE9),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 160,
+                child: Image.asset('assets/images/LEAF_im_Regen.png'),
+              ),
+              SizedBox(height: 16,),
+              Text(
+                'Hier gibt es im Moment nichts zu sehen.',
+                style: TextStyle(
+                  fontFamily: 'UbuntuLight',
+                  fontSize: 14,
+                  color: Color(0xffE6EFE9),
+                ),
+              ),
+            ],
           ),
         );
       }
@@ -275,7 +300,6 @@ Widget futureRidesCreated(context) {
 }
 
 Widget pastRidesCreated(context) {
-  //return new Text("Vergangene angebotene Fahrten");
   return FutureBuilder(
     key: UniqueKey(),
     future: DatabaseService.pastRidesCreated(context),
@@ -292,13 +316,23 @@ Widget pastRidesCreated(context) {
       }
       if (snapshot.data.documents.length == 0) {
         return Center(
-          child: Text(
-            'Hier gibt es im Moment nichts zu sehen.',
-            style: TextStyle(
-              fontFamily: 'UbuntuLight',
-              fontSize: 14,
-              color: Color(0xffE6EFE9),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: 160,
+                child: Image.asset('assets/images/LEAF_im_Regen.png'),
+              ),
+              SizedBox(height: 16,),
+              Text(
+                'Hier gibt es im Moment nichts zu sehen.',
+                style: TextStyle(
+                  fontFamily: 'UbuntuLight',
+                  fontSize: 14,
+                  color: Color(0xffE6EFE9),
+                ),
+              ),
+            ],
           ),
         );
       }

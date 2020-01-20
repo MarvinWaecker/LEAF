@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               color: Color(0xffE6EFE9),
                               fontFamily: 'UbuntuRegular',
-                              fontSize: 15,
+                              fontSize: 16,
                             ),
                             decoration: InputDecoration(
                               prefixIcon: Icon(
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               color: Color(0xffE6EFE9),
                               fontFamily: 'UbuntuRegular',
-                              fontSize: 15,
+                              fontSize: 16,
                             ),
                             obscureText: true,
                             decoration: InputDecoration(
