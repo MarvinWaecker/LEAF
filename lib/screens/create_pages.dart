@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:leaf/models/ride_model.dart';
-import 'package:leaf/models/user_data.dart';
-import 'package:leaf/screens/create_ride_overview_screen.dart';
-import 'package:leaf/screens/mainBar_screen.dart';
 import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/services/database_service.dart';
-import 'package:provider/provider.dart';
 
 class CreatePages extends StatefulWidget {
   @override
@@ -31,10 +26,7 @@ class _CreatePagesState extends State<CreatePages> {
   String _origin, _destination;
   double _priceDouble = 10.0;
 
-  double _sliderValue = 0;
-
   /// Date Picker --------------------------------------------------------------
-
   changeDateFirebase() {
     final dateFormatter = DateFormat("dd.MM.yyyy");
     selectedDateFirebase = dateFormatter.format(_dateTime);
@@ -93,22 +85,6 @@ class _CreatePagesState extends State<CreatePages> {
       initialDate: _dateTime == null ? DateTime.now() : _dateTime,
       firstDate: DateTime.now().add(Duration(days: -1)),
       lastDate: DateTime.now().add(Duration(days: 365)),
-      /*
-      builder: (BuildContext context, Widget child) {
-          return Theme(
-            data: ThemeData(
-              primaryColorBrightness: Brightness.dark,
-              buttonColor: Color(0xff0cce6b),
-              accentColor: Color(0xff0cce6b),
-              primaryColor: Color(0xff0cce6b),
-              backgroundColor: Color(0xff111e2e),
-              cardColor: Color(0xff111e2e),
-              highlightColor: Color(0xff111e2e),
-            ),
-            child: child,
-          );
-        },
-      */
     );
     if (picked != null) {
       setState(() => _dateTime = picked);
@@ -119,7 +95,6 @@ class _CreatePagesState extends State<CreatePages> {
   }
 
   /// Time Picker --------------------------------------------------------------
-
   changeTime() {
     setState(() {
       // Formatter
@@ -152,26 +127,6 @@ class _CreatePagesState extends State<CreatePages> {
     }
   }
 
-  /// Fahrt in Firebase einfügen -------------------------------------------------
-
-  /*
-  _submit() async {
-    Ride ride = Ride(
-      //  id: Provider.of<UserData>(context).currentUserId =
-      //      UserData().currentUserId,
-      origin: origin,
-      destination: destination,
-      date: date,
-      time: time,
-    );
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      DatabaseService.createRide(ride, context);
-    }
-  }
-
-   */
-
   /// Fahrt anbieten -------------------------------------------------------------
   PageController _controllerS;
   int _selectedIndex = 0;
@@ -201,6 +156,7 @@ class _CreatePagesState extends State<CreatePages> {
     _controllerS = new PageController();
   }
 
+  // UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(

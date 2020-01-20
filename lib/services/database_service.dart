@@ -57,6 +57,7 @@ class DatabaseService {
     return rides;
   }
 
+  /*
   static Future<QuerySnapshot> getUserData(String creatorId) {
     Future<QuerySnapshot> data =  _firestore
         .collection('users')
@@ -64,9 +65,18 @@ class DatabaseService {
         .getDocuments();
 
     return data;
-
-    //return document;
   }
+
+   */
+
+  /*
+  static Future<QuerySnapshot> getUserData(String creatorId) {
+   Future<DocumentSnapshot> data = _firestore.collection('users').document(creatorId).snapshots();
+
+    return data;
+  }
+
+   */
 
   //Übersicht
   static Future<QuerySnapshot> futureRidesCreated(context){
