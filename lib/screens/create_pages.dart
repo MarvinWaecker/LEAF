@@ -4,6 +4,8 @@ import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
+import 'mainBar_screen.dart';
+
 class CreatePages extends StatefulWidget {
   @override
   _CreatePagesState createState() => _CreatePagesState();
@@ -90,7 +92,6 @@ class _CreatePagesState extends State<CreatePages> {
       setState(() => _dateTime = picked);
       changeDate();
     } else {
-      print('DatePicker cancelled');
     }
   }
 
@@ -123,7 +124,6 @@ class _CreatePagesState extends State<CreatePages> {
       setState(() => _time = picked);
       changeTime();
     } else {
-      print('TimePicker cancelled');
     }
   }
 

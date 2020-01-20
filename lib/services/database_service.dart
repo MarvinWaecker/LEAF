@@ -23,7 +23,6 @@ class DatabaseService {
       'car': user.car,
       'mood': user.mood,
       'smoke': user.smoke,
-      'pet': user.pet,
     });
   }
 
@@ -42,6 +41,12 @@ class DatabaseService {
   static void updateRide(Ride ride, BuildContext context) {
     ridesRef.document(ride.id).updateData({
       'passenger1': Provider.of<UserData>(context, listen: false).currentUserId,
+    });
+  }
+
+  static void updatePay(User user, String pay) {
+    usersRef.document(user.id).updateData({
+      'pay': pay,
     });
   }
 
@@ -128,12 +133,9 @@ class DatabaseService {
 
   static Future<QuerySnapshot> pastRidesBooked(BuildContext context){
     String id = Provider.of<UserData>(context).currentUserId;
-        //UserData().currentUserId;
-    print(id);
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
     String dateNow = dateFormatter.format(DateTime.now());
-    print(dateNow);
 
     Future<QuerySnapshot> rides = _firestore
         .collection('rides')

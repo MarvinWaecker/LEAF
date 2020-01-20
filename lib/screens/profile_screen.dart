@@ -4,10 +4,12 @@ import 'package:leaf/animations/page_transition3.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/edit_profile_screen.dart';
 import 'package:leaf/services/auth_service.dart';
+import 'package:leaf/services/database_service.dart';
 import 'package:leaf/utilities/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   final String userId;
+  User user;
 
   ProfileScreen({this.userId});
 
@@ -21,13 +23,13 @@ class _ProfileScreenState extends State<ProfileScreen>
   TabController _tabController;
   int selectedRadioComm;
   int selectedRadioPay;
+  String pay = '';
 
   @override
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
     super.initState();
     selectedRadioComm = 1;
-    selectedRadioPay = 1;
   }
 
   setSelectedRadioComm(int val) {
@@ -39,11 +41,19 @@ class _ProfileScreenState extends State<ProfileScreen>
   setSelectedRadioPay(int val) {
     setState(() {
       selectedRadioPay = val;
+      print(selectedRadioPay);
+      if (selectedRadioPay == 1) {
+        pay = 'Bar';
+      } else {
+        pay = 'PayPal';
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    getPayMethod() {}
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -74,6 +84,11 @@ class _ProfileScreenState extends State<ProfileScreen>
             );
           }
           User user = User.fromDoc(snapshot.data);
+          if (user.pay == 'PayPal') {
+            selectedRadioPay = 2;
+          } else {
+            selectedRadioPay = 1;
+          }
           return Column(
             children: <Widget>[
               Container(
@@ -137,12 +152,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                             padding: EdgeInsets.all(16),
                             child: Column(
                               children: <Widget>[
-                                SizedBox(height: 16,),
+                                SizedBox(
+                                  height: 16,
+                                ),
                                 CircleAvatar(
                                   radius: 42.5,
                                   backgroundImage: user.profileImageUrl.isEmpty
-                                      ? AssetImage(
-                                          'assets/images/Profilbild_Paul.png')
+                                      ? AssetImage('assets/images/logo.png')
                                       : CachedNetworkImageProvider(
                                           user.profileImageUrl),
                                   backgroundColor: Colors.transparent,
@@ -162,7 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   ),
                                 ),
                                 SizedBox(
-                                  height:16,
+                                  height: 16,
                                 ),
                                 Container(
                                   child: Container(
@@ -228,33 +244,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Über mich',
-                                    style: TextStyle(
-                                      fontFamily: 'UbuntuLight',
-                                      fontSize: 16,
-                                      color: Color(0xffE6EFE9),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  child: Text(
-                                    'Hier muss die Bio Variable eingefügt werden.',
-                                    style: TextStyle(
-                                      fontFamily: 'UbuntuLight',
-                                      fontSize: 14,
-                                      color: Color(0xffE6EFE9),
-                                      height: 1.3,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 32,
-                                ),
-                                Container(
-                                  child: Text(
                                     'Lieblingsmusik',
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
@@ -268,7 +257,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Hier muss die Music Variable eingefügt werden.',
+                                    user.music,
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -295,7 +284,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Hier muss die Car Variable eingefügt werden.',
+                                    user.car,
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -322,7 +311,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    'Hier muss die mood Variable eingefügt werden.',
+                                    (() {
+                                      if (user.mood == null) {
+                                        return ' test';
+                                      }
+
+                                      return user.mood;
+                                    })(),
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -348,8 +343,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   height: 8,
                                 ),
                                 Container(
-                                  child: Text(
-                                    'Hier muss die smoke Variable eingefügt werden.',
+                                  child:Text(
+                                    (() {
+                                      if (user.smoke == null) {
+                                        return ' test';
+                                      }
+
+                                      return user.smoke;
+                                    })(),
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -468,15 +469,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   Row(
                                     children: <Widget>[
                                       Radio(
-                                        value: 1,
-                                        groupValue: selectedRadioPay,
-                                        activeColor: Color(0xff0cce6b),
-                                        onChanged: (val) {
-                                          FocusScopeNode currentFocus =
-                                              FocusScope.of(context);
-                                          setSelectedRadioPay(val);
-                                        },
-                                      ),
+                                          value: 1,
+                                          groupValue: selectedRadioPay,
+                                          activeColor: Color(0xff0cce6b),
+                                          onChanged: (val) {
+                                            FocusScopeNode currentFocus =
+                                                FocusScope.of(context);
+                                            setSelectedRadioPay(val);
+                                            DatabaseService.updatePay(
+                                                user, pay);
+                                          }),
                                       Text(
                                         'Bar',
                                         style: TextStyle(
@@ -498,6 +500,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                           FocusScopeNode currentFocus =
                                               FocusScope.of(context);
                                           setSelectedRadioPay(val);
+                                          DatabaseService.updatePay(user, pay);
                                         },
                                       ),
                                       Text(

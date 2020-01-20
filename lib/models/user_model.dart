@@ -10,7 +10,7 @@ class User {
   final String car;
   final String mood;
   final String smoke;
-  final String pet;
+  final String pay;
 
   User({
     this.id,
@@ -22,7 +22,7 @@ class User {
     this.car,
     this.mood,
     this.smoke,
-    this.pet,
+    this.pay
   });
 
   factory User.fromDoc(DocumentSnapshot doc) {
@@ -34,9 +34,9 @@ class User {
       bio: doc['bio'] ?? '',
       music: doc['music'] ?? '',
       car: doc['car'] ?? '',
-      mood: doc['mood'] ?? '',
-      smoke: doc['smoke'] ?? '',
-      pet: doc['pet'] ?? '',
+      mood: doc['mood'],
+      smoke: doc['smoke'],
+      pay: doc['pay'] ?? '',
     );
   }
 }

@@ -87,7 +87,6 @@ class _SearchPagesState extends State<SearchPages> {
       setState(() => _dateTime = picked);
       changeDate();
     } else {
-      print('DatePicker cancelled');
     }
   }
 
@@ -120,7 +119,6 @@ class _SearchPagesState extends State<SearchPages> {
       setState(() => _time = picked);
       changeTime();
     } else {
-      print('TimePicker cancelled');
     }
   }
 
