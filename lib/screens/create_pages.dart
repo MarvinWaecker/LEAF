@@ -156,7 +156,7 @@ class _CreatePagesState extends State<CreatePages> {
     _controllerS = new PageController();
   }
 
-  // UI
+  /// Origin und Destination eingeben
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -275,9 +275,7 @@ class _CreatePagesState extends State<CreatePages> {
             ),
           ),
 
-          /// Start Ziel picken ------------------------------------------------
-
-          /// Date Time picken -------------------------------------------------
+          /// Date und Time einstellen -------------------------------------------------
           Form(
             key: _formKeyDateTime,
             child: Scaffold(

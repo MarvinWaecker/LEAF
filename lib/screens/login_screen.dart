@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:leaf/animations/page_transition1.dart';
-import 'package:leaf/animations/page_transition2.dart';
-import 'package:leaf/screens/mainBar_screen.dart';
 import 'package:leaf/screens/signup_screen.dart';
 import 'package:leaf/services/auth_service.dart';
 import 'package:flutter/services.dart';

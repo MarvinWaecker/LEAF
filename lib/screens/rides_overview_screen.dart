@@ -1,7 +1,8 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/search_results_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
@@ -12,8 +13,8 @@ class RidesOverviewScreen extends StatefulWidget {
   _RidesOverviewScreenState createState() => _RidesOverviewScreenState();
 }
 
-class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTickerProviderStateMixin{
-
+class _RidesOverviewScreenState extends State<RidesOverviewScreen>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
@@ -40,7 +41,6 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
   };
   // 0 = Gebucht, 1 = Angeboten
   int sharedValue = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +102,7 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
                 child: Container(
                   color: Color(0xff111e2e),
                   child: TabBar(
-                    controller: _tabController,
+                      controller: _tabController,
                       labelColor: Color(0xffE6EFE9),
                       unselectedLabelColor: Color(0xffAAAEB2),
                       indicatorColor: Color(0xff0cce6b),
@@ -190,8 +190,23 @@ Widget futureRidesBooked(context) {
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-
-          return SearchCardItem(num: index, ride: ride);
+          return FutureBuilder(
+            future: Firestore.instance
+                .collection("users")
+                .document(ride.creatorId)
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                );
+              }
+              User user = User.fromDoc(snapshot.data);
+              return SearchCardItem(num: index, ride: ride, user: user);
+            },
+          );
         },
       );
     },
@@ -200,7 +215,7 @@ Widget futureRidesBooked(context) {
 
 Widget pastRidesBooked(context) {
   return FutureBuilder(
-      key: UniqueKey(),
+    key: UniqueKey(),
     future: DatabaseService.pastRidesBooked(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -241,13 +256,29 @@ Widget pastRidesBooked(context) {
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-
-          return SearchCardItem(num: index, ride: ride);
+          return FutureBuilder(
+            future: Firestore.instance
+                .collection("users")
+                .document(ride.creatorId)
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                );
+              }
+              User user = User.fromDoc(snapshot.data);
+              return SearchCardItem(num: index, ride: ride, user: user);
+            },
+          );
         },
       );
     },
   );
 }
+
 Widget futureRidesCreated(context) {
   return FutureBuilder(
     key: UniqueKey(),
@@ -291,8 +322,23 @@ Widget futureRidesCreated(context) {
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-
-          return SearchCardItem(num: index, ride: ride);
+          return FutureBuilder(
+            future: Firestore.instance
+                .collection("users")
+                .document(ride.creatorId)
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                );
+              }
+              User user = User.fromDoc(snapshot.data);
+              return SearchCardItem(num: index, ride: ride, user: user);
+            },
+          );
         },
       );
     },
@@ -342,17 +388,31 @@ Widget pastRidesCreated(context) {
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-
-          return SearchCardItem(num: index, ride: ride);
+          return FutureBuilder(
+            future: Firestore.instance
+                .collection("users")
+                .document(ride.creatorId)
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: Container(
+                    color: Colors.transparent,
+                  ),
+                );
+              }
+              User user = User.fromDoc(snapshot.data);
+              return SearchCardItem(num: index, ride: ride, user: user);
+            },
+          );
         },
       );
     },
   );
 }
-
-Widget getTabView(BuildContext context, int sharedValue, TabController _tabController) {
-
-  if(sharedValue == 0) {
+Widget getTabView(
+    BuildContext context, int sharedValue, TabController _tabController) {
+  if (sharedValue == 0) {
     return TabBarView(
       children: [
         // Future Builder aufrufen
@@ -362,8 +422,7 @@ Widget getTabView(BuildContext context, int sharedValue, TabController _tabContr
       ],
       controller: _tabController,
     );
-  }
-  else {
+  } else {
     return TabBarView(
       children: [
         // Future Builder aufrufen
@@ -375,5 +434,3 @@ Widget getTabView(BuildContext context, int sharedValue, TabController _tabContr
     );
   }
 }
-
-
