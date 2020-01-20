@@ -10,7 +10,6 @@ import 'package:leaf/services/database_service.dart';
 import 'package:provider/provider.dart';
 
 class CreatePages extends StatefulWidget {
-
   @override
   _CreatePagesState createState() => _CreatePagesState();
 }
@@ -203,123 +202,123 @@ class _CreatePagesState extends State<CreatePages> {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: _controllerS,
         children: <Widget>[
-          /// Start Ziel picken ------------------------------------------------
-          Form(
-            key: _formKeyLocation,
-            child: Scaffold(
-              backgroundColor: Color(0xff111e2e),
-              appBar: AppBar(
-                centerTitle: true,
+          GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Form(
+              key: _formKeyLocation,
+              child: Scaffold(
                 backgroundColor: Color(0xff111e2e),
-                automaticallyImplyLeading: false,
-                title: Text(
-                  'Fahrt anbieten',
-                  style: TextStyle(
-                    fontFamily: 'UbuntuRegular',
-                    fontSize: 24,
-                    color: Color(0xffE6EFE9),
+                appBar: AppBar(
+                  centerTitle: true,
+                  backgroundColor: Color(0xff111e2e),
+                  automaticallyImplyLeading: false,
+                  title: Text(
+                    'Fahrt anbieten',
+                    style: TextStyle(
+                      fontFamily: 'UbuntuRegular',
+                      fontSize: 24,
+                      color: Color(0xffE6EFE9),
+                    ),
                   ),
                 ),
-              ),
-              body: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 16, left: 16),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Welche Strecke fährst du?',
-                      style: TextStyle(
-                        fontFamily: 'UbuntuLight',
-                        fontSize: 20,
-                        color: Color(0xffE6EFE9),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      style: TextStyle(
-                        color: Color(0xffE6EFE9),
-                        fontFamily: 'UbuntuRegular',
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
-                        labelText: 'Start',
-                        labelStyle: TextStyle(
-                            color: Color(0xff4171AB),
-                            fontFamily: 'UbuntuRegular'),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff4171AB)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff0cce6b)),
-                        ),
-                      ),
-                      validator: (input) => input.trim().isEmpty
-                          ? 'Bitte gebe einen Startpunkt ein'
-                          : null,
-                      onSaved: (input) => _origin = input,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16.0),
-                    child: TextFormField(
-                      style: TextStyle(
-                        color: Color(0xffE6EFE9),
-                        fontFamily: 'UbuntuRegular',
-                      ),
-                      decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
-                        labelText: 'Ziel',
-                        labelStyle: TextStyle(
-                            color: Color(0xff4171AB),
-                            fontFamily: 'UbuntuRegular'),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff4171AB)),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color(0xff0cce6b)),
-                        ),
-                      ),
-                      validator: (input) => input.trim().isEmpty
-                          ? 'Bitte gebe ein Ziel ein'
-                          : null,
-                      onSaved: (input) => _destination = input,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16.0),
-                    alignment: Alignment.bottomRight,
-                    child: RaisedButton(
-                      onPressed: () {
-                        _formKeyLocation.currentState.save();
-                        onItemTapped(1);
-                      },
-                      color: Color(0xff0cce6b),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(18.0),
-                      ),
+                body: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.only(top: 16, left: 16),
+                      alignment: Alignment.topLeft,
                       child: Text(
-                        'WEITER',
+                        'Welche Strecke fährst du?',
                         style: TextStyle(
-                          color: Color(0xff111e2e),
-                          fontSize: 14,
-                          fontFamily: 'UbuntuMedium',
+                          fontFamily: 'UbuntuLight',
+                          fontSize: 20,
+                          color: Color(0xffE6EFE9),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Container(
+                      padding: EdgeInsets.all(16.0),
+                      child: TextFormField(
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                          labelText: 'Start',
+                          labelStyle: TextStyle(fontFamily: 'UbuntuRegular'),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff0cce6b)),
+                          ),
+                        ),
+                        validator: (input) => input.trim().isEmpty
+                            ? 'Bitte gebe einen Startpunkt ein'
+                            : null,
+                        onSaved: (input) => _origin = input,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(16.0),
+                      child: TextFormField(
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                          labelText: 'Ziel',
+                          labelStyle: TextStyle(fontFamily: 'UbuntuRegular'),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff0cce6b)),
+                          ),
+                        ),
+                        validator: (input) => input.trim().isEmpty
+                            ? 'Bitte gebe ein Ziel ein'
+                            : null,
+                        onSaved: (input) => _destination = input,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(16.0),
+                      alignment: Alignment.bottomRight,
+                      child: RaisedButton(
+                        onPressed: () {
+                          _formKeyLocation.currentState.save();
+                          onItemTapped(1);
+                        },
+                        color: Color(0xff0cce6b),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(18.0),
+                        ),
+                        child: Text(
+                          'WEITER',
+                          style: TextStyle(
+                            color: Color(0xff111e2e),
+                            fontSize: 14,
+                            fontFamily: 'UbuntuMedium',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
+
+          /// Start Ziel picken ------------------------------------------------
 
           /// Date Time picken -------------------------------------------------
           Form(
@@ -467,7 +466,7 @@ class _CreatePagesState extends State<CreatePages> {
                   ),
                   leading: IconButton(
                     icon: Icon(
-                      Icons.navigate_before,
+                      Icons.arrow_back_ios,
                       color: Color(0xffe8b641),
                     ),
                     onPressed: () {
@@ -509,7 +508,8 @@ class _CreatePagesState extends State<CreatePages> {
                         child: Container(
                           width: 40.0,
                           alignment: Alignment.center,
-                          child: Text('${_priceDouble.toInt()}'+' €',
+                          child: Text(
+                            '${_priceDouble.toInt()}' + ' €',
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 16,
@@ -520,7 +520,6 @@ class _CreatePagesState extends State<CreatePages> {
                       ),
                     ],
                   ),
-
                   Container(
                     padding: EdgeInsets.all(16.0),
                     alignment: Alignment.bottomRight,

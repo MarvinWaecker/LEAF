@@ -17,6 +17,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
+
   File _profileImage;
   String _name = '';
   String _bio = '';
@@ -156,8 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             onPressed: () {
               Navigator.pop(context);
             },
-          )
-      ),
+          )),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: ListView(
@@ -183,10 +183,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     FlatButton(
                       onPressed: _handleImageFromGallery,
                       child: Text(
-                        'Change Profile Picture',
-                        style:
-                            TextStyle(color: Color(0xff0cce6b), fontSize: 16.0),
+                        'Profilbild ändern',
+                        style: TextStyle(
+                          fontFamily: 'UbuntuMedium',
+                          fontSize: 16,
+                          color: Color(0xff0cce6b),
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 16,
                     ),
                     TextFormField(
                       initialValue: _name,
@@ -203,10 +209,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _bio,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        labelText: 'Bio',
+                        labelText: 'Über mich',
                       ),
-                      validator: (input) => input.trim().length > 150
-                          ? 'Please enter a bio less than 150 characters'
+                      validator: (input) => input.trim().length > 300
+                          ? 'Please enter a bio less than 300 characters'
                           : null,
                       onSaved: (input) => _bio = input,
                     ),
@@ -214,7 +220,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _music,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        labelText: 'Favorite Music',
+                        labelText: 'Lieblingsmusik',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -225,7 +231,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       initialValue: _car,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                        labelText: 'Automodell',
+                        labelText: 'Mein Auto',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -384,10 +390,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         );
                       }).toList(),
                     ),
-
                      */
 
-                    Container(),
+                    DropdownButton<String>(
+                      items: [
+                        DropdownMenuItem<String>(
+                          value: "1",
+                          child: Text(
+                            "First",
+                          ),
+                        ),
+                        DropdownMenuItem<String>(
+                          value: "2",
+                          child: Text(
+                            "Second",
+                          ),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        print("value: $value");
+                      },
+                      hint: Text(
+                        "",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    // Sticky bitte
                     Container(
                       margin: EdgeInsets.all(40.0),
                       height: 40.0,
