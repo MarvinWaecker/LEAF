@@ -21,7 +21,7 @@ class _SignupScreenState extends State<SignupScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => MainBarScreen(0)));
+              builder: (BuildContext context) => MainBarScreen()));
     }
   }
 
@@ -88,7 +88,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           style: TextStyle(
                             color: Color(0xffE6EFE9),
                             fontFamily: 'UbuntuRegular',
-                            fontSize: 15,
+                            fontSize: 16,
                           ),
                           decoration: InputDecoration(
                             prefixIcon: Icon(
@@ -121,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           style: TextStyle(
                             color: Color(0xffE6EFE9),
                             fontFamily: 'UbuntuRegular',
-                            fontSize: 15,
+                            fontSize: 16,
                           ),
                           decoration: InputDecoration(
                             prefixIcon: Icon(
@@ -154,7 +154,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           style: TextStyle(
                             color: Color(0xffE6EFE9),
                             fontFamily: 'UbuntuRegular',
-                            fontSize: 15,
+                            fontSize: 16,
                           ),
                           decoration: InputDecoration(
                             prefixIcon: Icon(

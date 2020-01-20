@@ -161,6 +161,7 @@ class _CreatePagesState extends State<CreatePages> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        physics: new ClampingScrollPhysics(),
         controller: _controllerS,
         children: <Widget>[
           GestureDetector(
@@ -486,7 +487,7 @@ class _CreatePagesState extends State<CreatePages> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => RidesOverviewScreen(),
+                              builder: (_) => MainBarScreen(),
                             ),
                           );
                         }

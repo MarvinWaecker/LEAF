@@ -147,6 +147,7 @@ class _SearchPagesState extends State<SearchPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        physics: new ClampingScrollPhysics(),
         controller: _controllerS,
         children: <Widget>[
           GestureDetector(

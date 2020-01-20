@@ -25,7 +25,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String _car = '';
   String mood = 'One';
   String dropdown = 'Ich bin eher der ruhige Typ';
-  String dropdownValue = 'One';
+  String dropdownValue = 'Two';
 
   List<String> moods = [
     'Ich bin eher der ruhige Typ',
@@ -77,7 +77,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     _car = widget.user.car;
     mood = widget.user.mood;
     smoke = widget.user.smoke;
-    pet = widget.user.pet;
   }
 
   _handleImageFromGallery() async {
@@ -125,13 +124,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         music: _music,
         mood: mood,
         smoke: smoke,
-        pet: pet,
       );
       DatabaseService.updateUser(user);
 
       Navigator.pop(context);
     }
   }
+
+  // Variables Dropdowns
+  String _currentSelectedValueComm;
+  String _currentSelectedValueSmoke;
+
+  // Listen
+  var _commType = [
+    'Ich bin eher der ruhige Typ',
+    'Launisch',
+    'Ich liebe es zu quatschen',
+  ];
+  var _smokeType = [
+    'Nichtraucher',
+    'Raucher',
+    'Gelegenheitsraucher',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -175,6 +189,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+                    SizedBox(
+                      height: 16,
+                    ),
                     CircleAvatar(
                       radius: 42.0,
                       backgroundColor: Colors.grey,
@@ -191,249 +208,223 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    TextFormField(
-                      initialValue: _name,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        labelText: 'Name',
-                      ),
-                      validator: (input) => input.trim().isEmpty
-                          ? 'Please enter a valid name'
-                          : null,
-                      onSaved: (input) => _name = input,
-                    ),
-                    TextFormField(
-                      initialValue: _bio,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        labelText: 'Über mich',
-                      ),
-                      validator: (input) => input.trim().length > 300
-                          ? 'Please enter a bio less than 300 characters'
-                          : null,
-                      onSaved: (input) => _bio = input,
-                    ),
-                    TextFormField(
-                      initialValue: _music,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        labelText: 'Lieblingsmusik',
-                      ),
-                      validator: (input) => input.trim().length > 150
-                          ? 'Please enter a bio less than 150 characters'
-                          : null,
-                      onSaved: (input) => _music = input,
-                    ),
-                    TextFormField(
-                      initialValue: _car,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        labelText: 'Mein Auto',
-                      ),
-                      validator: (input) => input.trim().length > 150
-                          ? 'Please enter a bio less than 150 characters'
-                          : null,
-                      onSaved: (input) => _car = input,
-                    ),
 
-                    /*
-                    DropdownButtonFormField(
-                      hint: Text(
-                        'Redseligkeit',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.people,
-                          size: 30.0,
-                        ),
-                      ),
-                      value: mood,
-                      onChanged: (newValue) {
-                        setState(() {
-                          mood = newValue;
-                        });
-                      },
-                      items: moods.map((talk) {
-                        return DropdownMenuItem(
-                          child: new Text(talk),
-                          value: talk,
-                        );
-                      }).toList(),
-                    ),
-
-                     */
-
-                    Row(
-                      children: <Widget>[
-                        /*
-                        DropdownButton<String>(
-                          value: dropdown,
-                          hint: Text(
-                            'Redseligkeit',
-                            style: TextStyle(fontSize: 15.0),
-                          ),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              dropdown = newValue;
-                            });
-                          },
-                          items: <String>[
-                            'Ich bin eher der ruhige Typ',
-                            'Meine Gesprächigkeit hängt von meiner Laune ab',
-                            'Ich liebe es zu quatschen',
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                         */
-                        DropdownButton<String>(
-                          value: dropdownValue,
-                          icon: Icon(Icons.arrow_downward),
-                          iconSize: 24,
-                          elevation: 16,
-                          style: TextStyle(color: Colors.deepPurple),
-                          underline: Container(
-                            height: 2,
-                            color: Colors.deepPurpleAccent,
-                          ),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              dropdownValue = newValue;
-                            });
-                          },
-                          items: <String>['One', 'Two', 'Free', 'Four']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                        /*
-                        DropdownButton<String>(
-                          value: mood,
-                          hint: Text(
-                            'Redseligkeit',
-                            style: TextStyle(fontSize: 15.0),
-                          ),
-                          items: moods.map((talk) {
-                            return DropdownMenuItem(
-                              child: new Text(talk),
-                              value: talk,
-                            );
-                          }).toList(),
-                          onChanged: (newValue) {
-                            setState(() {
-                              mood = newValue;
-                            });
-                          },
-                          isExpanded: true,
-                        ),
-
-                         */
-                      ],
-                    ),
-
-/*
-                    DropdownButtonFormField(
-                      hint: Text(
-                        'Rauchen',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.smoke_free,
-                          size: 30.0,
-                        ),
-                      ),
-                      value: smoke,
-                      onChanged: (newValue) {
-                        setState(() {
-                          smoke = newValue;
-                        });
-                      },
-                      items: smokes.map((smoke) {
-                        return DropdownMenuItem(
-                          child: new Text(smoke),
-                          value: smoke,
-                        );
-                      }).toList(),
-                    ),
-                    DropdownButtonFormField(
-                      hint: Text(
-                        'Haustiere',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.pets,
-                          size: 30.0,
-                        ),
-                      ),
-                      value: pet,
-                      onChanged: (newValue) {
-                        setState(() {
-                          pet = newValue;
-                        });
-                      },
-                      items: pets.map((pet) {
-                        return DropdownMenuItem(
-                          child: new Text(pet),
-                          value: pet,
-                        );
-                      }).toList(),
-                    ),
-                     */
-
-                    DropdownButton<String>(
-                      items: [
-                        DropdownMenuItem<String>(
-                          value: "1",
-                          child: Text(
-                            "First",
-                          ),
-                        ),
-                        DropdownMenuItem<String>(
-                          value: "2",
-                          child: Text(
-                            "Second",
-                          ),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        print("value: $value");
-                      },
-                      hint: Text(
-                        "",
+                    /// Formular -----------------------------------------------
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: TextFormField(
+                        initialValue: _name,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                          fontSize: 16,
                         ),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          labelText: 'Name',
+                        ),
+                        validator: (input) => input.trim().isEmpty
+                            ? 'Please enter a valid name'
+                            : null,
+                        onSaved: (input) => _name = input,
                       ),
                     ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: TextFormField(
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        initialValue: _bio,
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          labelText: 'Über mich',
+                        ),
+                        validator: (input) => input.trim().length > 300
+                            ? 'Please enter a bio less than 300 characters'
+                            : null,
+                        onSaved: (input) => _bio = input,
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: TextFormField(
+                        initialValue: _music,
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          labelText: 'Lieblingsmusik',
+                        ),
+                        validator: (input) => input.trim().length > 150
+                            ? 'Please enter a bio less than 150 characters'
+                            : null,
+                        onSaved: (input) => _music = input,
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: TextFormField(
+                        initialValue: _car,
+                        style: TextStyle(
+                          color: Color(0xffE6EFE9),
+                          fontFamily: 'UbuntuRegular',
+                          fontSize: 16,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xff4171AB)),
+                          ),
+                          labelText: 'Mein Auto',
+                        ),
+                        validator: (input) => input.trim().length > 150
+                            ? 'Please enter a bio less than 150 characters'
+                            : null,
+                        onSaved: (input) => _car = input,
+                      ),
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff4171AB)),
+                              ),
+                              labelStyle: TextStyle(fontSize: 16),
+                              errorStyle: TextStyle(
+                                  color: Colors.redAccent, fontSize: 16.0),
+                              labelText: 'Kommunikationstyp',
+                            ),
+                            isEmpty: _currentSelectedValueComm == null,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _currentSelectedValueComm,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _currentSelectedValueComm = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _commType.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(
+                                        color: Color(0xffE6EFE9),
+                                        fontFamily: 'UbuntuRegular',
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      child: FormField<String>(
+                        builder: (FormFieldState<String> state) {
+                          return InputDecorator(
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xff4171AB)),
+                              ),
+                              labelStyle: TextStyle(fontSize: 16),
+                              errorStyle: TextStyle(
+                                  color: Colors.redAccent, fontSize: 16.0),
+                              labelText: 'Rauchertyp',
+                            ),
+                            isEmpty: _currentSelectedValueSmoke == null,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                value: _currentSelectedValueSmoke,
+                                isDense: true,
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    _currentSelectedValueSmoke = newValue;
+                                    state.didChange(newValue);
+                                  });
+                                },
+                                items: _smokeType.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(
+                                      value,
+                                      style: TextStyle(
+                                        color: Color(0xffE6EFE9),
+                                        fontFamily: 'UbuntuRegular',
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
                     SizedBox(
-                      height: 16,
+                      height: 32,
                     ),
                     // Sticky bitte
-                    Container(
-                      margin: EdgeInsets.all(40.0),
-                      height: 40.0,
-                      width: 250.0,
-                      child: FlatButton(
+                    SizedBox(
+                      width: double.maxFinite,
+                      child: RaisedButton(
                         onPressed: _submit,
                         color: Color(0xff0cce6b),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(18.0),
+                        ),
                         child: Text(
-                          'Save Profile',
-                          style: TextStyle(fontSize: 18.0),
+                          'ÄNDERUNGEN SPEICHERN',
+                          style: TextStyle(
+                            color: Color(0xff111e2e),
+                            fontSize: 14,
+                            fontFamily: 'UbuntuMedium',
+                          ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
