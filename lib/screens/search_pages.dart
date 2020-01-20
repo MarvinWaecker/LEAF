@@ -24,7 +24,6 @@ class _SearchPagesState extends State<SearchPages> {
   String _origin, _destination, _price;
 
   /// Date Picker --------------------------------------------------------------
-
   changeDateFirebase() {
     final dateFormatter = DateFormat("dd.MM.yyyy");
     selectedDateFirebase = dateFormatter.format(_dateTime);
@@ -143,6 +142,7 @@ class _SearchPagesState extends State<SearchPages> {
     _controllerS = new PageController();
   }
 
+  /// Origin und Destination eingeben
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -262,9 +262,7 @@ class _SearchPagesState extends State<SearchPages> {
             ),
           ),
 
-          /// Start Ziel picken ------------------------------------------------
-
-          /// Date Time picken -------------------------------------------------
+          /// Date und Time eingeben -------------------------------------------------
           Form(
             key: _formKeyDateTime,
             child: Scaffold(

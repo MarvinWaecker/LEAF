@@ -1,29 +1,19 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/search_card_info.dart';
 import 'package:leaf/services/database_service.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
-
 
 String url = 'https://jsonplaceholder.typicode.com/posts';
 
-// Variablen
-String name = 'Paul';
-String car = 'Golf';
-String bio = 'Bio';
-String music = 'Rap';
-String mood = 'Ich liebe es zu quatschen';
-String smoke = 'Nichtraucher';
-String pet = 'Sorry, ich nehme keine Haustiere mit';
-
-
 class SearchResultsScreen extends StatefulWidget {
   final String origin, destination, time, date, price;
-  SearchResultsScreen(this.origin, this.destination, this.time, this.date, this.price);
+  SearchResultsScreen(
+      this.origin, this.destination, this.time, this.date, this.price);
 
   static final String id = 'search_results_screen';
 
@@ -31,9 +21,7 @@ class SearchResultsScreen extends StatefulWidget {
   _SearchResultsScreenState createState() => _SearchResultsScreenState();
 }
 
-
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
-
   /*
   void initState()
   {
@@ -55,7 +43,6 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     final String time = widget.time;
     String date = widget.date;
     final String price = widget.price;
-
 
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
@@ -126,7 +113,26 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
             itemBuilder: (BuildContext context, int index) {
               Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
 
-              return SearchCardItem(num: index, ride: ride);
+              return FutureBuilder(
+                future: Firestore.instance
+                    .collection("users")
+                    .document(ride.creatorId)
+                    .get(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Color(0xff192C43),
+                        valueColor: AlwaysStoppedAnimation(
+                          Color(0xff213a59),
+                        ),
+                      ),
+                    );
+                  }
+                  User user = User.fromDoc(snapshot.data);
+                  return SearchCardItem(num: index, ride: ride, user: user);
+                },
+              );
             },
           );
         },
@@ -135,21 +141,21 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
   }
 }
 
+//SearchCardItem(num: index, ride: ride);
 class SearchCardItem extends StatelessWidget {
-
   final int num;
   final Ride ride;
+  final User user;
 
-  const SearchCardItem({Key key, this.num, this.ride}) : super(key: key);
+  const SearchCardItem({Key key, this.num, this.ride, this.user})
+      : super(key: key);
 
-  getData(String creatorId) async{
-    return await Firestore.instance.
-    collection(creatorId).getDocuments();
+  getData(String creatorId) async {
+    return await Firestore.instance.collection(creatorId).getDocuments();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: <Widget>[
         Hero(
@@ -244,30 +250,24 @@ class SearchCardItem extends StatelessWidget {
                                             height: 4,
                                           ),
                                           Material(
-                                            color:
-                                            Color(0xff192C43),
+                                            color: Color(0xff192C43),
                                             child: Text(
                                               'Datum',
                                               style: TextStyle(
-                                                fontFamily:
-                                                'UbuntuLight',
+                                                fontFamily: 'UbuntuLight',
                                                 fontSize: 12,
-                                                color: Color(
-                                                    0xffE6EFE9),
+                                                color: Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
                                           Material(
-                                            color:
-                                            Color(0xff192C43),
+                                            color: Color(0xff192C43),
                                             child: Text(
                                               ride.date.substring(0, 5),
                                               style: TextStyle(
-                                                fontFamily:
-                                                'UbuntuLight',
+                                                fontFamily: 'UbuntuLight',
                                                 fontSize: 16,
-                                                color: Color(
-                                                    0xffE6EFE9),
+                                                color: Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
@@ -286,30 +286,24 @@ class SearchCardItem extends StatelessWidget {
                                             height: 4,
                                           ),
                                           Material(
-                                            color:
-                                            Color(0xff192C43),
+                                            color: Color(0xff192C43),
                                             child: Text(
                                               'Abfahrt',
                                               style: TextStyle(
-                                                fontFamily:
-                                                'UbuntuLight',
+                                                fontFamily: 'UbuntuLight',
                                                 fontSize: 12,
-                                                color: Color(
-                                                    0xffE6EFE9),
+                                                color: Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
                                           Material(
-                                            color:
-                                            Color(0xff192C43),
+                                            color: Color(0xff192C43),
                                             child: Text(
                                               ride.time,
                                               style: TextStyle(
-                                                fontFamily:
-                                                'UbuntuLight',
+                                                fontFamily: 'UbuntuLight',
                                                 fontSize: 16,
-                                                color: Color(
-                                                    0xffE6EFE9),
+                                                color: Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
@@ -332,11 +326,9 @@ class SearchCardItem extends StatelessWidget {
                                             child: Text(
                                               'Preis',
                                               style: TextStyle(
-                                                fontFamily:
-                                                'UbuntuLight',
+                                                fontFamily: 'UbuntuLight',
                                                 fontSize: 12,
-                                                color:
-                                                Color(0xffE6EFE9),
+                                                color: Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
@@ -345,11 +337,9 @@ class SearchCardItem extends StatelessWidget {
                                             child: Text(
                                               ride.price,
                                               style: TextStyle(
-                                                fontFamily:
-                                                'UbuntuLight',
+                                                fontFamily: 'UbuntuLight',
                                                 fontSize: 16,
-                                                color:
-                                                Color(0xffE6EFE9),
+                                                color: Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
@@ -374,8 +364,7 @@ class SearchCardItem extends StatelessWidget {
                           children: <Widget>[
                             /// Flagge oben ------------------------------------------
                             GestureDetector(
-                              onTap: () async {
-                              },
+                              onTap: () async {},
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
@@ -403,7 +392,8 @@ class SearchCardItem extends StatelessWidget {
                                       children: <Widget>[
                                         Material(
                                           color: Color(0xff294970),
-                                          child: Text(name,
+                                          child: Text(
+                                            user.name,
                                             style: TextStyle(
                                               fontFamily: 'UbuntuLight',
                                               fontSize: 12,
@@ -414,8 +404,9 @@ class SearchCardItem extends StatelessWidget {
                                         Container(
                                           child: CircleAvatar(
                                             radius: 21.0,
-                                            backgroundImage: AssetImage(
-                                                'assets/images/Profilbild_Paul.png'),
+                                            backgroundImage: user.profileImageUrl.isEmpty
+                                                ? AssetImage('assets/images/logo.png')
+                                                : CachedNetworkImageProvider(user.profileImageUrl),
                                             backgroundColor: Colors.grey,
                                           ),
                                         ),
@@ -440,8 +431,7 @@ class SearchCardItem extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return new SearchCardInfo(
-                                        num: num, ride: ride
-                                      );
+                                          num: num, ride: ride);
                                     },
                                     fullscreenDialog: true,
                                   ),
@@ -495,4 +485,3 @@ class SearchCardItem extends StatelessWidget {
     );
   }
 }
-
