@@ -79,7 +79,6 @@ class _SearchCardInfoState extends State<SearchCardInfo> {
               ),
             );
           }
-
           User user = User.fromDoc(snapshot.data);
           return SearchCardItemExtended(
             user: user,
@@ -190,6 +189,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       //crossAxisAlignment: CrossAxisAlignment.,
                                       children: <Widget>[
+
                                         Padding(
                                           padding: EdgeInsets.only(right: 0),
                                           child: Container(
@@ -215,7 +215,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Material(
-                                                  color: Color(0xff192C43),
+                                                  color: Color(0xff192C43,
                                                   child: Text(
                                                     ride.time,
                                                     style: TextStyle(
@@ -261,24 +261,53 @@ class SearchCardItemExtended extends StatelessWidget {
                                                       fontFamily: 'UbuntuLight',
                                                       fontSize: 16,
                                                       color: Color(0xffE6EFE9),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+
                                         Container(
                                           child: Column(
                                             children: <Widget>[
                                               Container(
-                                                height: 22,
-                                                child: Image.asset(
-                                                    'assets/images/thin_euro.png'),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 22,
+                                                      child: Image.asset(
+                                                          'assets/images/thin_hourglass.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                    Material(
+                                                      color: Color(0xff192C43),
+                                                      child: Text(
+                                                        'Datum',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'UbuntuLight',
+                                                          fontSize: 12,
+                                                          color:
+                                                              Color(0xffE6EFE9),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Material(
+                                                      color: Color(0xff192C43),
+                                                      child: Text(
+                                                        ride.date
+                                                            .substring(0, 5),
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'UbuntuLight',
+                                                          fontSize: 16,
+                                                          color:
+                                                              Color(0xffE6EFE9),
+                                                        ),
+                                                      ),
+
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                              SizedBox(
-                                                height: 4,
-                                              ),
+
                                               Material(
                                                 color: Color(0xff192C43),
                                                 child: Text(
@@ -299,6 +328,86 @@ class SearchCardItemExtended extends StatelessWidget {
                                                     fontSize: 16,
                                                     color: Color(0xffE6EFE9),
                                                   ),
+
+                                              Container(
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 22,
+                                                      child: Image.asset(
+                                                          'assets/images/thin_clock.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                    Material(
+                                                      color: Color(0xff192C43),
+                                                      child: Text(
+                                                        'Abfahrt',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'UbuntuLight',
+                                                          fontSize: 12,
+                                                          color:
+                                                              Color(0xffE6EFE9),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Material(
+                                                      color: Color(0xff192C43),
+                                                      child: Text(
+                                                        ride.time,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'UbuntuLight',
+                                                          fontSize: 16,
+                                                          color:
+                                                              Color(0xffE6EFE9),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      height: 22,
+                                                      child: Image.asset(
+                                                          'assets/images/thin_euro.png'),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                    Material(
+                                                      color: Color(0xff192C43),
+                                                      child: Text(
+                                                        'Preis',
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'UbuntuLight',
+                                                          fontSize: 12,
+                                                          color:
+                                                              Color(0xffE6EFE9),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Material(
+                                                      color: Color(0xff192C43),
+                                                      child: Text(
+                                                        ride.price,
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              'UbuntuLight',
+                                                          fontSize: 16,
+                                                          color:
+                                                              Color(0xffE6EFE9),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+
                                                 ),
                                               ),
                                             ],
@@ -563,7 +672,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                   child: Hero(
                                     tag: 'animateCar',
                                     child: Image.asset(
-                                        'assets/images/Sitzwahl_Auto_Draufsicht.png'),
+                                        'assets/images/Sitzwahl_Auto_Draufsicht_GMD.png'),
                                   ),
                                 ),
                               ),

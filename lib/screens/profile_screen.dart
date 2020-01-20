@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/animations/page_transition3.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/edit_profile_screen.dart';
 import 'package:leaf/services/auth_service.dart';
@@ -16,7 +17,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen>
     with SingleTickerProviderStateMixin {
-
   // Variables
   TabController _tabController;
   int selectedRadioComm;
@@ -35,6 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       selectedRadioComm = val;
     });
   }
+
   setSelectedRadioPay(int val) {
     setState(() {
       selectedRadioPay = val;
@@ -140,9 +141,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   radius: 42.5,
                                   backgroundImage: user.profileImageUrl.isEmpty
                                       ? AssetImage(
-                                      'assets/images/Profilbild_Paul.png')
+                                          'assets/images/Profilbild_Paul.png')
                                       : CachedNetworkImageProvider(
-                                      user.profileImageUrl),
+                                          user.profileImageUrl),
                                   backgroundColor: Colors.transparent,
                                 ),
                                 SizedBox(
@@ -166,18 +167,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   child: Container(
                                     child: RaisedButton(
                                       onPressed: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => EditProfileScreen(
-                                            user: user,
-                                          ),
-                                        ),
-                                      ),
+                                          context,
+                                          SlideUpRoute(
+                                              page: EditProfileScreen(
+                                                  user: user))),
                                       color: Color(0xff111e2e),
                                       shape: RoundedRectangleBorder(
-                                        side: BorderSide(color: Color(0xff0cce6b)),
+                                        side: BorderSide(
+                                            color: Color(0xff0cce6b)),
                                         borderRadius:
-                                        new BorderRadius.circular(18.0),
+                                            new BorderRadius.circular(18.0),
                                       ),
                                       child: Text(
                                         'PROFIL BEARBEITEN',
@@ -194,7 +193,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 32, left: 16, right: 16),
+                            padding:
+                                EdgeInsets.only(top: 32, left: 16, right: 16),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -253,224 +253,246 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ],
                             ),
                           ),
-                          SizedBox(height: 32.0),
-                          Padding(
-                            padding: EdgeInsets.only(left: 16, right: 16),
-                            child: SizedBox(
-                              child: FlatButton(
-                                onPressed: () => AuthService.logout(),
-                                child: Text(
-                                  "AUSLOGGEN",
-                                  style: TextStyle(
-                                    color: Color(0xffe8b641),
-                                    fontFamily: 'UbuntuMedium',
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ),
-                            ),
+                          SizedBox(
+                            height: 16,
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 16, right: 16, left: 16),
-                        child: ListView(
-                          physics: new BouncingScrollPhysics(),
-                          children: <Widget>[
-                            Text(
-                              'Kommunikation',
-                              style: TextStyle(
-                                color: Color(0xffE6EFE9),
-                                fontFamily: 'UbuntuLight',
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 8,),
-                            Text(
-                              'Wähle aus, wie du mit Mitfahrern kommunizieren möchtest.',
-                              style: TextStyle(
-                                color: Color(0xffE6EFE9),
-                                fontFamily: 'UbuntuLight',
-                                fontSize: 14,
-                                height: 1.3,
-                              ),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Radio(
-                                      value: 1,
-                                      groupValue: selectedRadioComm,
-                                      activeColor: Color(0xff0cce6b),
-                                      onChanged: (val) {
-                                        setSelectedRadioComm(val);
-                                      },
-                                    ),
-                                    Text(
-                                      'E-Mail',
-                                      style: TextStyle(
-                                        color: Color(0xffE6EFE9),
-                                        fontFamily: 'UbuntuLight',
-                                        fontSize: 14,
-                                        height: 1.3,
-                                      ),
-                                    ),
-                                  ],
+                      GestureDetector(
+                        onTap: () => FocusScope.of(context).unfocus(),
+                        child: Padding(
+                          padding:
+                              EdgeInsets.only(top: 16, right: 16, left: 16),
+                          child: ListView(
+                            physics: new BouncingScrollPhysics(),
+                            children: <Widget>[
+                              Text(
+                                'Kommunikation',
+                                style: TextStyle(
+                                  color: Color(0xffE6EFE9),
+                                  fontFamily: 'UbuntuLight',
+                                  fontSize: 16,
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    Radio(
-                                      value: 2,
-                                      groupValue: selectedRadioComm,
-                                      activeColor: Color(0xff0cce6b),
-                                      onChanged: (val) {
-                                        setSelectedRadioComm(val);
-                                      },
-                                    ),
-                                    Text(
-                                      'Handy',
-                                      style: TextStyle(
-                                        color: Color(0xffE6EFE9),
-                                        fontFamily: 'UbuntuLight',
-                                        fontSize: 14,
-                                        height: 1.3,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 24,),
-                            Text(
-                              'Bezahlung',
-                              style: TextStyle(
-                                color: Color(0xffE6EFE9),
-                                fontFamily: 'UbuntuLight',
-                                fontSize: 16,
                               ),
-                            ),
-                            SizedBox(height: 8,),
-                            Text(
-                              'Wähle aus, wie du von deinen Mitfahrern bezahlt werden möchtest',
-                              style: TextStyle(
-                                color: Color(0xffE6EFE9),
-                                fontFamily: 'UbuntuLight',
-                                fontSize: 14,
-                                height: 1.3,
+                              SizedBox(
+                                height: 8,
                               ),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    Radio(
-                                      value: 1,
-                                      groupValue: selectedRadioPay,
-                                      activeColor: Color(0xff0cce6b),
-                                      onChanged: (val) {
-                                        setSelectedRadioPay(val);
-                                      },
-                                    ),
-                                    Text(
-                                      'Bar',
+                              Text(
+                                'Wähle aus, wie du mit Mitfahrern kommunizieren möchtest.',
+                                style: TextStyle(
+                                  color: Color(0xffE6EFE9),
+                                  fontFamily: 'UbuntuLight',
+                                  fontSize: 14,
+                                  height: 1.3,
+                                ),
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        value: 1,
+                                        groupValue: selectedRadioComm,
+                                        activeColor: Color(0xff0cce6b),
+                                        onChanged: (val) {
+                                          setSelectedRadioComm(val);
+                                        },
+                                      ),
+                                      Text(
+                                        'E-Mail',
+                                        style: TextStyle(
+                                          color: Color(0xffE6EFE9),
+                                          fontFamily: 'UbuntuLight',
+                                          fontSize: 14,
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        value: 2,
+                                        groupValue: selectedRadioComm,
+                                        activeColor: Color(0xff0cce6b),
+                                        onChanged: (val) {
+                                          setSelectedRadioComm(val);
+                                        },
+                                      ),
+                                      Text(
+                                        'Handy',
+                                        style: TextStyle(
+                                          color: Color(0xffE6EFE9),
+                                          fontFamily: 'UbuntuLight',
+                                          fontSize: 14,
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 24,
+                              ),
+                              Text(
+                                'Bezahlung',
+                                style: TextStyle(
+                                  color: Color(0xffE6EFE9),
+                                  fontFamily: 'UbuntuLight',
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                'Wähle aus, wie du von deinen Mitfahrern bezahlt werden möchtest',
+                                style: TextStyle(
+                                  color: Color(0xffE6EFE9),
+                                  fontFamily: 'UbuntuLight',
+                                  fontSize: 14,
+                                  height: 1.3,
+                                ),
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        value: 1,
+                                        groupValue: selectedRadioPay,
+                                        activeColor: Color(0xff0cce6b),
+                                        onChanged: (val) {
+                                          FocusScopeNode currentFocus =
+                                              FocusScope.of(context);
+                                          setSelectedRadioPay(val);
+                                        },
+                                      ),
+                                      Text(
+                                        'Bar',
+                                        style: TextStyle(
+                                          color: Color(0xffE6EFE9),
+                                          fontFamily: 'UbuntuLight',
+                                          fontSize: 14,
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      Radio(
+                                        value: 2,
+                                        groupValue: selectedRadioPay,
+                                        activeColor: Color(0xff0cce6b),
+                                        onChanged: (val) {
+                                          FocusScopeNode currentFocus =
+                                              FocusScope.of(context);
+                                          setSelectedRadioPay(val);
+                                        },
+                                      ),
+                                      Text(
+                                        'PayPal',
+                                        style: TextStyle(
+                                          color: Color(0xffE6EFE9),
+                                          fontFamily: 'UbuntuLight',
+                                          fontSize: 14,
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 48),
+                                    child: TextFormField(
                                       style: TextStyle(
                                         color: Color(0xffE6EFE9),
-                                        fontFamily: 'UbuntuLight',
-                                        fontSize: 14,
-                                        height: 1.3,
+                                        fontFamily: 'UbuntuRegular',
+                                        fontSize: 15,
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Radio(
-                                      value: 2,
-                                      groupValue: selectedRadioPay,
-                                      activeColor: Color(0xff0cce6b),
-                                      onChanged: (val) {
-                                        setSelectedRadioPay(val);
-                                      },
-                                    ),
-                                    Text(
-                                      'PayPal',
-                                      style: TextStyle(
-                                        color: Color(0xffE6EFE9),
-                                        fontFamily: 'UbuntuLight',
-                                        fontSize: 14,
-                                        height: 1.3,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.fromLTRB(
+                                            0.0, 0.0, 20.0, 10.0),
+                                        labelText: 'E-Mail bei PayPal',
+                                        labelStyle: TextStyle(
+                                          fontFamily: 'UbuntuRegular',
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Color(0xff4171AB)),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Color(0xff0cce6b)),
+                                        ),
                                       ),
+                                      validator: (input) => !input.contains('@')
+                                          ? 'Please enter a valid email'
+                                          : null,
+                                      onSaved: (input) {},
                                     ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 48),
-                                  child: TextFormField(
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'FAQ',
                                     style: TextStyle(
                                       color: Color(0xffE6EFE9),
-                                      fontFamily: 'UbuntuRegular',
-                                      fontSize: 15,
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 16,
+                                      height: 1.3,
                                     ),
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                      EdgeInsets.fromLTRB(0.0, 0.0, 20.0, 10.0),
-                                      labelText: 'E-Mail',
-                                      labelStyle: TextStyle(
-                                        color: Color(0xff4171AB),
-                                        fontFamily: 'UbuntuRegular',
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Color(0xff4171AB)),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Color(0xff0cce6b)),
-                                      ),
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    'Über das LEAF Team',
+                                    style: TextStyle(
+                                      color: Color(0xffE6EFE9),
+                                      fontFamily: 'UbuntuLight',
+                                      fontSize: 16,
+                                      height: 1.3,
                                     ),
-                                    validator: (input) => !input.contains('@')
-                                        ? 'Please enter a valid email'
-                                        : null,
-                                    onSaved: (input) {},
+                                  ),
+                                  Icon(
+                                    Icons.navigate_next,
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 32.0),
+                              Container(
+                                width: 150,
+                                child: FlatButton(
+                                  onPressed: () => AuthService.logout(),
+                                  child: Text(
+                                    "AUSLOGGEN",
+                                    style: TextStyle(
+                                      color: Color(0xffe8b641),
+                                      fontFamily: 'UbuntuMedium',
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            SizedBox(height: 32,),
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  'FAQ',
-                                  style: TextStyle(
-                                    color: Color(0xffE6EFE9),
-                                    fontFamily: 'UbuntuLight',
-                                    fontSize: 16,
-                                    height: 1.3,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.navigate_next,
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 32,),
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  'Über das LEAF Team',
-                                  style: TextStyle(
-                                    color: Color(0xffE6EFE9),
-                                    fontFamily: 'UbuntuLight',
-                                    fontSize: 16,
-                                    height: 1.3,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.navigate_next,
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 16,),
-                          ],
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

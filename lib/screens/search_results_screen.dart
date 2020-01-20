@@ -53,7 +53,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     final String origin = widget.origin;
     final String destination = widget.destination;
     final String time = widget.time;
-    final String date = widget.date;
+    String date = widget.date;
     final String price = widget.price;
 
 
@@ -68,7 +68,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
           child: Material(
             color: Color(0xff111e2e),
             child: Text(
-              'Fahrten am 18.01.2020',
+              'Angebotene Fahrten',
               style: TextStyle(
                 fontFamily: 'UbuntuRegular',
                 fontSize: 22,
@@ -232,82 +232,88 @@ class SearchCardItem extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   //crossAxisAlignment: CrossAxisAlignment.,
                                   children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 0),
-                                      child: Container(
-                                        child: Column(
-                                          children: <Widget>[
-                                            Container(
-                                              height: 22,
-                                              child: Image.asset(
-                                                  'assets/images/thin_clock.png'),
-                                            ),
-                                            SizedBox(
-                                              height: 4,
-                                            ),
-                                            Material(
-                                              color: Color(0xff192C43),
-                                              child: Text(
-                                                'Abfahrt',
-                                                style: TextStyle(
-                                                  fontFamily: 'UbuntuLight',
-                                                  fontSize: 12,
-                                                  color: Color(0xffE6EFE9),
-                                                ),
+                                    Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Container(
+                                            height: 22,
+                                            child: Image.asset(
+                                                'assets/images/thin_hourglass.png'),
+                                          ),
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Material(
+                                            color:
+                                            Color(0xff192C43),
+                                            child: Text(
+                                              'Datum',
+                                              style: TextStyle(
+                                                fontFamily:
+                                                'UbuntuLight',
+                                                fontSize: 12,
+                                                color: Color(
+                                                    0xffE6EFE9),
                                               ),
                                             ),
-                                            Material(
-                                              color: Color(0xff192C43),
-                                              child: Text(
-                                                ride.time,
-                                                style: TextStyle(
-                                                  fontFamily: 'UbuntuLight',
-                                                  fontSize: 16,
-                                                  color: Color(0xffE6EFE9),
-                                                ),
+                                          ),
+                                          Material(
+                                            color:
+                                            Color(0xff192C43),
+                                            child: Text(
+                                              ride.date.substring(0, 5),
+                                              style: TextStyle(
+                                                fontFamily:
+                                                'UbuntuLight',
+                                                fontSize: 16,
+                                                color: Color(
+                                                    0xffE6EFE9),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(right: 0),
-                                      child: Container(
-                                        child: Column(
-                                          children: <Widget>[
-                                            Container(
-                                              height: 22,
-                                              child: Image.asset(
-                                                  'assets/images/thin_hourglass.png'),
-                                            ),
-                                            SizedBox(
-                                              height: 4,
-                                            ),
-                                            Material(
-                                              color: Color(0xff192C43),
-                                              child: Text(
-                                                'Fahrtdauer',
-                                                style: TextStyle(
-                                                  fontFamily: 'UbuntuLight',
-                                                  fontSize: 12,
-                                                  color: Color(0xffE6EFE9),
-                                                ),
+                                    Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Container(
+                                            height: 22,
+                                            child: Image.asset(
+                                                'assets/images/thin_clock.png'),
+                                          ),
+                                          SizedBox(
+                                            height: 4,
+                                          ),
+                                          Material(
+                                            color:
+                                            Color(0xff192C43),
+                                            child: Text(
+                                              'Abfahrt',
+                                              style: TextStyle(
+                                                fontFamily:
+                                                'UbuntuLight',
+                                                fontSize: 12,
+                                                color: Color(
+                                                    0xffE6EFE9),
                                               ),
                                             ),
-                                            Material(
-                                              color: Color(0xff192C43),
-                                              child: Text(
-                                                '1,5',
-                                                style: TextStyle(
-                                                  fontFamily: 'UbuntuLight',
-                                                  fontSize: 16,
-                                                  color: Color(0xffE6EFE9),
-                                                ),
+                                          ),
+                                          Material(
+                                            color:
+                                            Color(0xff192C43),
+                                            child: Text(
+                                              ride.time,
+                                              style: TextStyle(
+                                                fontFamily:
+                                                'UbuntuLight',
+                                                fontSize: 16,
+                                                color: Color(
+                                                    0xffE6EFE9),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Container(
@@ -326,19 +332,24 @@ class SearchCardItem extends StatelessWidget {
                                             child: Text(
                                               'Preis',
                                               style: TextStyle(
-                                                fontFamily: 'UbuntuLight',
+                                                fontFamily:
+                                                'UbuntuLight',
                                                 fontSize: 12,
-                                                color: Color(0xffE6EFE9),
+                                                color:
+                                                Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),
                                           Material(
                                             color: Color(0xff192C43),
-                                            child: Text(ride.price,
+                                            child: Text(
+                                              ride.price,
                                               style: TextStyle(
-                                                fontFamily: 'UbuntuLight',
+                                                fontFamily:
+                                                'UbuntuLight',
                                                 fontSize: 16,
-                                                color: Color(0xffE6EFE9),
+                                                color:
+                                                Color(0xffE6EFE9),
                                               ),
                                             ),
                                           ),

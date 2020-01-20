@@ -76,8 +76,6 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
                 onValueChanged: (int val) {
                   setState(() {
                     sharedValue = val;
-                    print("sharedValue" + sharedValue.toString());
-                    print("val" + val.toString());
                   });
                 },
                 groupValue: sharedValue,
@@ -137,8 +135,11 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
             ),
           ),
           Expanded(
+            key: UniqueKey(),
             child: Container(
+              key: UniqueKey(),
               child: getTabView(context, sharedValue, _tabController),
+              // getTabView(context, sharedValue, _tabController),
             ),
           ),
         ],
@@ -147,10 +148,11 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen> with SingleTi
   }
 }
 
-
+/// Widgets --------------------------------------------------------------------
 Widget futureRidesBooked(context) {
   //return new Text("Zukünftige gebuchte Fahrten");
-  FutureBuilder(
+  return FutureBuilder(
+    key: UniqueKey(),
     future: DatabaseService.futureRidesBooked(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -166,9 +168,7 @@ Widget futureRidesBooked(context) {
       if (snapshot.data.documents.length == 0) {
         return Center(
           child: Text(
-            'Uppss..\n'
-                'Leider wurden keine passenden Fahrten gefunden.\n'
-                'Schau doch später noch mal vorbei.',
+            'Hier gibt es im Moment nichts zu sehen.',
             style: TextStyle(
               fontFamily: 'UbuntuLight',
               fontSize: 14,
@@ -178,6 +178,7 @@ Widget futureRidesBooked(context) {
         );
       }
       return ListView.builder(
+        key: UniqueKey(),
         physics: new BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
@@ -192,7 +193,8 @@ Widget futureRidesBooked(context) {
 
 Widget pastRidesBooked(context) {
   //return new Text("Vergangene gebuchte Fahrten");
-  FutureBuilder(
+  return FutureBuilder(
+      key: UniqueKey(),
     future: DatabaseService.pastRidesBooked(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -208,9 +210,7 @@ Widget pastRidesBooked(context) {
       if (snapshot.data.documents.length == 0) {
         return Center(
           child: Text(
-            'Uppss..\n'
-                'Leider wurden keine passenden Fahrten gefunden.\n'
-                'Schau doch später noch mal vorbei.',
+            'Hier gibt es im Moment nichts zu sehen.',
             style: TextStyle(
               fontFamily: 'UbuntuLight',
               fontSize: 14,
@@ -220,6 +220,7 @@ Widget pastRidesBooked(context) {
         );
       }
       return ListView.builder(
+        key: UniqueKey(),
         physics: new BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
@@ -233,7 +234,8 @@ Widget pastRidesBooked(context) {
 }
 Widget futureRidesCreated(context) {
   //return new Text("Zukünftige angebotene Fahrten");
-  FutureBuilder(
+  return FutureBuilder(
+    key: UniqueKey(),
     future: DatabaseService.futureRidesCreated(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -249,9 +251,7 @@ Widget futureRidesCreated(context) {
       if (snapshot.data.documents.length == 0) {
         return Center(
           child: Text(
-            'Uppss..\n'
-                'Leider wurden keine passenden Fahrten gefunden.\n'
-                'Schau doch später noch mal vorbei.',
+            'Hier gibt es im Moment nichts zu sehen.',
             style: TextStyle(
               fontFamily: 'UbuntuLight',
               fontSize: 14,
@@ -261,6 +261,7 @@ Widget futureRidesCreated(context) {
         );
       }
       return ListView.builder(
+        key: UniqueKey(),
         physics: new BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
@@ -275,7 +276,8 @@ Widget futureRidesCreated(context) {
 
 Widget pastRidesCreated(context) {
   //return new Text("Vergangene angebotene Fahrten");
-  FutureBuilder(
+  return FutureBuilder(
+    key: UniqueKey(),
     future: DatabaseService.pastRidesCreated(context),
     builder: (context, snapshot) {
       if (!snapshot.hasData) {
@@ -291,9 +293,7 @@ Widget pastRidesCreated(context) {
       if (snapshot.data.documents.length == 0) {
         return Center(
           child: Text(
-            'Uppss..\n'
-                'Leider wurden keine passenden Fahrten gefunden.\n'
-                'Schau doch später noch mal vorbei.',
+            'Hier gibt es im Moment nichts zu sehen.',
             style: TextStyle(
               fontFamily: 'UbuntuLight',
               fontSize: 14,
@@ -303,6 +303,7 @@ Widget pastRidesCreated(context) {
         );
       }
       return ListView.builder(
+        key: UniqueKey(),
         physics: new BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
@@ -341,47 +342,4 @@ Widget getTabView(BuildContext context, int sharedValue, TabController _tabContr
   }
 }
 
-/*
-Widget test () {
-  FutureBuilder(
-    future: DatabaseService.searchRides(origin, destination, date, time),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return Center(
-          child: CircularProgressIndicator(
-            backgroundColor: Color(0xff192C43),
-            valueColor: AlwaysStoppedAnimation(
-              Color(0xff213a59),
-            ),
-          ),
-        );
-      }
-      if (snapshot.data.documents.length == 0) {
-        return Center(
-          child: Text(
-            'Uppss..\n'
-                'Leider wurden keine passenden Fahrten gefunden.\n'
-                'Schau doch später noch mal vorbei.',
-            style: TextStyle(
-              fontFamily: 'UbuntuLight',
-              fontSize: 14,
-              color: Color(0xffE6EFE9),
-            ),
-          ),
-        );
-      }
-      return ListView.builder(
-        physics: new BouncingScrollPhysics(),
-        itemCount: snapshot.data.documents.length,
-        itemBuilder: (BuildContext context, int index) {
-          Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
-
-          return SearchCardItem(num: index, ride: ride);
-        },
-      );
-    },
-  );
-}
-
- */
 
