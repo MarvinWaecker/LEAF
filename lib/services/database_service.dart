@@ -57,19 +57,20 @@ class DatabaseService {
     return rides;
   }
 
-  static Future<QuerySnapshot> getUserData(String creatorId) async {
-    Future<QuerySnapshot> data = _firestore
+  static Future<QuerySnapshot> getUserData(String creatorId) {
+    Future<QuerySnapshot> data =  _firestore
         .collection('users')
         .where('creatorId', isEqualTo: creatorId)
         .getDocuments();
+
     return data;
 
     //return document;
   }
 
   //Übersicht
-  static Future<QuerySnapshot> futureRidesCreated(){
-    String id = UserData().currentUserId;
+  static Future<QuerySnapshot> futureRidesCreated(context){
+    String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
     String dateNow = dateFormatter.format(DateTime.now());
@@ -84,8 +85,8 @@ class DatabaseService {
     
   }
 
-  static Future<QuerySnapshot> futureRidesBooked(){
-    String id = UserData().currentUserId;
+  static Future<QuerySnapshot> futureRidesBooked(context){
+    String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
     String dateNow = dateFormatter.format(DateTime.now());
@@ -99,8 +100,8 @@ class DatabaseService {
     return rides;
   }
 
-  static Future<QuerySnapshot> pastRidesCreated(){
-    String id = UserData().currentUserId;
+  static Future<QuerySnapshot> pastRidesCreated(BuildContext context){
+    String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
     String dateNow = dateFormatter.format(DateTime.now());

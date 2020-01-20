@@ -3,9 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
-import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/search_card_info.dart';
-import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
 import 'package:leaf/services/demo.dart';
 import 'package:http/http.dart' as http;
@@ -452,7 +450,7 @@ class SearchCardItem extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return new SearchCardInfo(
-                                        num: num, ride: ride, bio: bio, name: name, car: car, music: music, mood: mood, smoke: smoke, pet: pet,
+                                        num: num, ride: ride
                                       );
                                     },
                                     fullscreenDialog: true,
