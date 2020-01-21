@@ -10,7 +10,6 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-
 class DatabaseService {
   static final _firestore = Firestore.instance;
 
@@ -38,7 +37,7 @@ class DatabaseService {
     });
   }
 
-  static void updateRide(Ride ride, BuildContext context) {
+  static void bookRide(Ride ride, BuildContext context) {
     ridesRef.document(ride.id).updateData({
       'passenger1': Provider.of<UserData>(context, listen: false).currentUserId,
     });
@@ -50,8 +49,10 @@ class DatabaseService {
     });
   }
 
-  static Future<QuerySnapshot> searchRides(
-      String origin, String destination, String date, String time) {
+  static Future<QuerySnapshot> searchRides(String origin, String destination,
+      String date, String time, BuildContext context) {
+    String id = Provider.of<UserData>(context).currentUserId;
+
     Future<QuerySnapshot> rides = _firestore
         .collection('rides')
         .where('origin', isEqualTo: origin)
@@ -62,29 +63,8 @@ class DatabaseService {
     return rides;
   }
 
-  /*
-  static Future<QuerySnapshot> getUserData(String creatorId) {
-    Future<QuerySnapshot> data =  _firestore
-        .collection('users')
-        .where('creatorId', isEqualTo: creatorId)
-        .getDocuments();
-
-    return data;
-  }
-
-   */
-
-  /*
-  static Future<QuerySnapshot> getUserData(String creatorId) {
-   Future<DocumentSnapshot> data = _firestore.collection('users').document(creatorId).snapshots();
-
-    return data;
-  }
-
-   */
-
   //Übersicht
-  static Future<QuerySnapshot> futureRidesCreated(context){
+  static Future<QuerySnapshot> futureRidesCreated(context) {
     String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
@@ -92,15 +72,14 @@ class DatabaseService {
 
     Future<QuerySnapshot> rides = _firestore
         .collection('rides')
-    .where('creatorId', isEqualTo: id)
-    .where('date', isGreaterThan: dateNow)
+        .where('creatorId', isEqualTo: id)
+        .where('date', isGreaterThan: dateNow)
         .getDocuments();
 
     return rides;
-    
   }
 
-  static Future<QuerySnapshot> futureRidesBooked(context){
+  static Future<QuerySnapshot> futureRidesBooked(context) {
     String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
@@ -115,7 +94,7 @@ class DatabaseService {
     return rides;
   }
 
-  static Future<QuerySnapshot> pastRidesCreated(BuildContext context){
+  static Future<QuerySnapshot> pastRidesCreated(BuildContext context) {
     String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");
@@ -128,10 +107,9 @@ class DatabaseService {
         .getDocuments();
 
     return rides;
-
   }
 
-  static Future<QuerySnapshot> pastRidesBooked(BuildContext context){
+  static Future<QuerySnapshot> pastRidesBooked(BuildContext context) {
     String id = Provider.of<UserData>(context).currentUserId;
 
     final dateFormatter = DateFormat("dd.MM.yyyy");

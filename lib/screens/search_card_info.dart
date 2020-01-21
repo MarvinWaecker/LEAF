@@ -97,7 +97,7 @@ class SearchCardItemExtended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _submit() async {
-      DatabaseService.updateRide(ride, context);
+      DatabaseService.bookRide(ride, context);
     }
 
     /// UI

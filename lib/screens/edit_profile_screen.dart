@@ -59,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   _displayProfileImage() {
     if (_profileImage == null) {
       if (widget.user.profileImageUrl.isEmpty) {
-        return AssetImage('assets/images/Profilbild_Paul.png');
+        return AssetImage('assets/images/logo.png');
       } else {
         return CachedNetworkImageProvider(widget.user.profileImageUrl);
       }

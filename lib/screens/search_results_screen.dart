@@ -79,7 +79,8 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
         ),
       ),
       body: FutureBuilder(
-        future: DatabaseService.searchRides(origin, destination, date, time),
+        future: DatabaseService.searchRides(
+            origin, destination, date, time, context),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(
@@ -100,7 +101,9 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                     height: 160,
                     child: Image.asset('assets/images/LEAF_im_Regen.png'),
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(
+                    height: 16,
+                  ),
                   Text(
                     'Leider gibt es bis jetzt keine Fahrten.\nSchau doch später noch mal vorbei.',
                     textAlign: TextAlign.center,
@@ -137,6 +140,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                     );
                   }
                   User user = User.fromDoc(snapshot.data);
+
                   return SearchCardItem(num: index, ride: ride, user: user);
                 },
               );
@@ -411,9 +415,12 @@ class SearchCardItem extends StatelessWidget {
                                         Container(
                                           child: CircleAvatar(
                                             radius: 21.0,
-                                            backgroundImage: user.profileImageUrl.isEmpty
-                                                ? AssetImage('assets/images/logo.png')
-                                                : CachedNetworkImageProvider(user.profileImageUrl),
+                                            backgroundImage: user
+                                                    .profileImageUrl.isEmpty
+                                                ? AssetImage(
+                                                    'assets/images/logo.png')
+                                                : CachedNetworkImageProvider(
+                                                    user.profileImageUrl),
                                             backgroundColor: Colors.grey,
                                           ),
                                         ),
