@@ -15,7 +15,7 @@ class _CreatedScreenState extends State<CreatedScreen>{
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 900), () =>
+    Timer(Duration(milliseconds: 1500), () =>
         Navigator.push(
             context, ScaleRoute(page: MainBarScreen())),
     );
@@ -30,14 +30,16 @@ class _CreatedScreenState extends State<CreatedScreen>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
+              width: 250,
               child: Image.asset('assets/images/LEAF_check.png'),
             ),
+            SizedBox(height: 16,),
             Container(
               child: Text(
                 'Fahrt erstellt',
                 style: TextStyle(
                   color: Color(0xff0cce6b),
-                  fontSize: 20,
+                  fontSize: 24,
                   fontFamily: 'UbuntuLight',
                 ),
               ),
