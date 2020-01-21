@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/animations/page_transition2.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
+
+import 'booked_screen.dart';
 
 class SearchCardInfo extends StatefulWidget {
   final int num;
@@ -736,7 +739,11 @@ class SearchCardItemExtended extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 26, left: 8, right: 30),
                   child: SizedBox(
                     child: RaisedButton(
-                      onPressed: _submit,
+                      onPressed: () {
+                        _submit();
+                      Navigator.push(
+                          context, EnterExitRoute(exitPage: SeatSelectionScreen(), enterPage: BookedScreen()));
+                      },
                       color: Color(0xff0cce6b),
                       shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(18.0),
