@@ -649,10 +649,24 @@ class SearchCardItemExtended extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () async {},
                                 child: Container(
-                                  child: Hero(
-                                    tag: 'animateCar',
-                                    child: Image.asset(
-                                        'assets/images/Auto_Draufsicht_GMD.png'),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Image.asset(
+                                          'assets/images/Auto_Draufsicht_GMD.png'
+                                      ),
+                                      Positioned(
+                                        bottom: 135,
+                                        right: 40,
+                                        child: CircleAvatar(
+                                          radius: 15,
+                                          backgroundImage: user.profileImageUrl.isEmpty
+                                              ? AssetImage('assets/images/logo.png')
+                                              : CachedNetworkImageProvider(
+                                              user.profileImageUrl),
+                                          backgroundColor: Colors.transparent,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

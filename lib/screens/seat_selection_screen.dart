@@ -1,11 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/animations/page_transition1.dart';
 import 'package:leaf/animations/page_transition2.dart';
+import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/booked_screen.dart';
 import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/screens/mainBar_screen.dart';
 
 class SeatSelectionScreen extends StatefulWidget {
+  final User user;
+
+  SeatSelectionScreen(this.user);
+
   @override
   _SeatSelectionScreenState createState() => _SeatSelectionScreenState();
 }
@@ -158,15 +164,16 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                               },
                                               child: CircleAvatar(
                                                 radius: _radius ? 30.0 : 50.0,
-                                                backgroundImage: AssetImage(
-                                                    'assets/images/Profilbild_Paul.png'),
+                                                backgroundImage: widget.user.profileImageUrl.isEmpty
+                                                    ? AssetImage('assets/images/logo.png')
+                                                    : CachedNetworkImageProvider(
+                                                    widget.user.profileImageUrl),
                                                 backgroundColor: Colors.transparent,
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-
                                     ],
                                   ),
                                 ),
@@ -223,7 +230,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                                 child: RaisedButton(
                                                   onPressed: () {
                                                     Navigator.push(
-                                                        context, EnterExitRoute(exitPage: SeatSelectionScreen(), enterPage: BookedScreen()));
+                                                        context, EnterExitRoute(exitPage: SeatSelectionScreen(widget.user), enterPage: BookedScreen()));
                                                   },
                                                   color: Color(0xff0cce6b),
                                                   shape: RoundedRectangleBorder(
