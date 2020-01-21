@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
+import 'package:leaf/screens/overview_card_info.dart';
+import 'package:leaf/screens/overview_card_item.dart';
 import 'package:leaf/screens/search_results_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
@@ -204,7 +206,7 @@ Widget futureRidesBooked(context) {
                 );
               }
               User user = User.fromDoc(snapshot.data);
-              return SearchCardItem(num: index, ride: ride, user: user);
+              return OverviewCardItem(num: index, ride: ride, user: user);
             },
           );
         },
@@ -270,7 +272,7 @@ Widget pastRidesBooked(context) {
                 );
               }
               User user = User.fromDoc(snapshot.data);
-              return SearchCardItem(num: index, ride: ride, user: user);
+              return OverviewCardItem(num: index, ride: ride, user: user);
             },
           );
         },
@@ -336,7 +338,7 @@ Widget futureRidesCreated(context) {
                 );
               }
               User user = User.fromDoc(snapshot.data);
-              return SearchCardItem(num: index, ride: ride, user: user);
+              return OverviewCardItem(num: index, ride: ride, user: user);
             },
           );
         },
@@ -402,7 +404,7 @@ Widget pastRidesCreated(context) {
                 );
               }
               User user = User.fromDoc(snapshot.data);
-              return SearchCardItem(num: index, ride: ride, user: user);
+              return OverviewCardItem(num: index, ride: ride, user: user);
             },
           );
         },
