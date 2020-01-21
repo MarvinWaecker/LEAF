@@ -176,6 +176,7 @@ Widget futureRidesBooked(context) {
               SizedBox(height: 16,),
               Text(
                 'Hier gibt es im Moment nichts zu sehen.',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'UbuntuLight',
                   fontSize: 14,

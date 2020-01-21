@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:leaf/animations/page_transition1.dart';
+import 'package:leaf/animations/page_transition2.dart';
+import 'package:leaf/screens/booked_screen.dart';
 import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/screens/mainBar_screen.dart';
 
@@ -193,7 +195,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                               child: SizedBox(
                                                 child: RaisedButton(
                                                   onPressed: () => Navigator.pop(context),
-                                                  color: Color(0xff213A59),
+                                                  color: Color(0xff192C43),
                                                   shape: RoundedRectangleBorder(
                                                     side: BorderSide(
                                                         color: Color(0xff0cce6b)),
@@ -221,7 +223,7 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                                 child: RaisedButton(
                                                   onPressed: () {
                                                     Navigator.push(
-                                                        context, ScaleRoute(page: MainBarScreen()));
+                                                        context, EnterExitRoute(exitPage: SeatSelectionScreen(), enterPage: BookedScreen()));
                                                   },
                                                   color: Color(0xff0cce6b),
                                                   shape: RoundedRectangleBorder(
