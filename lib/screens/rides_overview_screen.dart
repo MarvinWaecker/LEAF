@@ -19,6 +19,7 @@ class _RidesOverviewScreenState extends State<RidesOverviewScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
+
   @override
   void initState() {
     _tabController = new TabController(length: 2, vsync: this);
@@ -189,7 +190,7 @@ Widget futureRidesBooked(context) {
       }
       return ListView.builder(
         key: UniqueKey(),
-        physics: new BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
@@ -255,7 +256,7 @@ Widget pastRidesBooked(context) {
       }
       return ListView.builder(
         key: UniqueKey(),
-        physics: new BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
@@ -321,7 +322,7 @@ Widget futureRidesCreated(context) {
       }
       return ListView.builder(
         key: UniqueKey(),
-        physics: new BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);
@@ -387,7 +388,7 @@ Widget pastRidesCreated(context) {
       }
       return ListView.builder(
         key: UniqueKey(),
-        physics: new BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         itemCount: snapshot.data.documents.length,
         itemBuilder: (BuildContext context, int index) {
           Ride ride = Ride.fromDoc(snapshot.data.documents[index]);

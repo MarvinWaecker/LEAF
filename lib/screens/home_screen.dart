@@ -43,26 +43,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            Container(
-              width: 245,
-              child: Draggable(
-                axis: Axis.vertical,
-                //dragAnchor: ,
+            Draggable(
+              axis: Axis.vertical,
+              //dragAnchor: ,
+              child: Container(
+                height: 132,
+                width: 245,
                 child: Image.asset(
-                  'assets/images/Drag_LEAF_3.png',
+                  'assets/images/Drag_LEAF_Original_2.png',
                 ),
-                feedback: Container(
-                  width: 245,
-                  child: Image.asset(
-                    'assets/images/Drag_LEAF.png',
-                  ),
-                ),
-
-                childWhenDragging: Container(
-                  height: 142,
-                ),
-                data: 1,
               ),
+              feedback: Container(
+                height: 138,
+                width: 245,
+                child: Image.asset(
+                  'assets/images/Drag_LEAF_Original_2.png',
+                ),
+              ),
+
+              childWhenDragging: Container(
+                height: 132,
+              ),
+              data: 1,
             ),
             Container(
               width: 500,

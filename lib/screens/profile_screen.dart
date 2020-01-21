@@ -583,19 +583,24 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ],
                               ),
                               SizedBox(height: 32.0),
-                              Container(
-                                width: 150,
-                                child: FlatButton(
-                                  onPressed: () => AuthService.logout(),
-                                  child: Text(
-                                    "AUSLOGGEN",
-                                    style: TextStyle(
-                                      color: Color(0xffe8b641),
-                                      fontFamily: 'UbuntuMedium',
-                                      fontSize: 14,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                    width: 150,
+                                    child: FlatButton(
+                                      onPressed: () => AuthService.logout(),
+                                      child: Text(
+                                        "AUSLOGGEN",
+                                        style: TextStyle(
+                                          color: Color(0xffe8b641),
+                                          fontFamily: 'UbuntuMedium',
+                                          fontSize: 14,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                               SizedBox(
                                 height: 16,
