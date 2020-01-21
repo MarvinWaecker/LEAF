@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
@@ -344,10 +345,12 @@ class SearchCardItemExtended extends StatelessWidget {
                                             ),
                                             Container(
                                               child: CircleAvatar(
-                                                radius: 21.0,
-                                                backgroundImage: AssetImage(
-                                                    'assets/images/Profilbild_Paul.png'),
-                                                backgroundColor: Colors.grey,
+                                                radius: 21,
+                                                backgroundImage: user.profileImageUrl.isEmpty
+                                                    ? AssetImage('assets/images/logo.png')
+                                                    : CachedNetworkImageProvider(
+                                                    user.profileImageUrl),
+                                                backgroundColor: Colors.transparent,
                                               ),
                                             ),
                                           ],
@@ -397,6 +400,7 @@ class SearchCardItemExtended extends StatelessWidget {
                 ),
               ),
             ),
+            /// Ausklappmenu ---------------------------------------------------
             Material(
               color: Color(0xff111e2e),
               child: Padding(
@@ -412,6 +416,7 @@ class SearchCardItemExtended extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(height: 16,),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
@@ -500,7 +505,12 @@ class SearchCardItemExtended extends StatelessWidget {
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            "Hier muss die Pay Variable rein.",
+                            (() {
+                              if (user.pay == "" || user.pay == null) {
+                                return " - ";
+                              }
+                              return user.pay;
+                            })(),
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,

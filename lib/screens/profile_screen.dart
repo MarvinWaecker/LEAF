@@ -52,8 +52,6 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    getPayMethod() {}
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -456,7 +454,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 height: 8,
                               ),
                               Text(
-                                'Wähle aus, wie du von deinen Mitfahrern bezahlt werden möchtest',
+                                'Wähle aus, wie du von deinen Mitfahrern bezahlt werden möchtest.',
                                 style: TextStyle(
                                   color: Color(0xffE6EFE9),
                                   fontFamily: 'UbuntuLight',

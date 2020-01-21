@@ -106,7 +106,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   // Listen
   var _commType = [
     'Ich bin eher der ruhige Typ',
-    'Launisch',
+    'Je nach Laune',
     'Ich liebe es zu quatschen',
   ];
   var _smokeType = [
@@ -161,9 +161,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       height: 16,
                     ),
                     CircleAvatar(
-                      radius: 42.0,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: _displayProfileImage(),
+                      radius: 42.5,
+                      backgroundImage: widget.user.profileImageUrl.isEmpty
+                          ? AssetImage('assets/images/logo.png')
+                          : CachedNetworkImageProvider(
+                          widget.user.profileImageUrl),
+                      backgroundColor: Colors.transparent,
                     ),
                     FlatButton(
                       onPressed: _handleImageFromGallery,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:leaf/animations/page_transition2.dart';
 import 'package:leaf/models/ride_model.dart';
+import 'package:leaf/screens/created_screen.dart';
 import 'package:leaf/screens/rides_overview_screen.dart';
+import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
 
 import 'mainBar_screen.dart';
@@ -485,11 +488,7 @@ class _CreatePagesState extends State<CreatePages> {
 
                           _submit();
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => MainBarScreen(),
-                            ),
-                          );
+                              context, EnterExitRoute(exitPage: CreatePages(), enterPage: CreatedScreen()));
                         }
                       },
                       color: Color(0xff0cce6b),

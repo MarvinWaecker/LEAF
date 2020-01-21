@@ -93,17 +93,24 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
           }
           if (snapshot.data.documents.length == 0) {
             return Center(
-              child: Text(
-                'Uppss...\n'
-                'Leider wurden keine passenden Fahrten gefunden.\n'
-                'Schau doch später noch mal vorbei.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'UbuntuLight',
-                  fontSize: 14,
-                  color: Color(0xffE6EFE9),
-                  height: 1.6,
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: 160,
+                    child: Image.asset('assets/images/LEAF_im_Regen.png'),
+                  ),
+                  SizedBox(height: 16,),
+                  Text(
+                    'Leider gibt es bis jetzt keine Fahrten.\nSchau doch später noch mal vorbei.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'UbuntuLight',
+                      fontSize: 14,
+                      color: Color(0xffE6EFE9),
+                    ),
+                  ),
+                ],
               ),
             );
           }

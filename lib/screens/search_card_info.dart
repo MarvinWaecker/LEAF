@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/models/ride_model.dart';
@@ -349,10 +350,12 @@ class SearchCardItemExtended extends StatelessWidget {
                                             ),
                                             Container(
                                               child: CircleAvatar(
-                                                radius: 21.0,
-                                                backgroundImage: AssetImage(
-                                                    'assets/images/Profilbild_Paul.png'),
-                                                backgroundColor: Colors.grey,
+                                                radius: 21,
+                                                backgroundImage: user.profileImageUrl.isEmpty
+                                                    ? AssetImage('assets/images/logo.png')
+                                                    : CachedNetworkImageProvider(
+                                                    user.profileImageUrl),
+                                                backgroundColor: Colors.transparent,
                                               ),
                                             ),
                                           ],
@@ -402,6 +405,7 @@ class SearchCardItemExtended extends StatelessWidget {
                 ),
               ),
             ),
+            /// Ausklappmenu ---------------------------------------------------
             Material(
               color: Color(0xff111e2e),
               child: Padding(
@@ -410,7 +414,6 @@ class SearchCardItemExtended extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3.0),
                     color: Color(0xff213A59),
-                    // Schatten???
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -418,10 +421,11 @@ class SearchCardItemExtended extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        SizedBox(height: 16,),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            user.car,
+                            'Über ' + user.name,
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 16,
@@ -430,13 +434,18 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 8,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            user.car,
+                            (() {
+                              if (user.bio == "" || user.bio == null) {
+                                return " - ";
+                              }
+                              return user.bio;
+                            })(),
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
@@ -445,13 +454,13 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 32,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            'Info',
+                            "Auto",
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 16,
@@ -460,16 +469,18 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 8,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            'Fährt die Strecke regelmäßig\nStudent der HFU\n' +
-                                user.mood +
-                                '\n' +
-                                user.smoke,
+                            (() {
+                              if (user.car == "" || user.car == null) {
+                                return " - ";
+                              }
+                              return user.car;
+                            })(),
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
@@ -478,7 +489,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 32,
                           width: double.maxFinite,
                         ),
                         Material(
@@ -493,13 +504,18 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 8,
                           width: double.maxFinite,
                         ),
                         Material(
                           color: Color(0xff213A59),
                           child: Text(
-                            'PayPal',
+                            (() {
+                              if (user.pay == "" || user.pay == null) {
+                                return " - ";
+                              }
+                              return user.pay;
+                            })(),
                             style: TextStyle(
                               fontFamily: 'UbuntuLight',
                               fontSize: 14,
@@ -508,7 +524,112 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 40,
+                          height: 32,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            "Kommunikationstyp",
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            (() {
+                              if (user.mood == "" || user.mood == null) {
+                                return " - ";
+                              }
+                              return user.mood;
+                            })(),
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 14,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            "Lieblingsmusik",
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            (() {
+                              if (user.music == "" || user.music == null) {
+                                return " - ";
+                              }
+                              return user.music;
+                            })(),
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 14,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            "Rauchertyp",
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 16,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                          width: double.maxFinite,
+                        ),
+                        Material(
+                          color: Color(0xff213A59),
+                          child: Text(
+                            (() {
+                              if (user.smoke == "" || user.smoke == null) {
+                                return " - ";
+                              }
+                              return user.smoke;
+                            })(),
+                            style: TextStyle(
+                              fontFamily: 'UbuntuLight',
+                              fontSize: 14,
+                              color: Color(0xffE6EFE9),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32,
                           width: double.maxFinite,
                         ),
                         Material(
@@ -523,7 +644,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 12,
+                          height: 14,
                           width: double.maxFinite,
                         ),
                         Row(
@@ -532,8 +653,7 @@ class SearchCardItemExtended extends StatelessWidget {
                             Flexible(
                               child: GestureDetector(
                                 onTap: () async {
-                                  await Future.delayed(
-                                      Duration(milliseconds: 200));
+                                  await Future.delayed(Duration(milliseconds: 200));
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -578,7 +698,7 @@ class SearchCardItemExtended extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 26, right: 8, left: 32),
+                  padding: EdgeInsets.only(bottom: 26, right: 8, left: 30),
                   child: SizedBox(
                     child: RaisedButton(
                       onPressed: () async {
@@ -613,7 +733,7 @@ class SearchCardItemExtended extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 26, left: 8, right: 32),
+                  padding: EdgeInsets.only(bottom: 26, left: 8, right: 30),
                   child: SizedBox(
                     child: RaisedButton(
                       onPressed: _submit,
