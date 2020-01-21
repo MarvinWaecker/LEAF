@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:leaf/animations/page_transition3.dart';
 import 'package:leaf/screens/home_screen.dart';
 import 'dart:async';
 import 'package:leaf/screens/mainBar_screen.dart';
@@ -7,6 +8,8 @@ import 'package:leaf/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:leaf/models/user_data.dart';
+
+import 'dark_screen.dart';
 
 int check;
 
@@ -25,21 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    Widget hallo = _getScreenId();
-
-    if (check == 1) {
-      Timer(Duration(milliseconds: 1500), () =>
-          Navigator.of(context).push(
-              new CupertinoPageRoute(builder: (context) => hallo)),
-      );
-    }
-    else {
-      Timer(Duration(milliseconds: 1500), () =>
-          Navigator.of(context).push(
-              new MaterialPageRoute(builder: (context) => hallo)),
-      );
-    }
+    Timer(Duration(milliseconds: 2000), () =>
+        Navigator.push(context, SlideUpRoute(page: _getScreenId())),
+    );
 }
 
 
@@ -140,7 +131,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
           tag: 'startLogo',
           child: Image.asset(
             'assets/images/LEAF_Logo_mehr_Abstand.png',
-            //scale: 0.5,
           ),
         ),
       ),
@@ -157,11 +147,9 @@ Widget _getScreenId()
     builder: (BuildContext context, snapshot) {
       if (snapshot.hasData) {
         Provider.of<UserData>(context).currentUserId = snapshot.data.uid;
-        check = 1;
         return MainBarScreen();
-        // HomeScreen
-      } else {
-        check = 2;
+      }
+      else {
         return LoginScreen();
         // LoginScreen
       }

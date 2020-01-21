@@ -1,13 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:leaf/animations/page_transition2.dart';
 import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/seat_selection_screen.dart';
 import 'package:leaf/services/database_service.dart';
-
-import 'booked_screen.dart';
 
 class SearchCardInfo extends StatefulWidget {
   final int num;
@@ -26,7 +23,6 @@ class SearchCardInfo extends StatefulWidget {
 class _SearchCardInfoState extends State<SearchCardInfo> {
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
       backgroundColor: Color(0xff111e2e),
@@ -653,7 +649,12 @@ class SearchCardItemExtended extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
+                            Expanded(
+                              flex: 1,
+                              child: Container(),
+                            ),
                             Flexible(
+                              flex: 2,
                               child: GestureDetector(
                                 onTap: () async {
                                   await Future.delayed(Duration(milliseconds: 200));
@@ -661,7 +662,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return SeatSelectionScreen();
+                                        return SeatSelectionScreen(user);
                                       },
                                       fullscreenDialog: true,
                                     ),
@@ -677,6 +678,7 @@ class SearchCardItemExtended extends StatelessWidget {
                               ),
                             ),
                             Expanded(
+                              flex: 1,
                               child: Container(),
                             ),
                           ],
@@ -701,7 +703,7 @@ class SearchCardItemExtended extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.only(bottom: 26, right: 8, left: 30),
+                  padding: EdgeInsets.only(bottom: 26, right: 32, left: 32),
                   child: SizedBox(
                     child: RaisedButton(
                       onPressed: () async {
@@ -710,46 +712,18 @@ class SearchCardItemExtended extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return SeatSelectionScreen();
+                              return SeatSelectionScreen(user);
                             },
                             fullscreenDialog: true,
                           ),
                         );
-                      },
-                      color: Color(0xff213A59),
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xff0cce6b)),
-                        borderRadius: new BorderRadius.circular(18.0),
-                      ),
-                      child: Text(
-                        'SITZPLATZWAHL',
-                        style: TextStyle(
-                          color: Color(0xff0cce6b),
-                          fontSize: 14,
-                          fontFamily: 'UbuntuMedium',
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 26, left: 8, right: 30),
-                  child: SizedBox(
-                    child: RaisedButton(
-                      onPressed: () {
-                        _submit();
-                      Navigator.push(
-                          context, EnterExitRoute(exitPage: SeatSelectionScreen(), enterPage: BookedScreen()));
                       },
                       color: Color(0xff0cce6b),
                       shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(18.0),
                       ),
                       child: Text(
-                        'FAHRT BUCHEN',
+                        'SITZPLATZWAHL',
                         style: TextStyle(
                           color: Color(0xff111e2e),
                           fontSize: 14,
@@ -760,6 +734,7 @@ class SearchCardItemExtended extends StatelessWidget {
                   ),
                 ),
               ),
+
             ],
           ),
         ),
