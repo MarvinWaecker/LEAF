@@ -50,14 +50,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 132,
                 width: 245,
                 child: Image.asset(
-                  'assets/images/Drag_LEAF_Original_2.png',
+                  'assets/images/drag_leaf_unpressed.png',
                 ),
               ),
               feedback: Container(
                 height: 138,
                 width: 245,
                 child: Image.asset(
-                  'assets/images/Drag_LEAF_Original_2.png',
+                  'assets/images/drag_leaf_pressed.png',
                 ),
               ),
 

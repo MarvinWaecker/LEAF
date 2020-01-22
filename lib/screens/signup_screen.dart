@@ -109,7 +109,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                           validator: (input) => input.trim().isEmpty
-                              ? 'Please enter a valid name'
+                              ? 'Bitte gib einen gültigen Namen an.'
                               : null,
                           onSaved: (input) => _name = input,
                         ),
@@ -142,7 +142,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                           validator: (input) => !input.contains('@')
-                              ? 'Please enter a valid email'
+                              ? 'Bitte gib eine gültige E-Mail an.'
                               : null,
                           onSaved: (input) => _email = input,
                         ),
@@ -175,7 +175,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                           validator: (input) => input.length < 6
-                              ? 'Password needs to be at least 6 characters long'
+                              ? 'Das Passwort muss mindestens 6 Zeichen lang sein.'
                               : null,
                           onSaved: (input) => _password = input,
                           obscureText: true,

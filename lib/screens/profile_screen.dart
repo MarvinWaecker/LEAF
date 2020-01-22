@@ -193,13 +193,24 @@ class _ProfileScreenState extends State<ProfileScreen>
                                         borderRadius:
                                             new BorderRadius.circular(18.0),
                                       ),
-                                      child: Text(
-                                        'PROFIL BEARBEITEN',
-                                        style: TextStyle(
-                                          color: Color(0xff0cce6b),
-                                          fontSize: 14,
-                                          fontFamily: 'UbuntuMedium',
-                                        ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.edit,
+                                            color: Color(0xff0cce6b),
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 3,),
+                                          Text(
+                                            'PROFIL BEARBEITEN',
+                                            style: TextStyle(
+                                              color: Color(0xff0cce6b),
+                                              fontSize: 14,
+                                              fontFamily: 'UbuntuMedium',
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -228,7 +239,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    user.bio,
+                                    (() {
+                                      if (user.bio == null || user.bio == "") {
+                                        return ' -';
+                                      }
+
+                                      return user.bio;
+                                    })(),
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -255,7 +272,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    user.music,
+                                    (() {
+                                      if (user.music == null || user.music == "") {
+                                        return ' -';
+                                      }
+
+                                      return user.music;
+                                    })(),
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -282,7 +305,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                                 Container(
                                   child: Text(
-                                    user.car,
+                                    (() {
+                                      if (user.car == null || user.car == "") {
+                                        return ' -';
+                                      }
+
+                                      return user.car;
+                                    })(),
                                     style: TextStyle(
                                       fontFamily: 'UbuntuLight',
                                       fontSize: 14,
@@ -310,8 +339,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 Container(
                                   child: Text(
                                     (() {
-                                      if (user.mood == null) {
-                                        return ' test';
+                                      if (user.mood == null || user.mood == "") {
+                                        return ' -';
                                       }
 
                                       return user.mood;
@@ -343,8 +372,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 Container(
                                   child:Text(
                                     (() {
-                                      if (user.smoke == null) {
-                                        return ' test';
+                                      if (user.smoke == null || user.smoke == "") {
+                                        return ' -';
                                       }
 
                                       return user.smoke;

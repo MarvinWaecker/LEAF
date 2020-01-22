@@ -7,6 +7,8 @@ import 'package:leaf/models/user_model.dart';
 import 'package:leaf/services/database_service.dart';
 import 'package:leaf/services/storage_service.dart';
 
+
+
 class EditProfileScreen extends StatefulWidget {
   final User user;
   EditProfileScreen({this.user});
@@ -47,8 +49,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  _handleImageFromGallery() async {
+
+  Future _handleImageFromGallery() async {
     File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+
     if (imageFile != null) {
       setState(() {
         _profileImage = imageFile;
@@ -162,11 +166,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     CircleAvatar(
                       radius: 42.5,
-                      backgroundImage: widget.user.profileImageUrl.isEmpty
-                          ? AssetImage('assets/images/logo.png')
-                          : CachedNetworkImageProvider(
-                          widget.user.profileImageUrl),
-                      backgroundColor: Colors.transparent,
+                      backgroundImage: _displayProfileImage(),
                     ),
                     FlatButton(
                       onPressed: _handleImageFromGallery,
@@ -199,7 +199,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           labelText: 'Name',
                         ),
                         validator: (input) => input.trim().isEmpty
-                            ? 'Please enter a valid name'
+                            ? 'Bitte gib einen korrekten Namen an'
                             : null,
                         onSaved: (input) => _name = input,
                       ),
@@ -225,7 +225,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           labelText: 'Über mich',
                         ),
                         validator: (input) => input.trim().length > 300
-                            ? 'Please enter a bio less than 300 characters'
+                            ? 'Maximal 300 Zeilen.'
                             : null,
                         onSaved: (input) => _bio = input,
                       ),
@@ -249,7 +249,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           labelText: 'Lieblingsmusik',
                         ),
                         validator: (input) => input.trim().length > 150
-                            ? 'Please enter a bio less than 150 characters'
+                            ? 'Maximal 150 Zeichen.'
                             : null,
                         onSaved: (input) => _music = input,
                       ),
@@ -272,8 +272,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ),
                           labelText: 'Mein Auto',
                         ),
-                        validator: (input) => input.trim().length > 150
-                            ? 'Please enter a bio less than 150 characters'
+                        validator: (input) => input.trim().length > 30
+                            ? 'Maximal 30 Zeichen'
                             : null,
                         onSaved: (input) => _car = input,
                       ),
