@@ -92,9 +92,6 @@ class SearchCardItemExtended extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _submit() async {
-      DatabaseService.bookRide(ride, context);
-    }
 
     /// UI
     return Stack(
@@ -662,7 +659,7 @@ class SearchCardItemExtended extends StatelessWidget {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
-                                        return SeatSelectionScreen(user);
+                                        return SeatSelectionScreen(user, ride);
                                       },
                                       fullscreenDialog: true,
                                     ),
@@ -712,7 +709,7 @@ class SearchCardItemExtended extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return SeatSelectionScreen(user);
+                              return SeatSelectionScreen(user, ride);
                             },
                             fullscreenDialog: true,
                           ),

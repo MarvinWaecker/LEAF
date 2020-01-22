@@ -2,15 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:leaf/animations/page_transition1.dart';
 import 'package:leaf/animations/page_transition2.dart';
+import 'package:leaf/models/ride_model.dart';
 import 'package:leaf/models/user_model.dart';
 import 'package:leaf/screens/booked_screen.dart';
 import 'package:leaf/screens/rides_overview_screen.dart';
 import 'package:leaf/screens/mainBar_screen.dart';
+import 'package:leaf/services/database_service.dart';
 
 class SeatSelectionScreen extends StatefulWidget {
   final User user;
+  final Ride ride;
 
-  SeatSelectionScreen(this.user);
+  SeatSelectionScreen(this.user, this.ride);
 
   @override
   _SeatSelectionScreenState createState() => _SeatSelectionScreenState();
@@ -62,6 +65,9 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
     print("test2: " + fadePositionBottom.toString());
   }
 
+  _submit() async {
+    DatabaseService.bookRide(widget.ride, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,10 +170,11 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                               },
                                               child: CircleAvatar(
                                                 radius: _radius ? 30.0 : 50.0,
-                                                backgroundImage: widget.user.profileImageUrl.isEmpty
+                                                backgroundImage: AssetImage('assets/images/profil_philipp.jpeg'),
+                                                /*widget.user.profileImageUrl.isEmpty
                                                     ? AssetImage('assets/images/logo.png')
                                                     : CachedNetworkImageProvider(
-                                                    widget.user.profileImageUrl),
+                                                    widget.user.profileImageUrl)*/
                                                 backgroundColor: Colors.transparent,
                                               ),
                                             ),
@@ -229,8 +236,9 @@ class _SeatSelectionScreenState extends State<SeatSelectionScreen>
                                               child: SizedBox(
                                                 child: RaisedButton(
                                                   onPressed: () {
+                                                    _submit();
                                                     Navigator.push(
-                                                        context, EnterExitRoute(exitPage: SeatSelectionScreen(widget.user), enterPage: BookedScreen()));
+                                                        context, EnterExitRoute(exitPage: SeatSelectionScreen(widget.user, widget.ride), enterPage: BookedScreen()));
                                                   },
                                                   color: Color(0xff0cce6b),
                                                   shape: RoundedRectangleBorder(
