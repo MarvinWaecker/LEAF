@@ -201,7 +201,7 @@ class _SearchPagesState extends State<SearchPages> {
                           ),
                         ),
                         validator: (input) => input.trim().isEmpty
-                            ? 'Bitte gib einen gültigen Abfahrtsort ein'
+                            ? 'Bitte gib einen gültigen Abfahrtsort an.'
                             : null,
                         onSaved: (input) => _origin = input.trim(),
                       ),
@@ -226,7 +226,7 @@ class _SearchPagesState extends State<SearchPages> {
                           ),
                         ),
                         validator: (input) => input.trim().isEmpty
-                            ? 'Bitte gib ein gültiges Ziel ein'
+                            ? 'Bitte gib ein gültiges Ziel an.'
                             : null,
                         onSaved: (input) => _destination = input.trim(),
                         //destination = input,

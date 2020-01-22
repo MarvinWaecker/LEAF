@@ -220,7 +220,7 @@ class _CreatePagesState extends State<CreatePages> {
                           ),
                         ),
                         validator: (input) => input.trim().isEmpty
-                            ? 'Bitte gebe einen Startpunkt ein'
+                            ? 'Bitte gib einen gültigen Abfahrtsort an.'
                             : null,
                         onSaved: (input) => _origin = input,
                       ),
@@ -245,7 +245,7 @@ class _CreatePagesState extends State<CreatePages> {
                           ),
                         ),
                         validator: (input) => input.trim().isEmpty
-                            ? 'Bitte gebe ein Ziel ein'
+                            ? 'Bitte gib ein gültiges Ziel ein.'
                             : null,
                         onSaved: (input) => _destination = input,
                       ),

@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             validator: (input) => !input.contains('@')
-                                ? 'Please enter a valid email'
+                                ? 'Bitte gib ein gültige E-Mail an.'
                                 : null,
                             onSaved: (input) => _email = input,
                           ),
@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             validator: (input) => input.length < 6
-                                ? 'Password needs to be at least 6 characters long'
+                                ? 'Das Passwort muss mindestens 6 Zeichen lang sein.'
                                 : null,
                             onSaved: (input) => _password = input,
                           ),
